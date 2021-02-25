@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="329dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:background="@drawable/login" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center|bottom"
+            android:background="#C4FAF8">
+            <TextView
+                android:id="@+id/sin"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Sign in"
+                android:textColor="#fff"
+                android:textSize="16dp"
+                android:padding="16dp"/>
+            <TextView
+                android:id="@+id/sup"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="16dp"/>
+        </LinearLayout>
+    </FrameLayout>
+    <customfonts.MyEditText
+        android:id="@+id/nom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom et prénom"
+        android:inputType="text"
+        android:textColor="#000"
+        android:background="#f0f0f4"
+        android:padding="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/usrusr"
+        android:drawablePadding="16dp"
+        />
+    <customfonts.MyEditText
+        android:id="@+id/identifiant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Identifiant"
+        android:inputType="text"
+        android:textColor="#000"
+        android:background="#f0f0f4"
+        android:padding="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/usrusr"
+        android:drawablePadding="16dp"
+        />
+    <customfonts.MyEditText
+        android:id="@+id/mdp1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mot de passe"
+        android:inputType="textPassword"
+        android:background="#f0f0f4"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/lockers"
+        android:drawablePadding="16dp"
+        />
+    <customfonts.MyEditText
+        android:id="@+id/mdp2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirmer le mot de passe"
+        android:inputType="textPassword"
+        android:background="#f0f0f4"
+        android:textColor="#000"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/lockers"
+        android:drawablePadding="16dp"
+        />
+    <TextView
+        android:id="@+id/inscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnformate"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="250dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="14dp"
+        android:text="S'inscrire"
+        android:textSize="16dp"
+        android:textColor="#fff"
+        />
+
+</LinearLayout>

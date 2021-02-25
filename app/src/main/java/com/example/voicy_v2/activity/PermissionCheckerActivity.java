@@ -50,7 +50,8 @@ public class PermissionCheckerActivity extends AppCompatActivity
         }
         else
         {
-            Intent i = new Intent(PermissionCheckerActivity.this, MainActivity.class);
+            //Intent i = new Intent(PermissionCheckerActivity.this, MainActivity.class);
+            Intent i = new Intent(PermissionCheckerActivity.this, ConnexionActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
