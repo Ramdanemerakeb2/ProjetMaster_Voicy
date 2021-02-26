@@ -44,10 +44,10 @@
         </LinearLayout>
     </FrameLayout>
     <customfonts.MyEditText
-        android:id="@+id/nom"
+        android:id="@+id/nomInscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nom et prénom"
+        android:hint="Nom"
         android:inputType="text"
         android:textColor="#000"
         android:background="#f0f0f4"
@@ -60,7 +60,23 @@
         android:drawablePadding="16dp"
         />
     <customfonts.MyEditText
-        android:id="@+id/identifiant"
+        android:id="@+id/prenomInscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Prénom"
+        android:inputType="text"
+        android:textColor="#000"
+        android:background="#f0f0f4"
+        android:padding="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/usrusr"
+        android:drawablePadding="16dp"
+        />
+    <customfonts.MyEditText
+        android:id="@+id/idInscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Identifiant"
@@ -76,7 +92,7 @@
         android:drawablePadding="16dp"
         />
     <customfonts.MyEditText
-        android:id="@+id/mdp1"
+        android:id="@+id/mdpInscription1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mot de passe"
@@ -92,7 +108,7 @@
         android:drawablePadding="16dp"
         />
     <customfonts.MyEditText
-        android:id="@+id/mdp2"
+        android:id="@+id/mdpInscription2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirmer le mot de passe"
@@ -108,7 +124,7 @@
         android:drawablePadding="16dp"
         />
     <TextView
-        android:id="@+id/inscription"
+        android:id="@+id/btnInscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btnformate"

@@ -47,7 +47,7 @@
         </LinearLayout>
     </FrameLayout>
     <customfonts.MyEditText
-        android:id="@+id/identifiant"
+        android:id="@+id/idConnexion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Identifiant"
@@ -63,7 +63,7 @@
         android:drawablePadding="16dp"
         />
     <customfonts.MyEditText
-        android:id="@+id/mdp"
+        android:id="@+id/mdpConnexion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Mot de passe"
