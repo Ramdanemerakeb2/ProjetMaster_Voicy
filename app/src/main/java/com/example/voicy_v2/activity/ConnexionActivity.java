@@ -21,9 +21,9 @@ public class ConnexionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_connexion);
 
         TextView sup = (TextView) findViewById(R.id.sup);
-        final EditText idConnexion = (EditText) findViewById(R.id.identifiant);
-        final EditText mdpConnexion = (EditText) findViewById(R.id.mdp);
-        TextView btnonnexion = (TextView) findViewById(R.id.btnConnexion);
+        final EditText idConnexion = (EditText) findViewById(R.id.idConnexion);
+        final EditText mdpConnexion = (EditText) findViewById(R.id.mdpConnexion);
+        TextView btnConnexion = (TextView) findViewById(R.id.btnConnexion);
 
 
         //switch vers l'inscription
@@ -38,7 +38,7 @@ public class ConnexionActivity extends AppCompatActivity {
         });
 
         //verification des identifiants
-        btnonnexion.setOnClickListener(new View.OnClickListener()
+        btnConnexion.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
