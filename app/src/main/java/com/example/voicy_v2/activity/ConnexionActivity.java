@@ -10,15 +10,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.voicy_v2.R;
+import com.example.voicy_v2.model.Clinicien;
+import com.example.voicy_v2.model.ClinicienDbHelper;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ConnexionActivity extends AppCompatActivity {
 
+    public static ClinicienDbHelper dbClinicien;
+    private Clinicien clinicienSup ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
+
+        dbClinicien = new ClinicienDbHelper(this);
+
 
         TextView sup = (TextView) findViewById(R.id.sup);
         final EditText idConnexion = (EditText) findViewById(R.id.idConnexion);
@@ -43,16 +54,33 @@ public class ConnexionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if( (idConnexion.getText().toString().equals("test")) &&(mdpConnexion.getText().toString().equals("test"))){
-                    Intent it = new Intent(ConnexionActivity.this, MainActivity.class);
-                    startActivity(it);
+
+                clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString()) ;
+
+                if(clinicienSup != null){
+                    String shalMdp = new String(Hex.encodeHex(DigestUtils.md5(mdpConnexion.getText().toString())));
+
+                    if(clinicienSup.getMdp().equals(shalMdp)){
+                        Intent it = new Intent(ConnexionActivity.this, MainActivity.class);
+                        startActivity(it);
+                    }else{
+                        SweetAlertDialog sDialog = new SweetAlertDialog(ConnexionActivity.this, SweetAlertDialog.ERROR_TYPE);
+                        sDialog.setTitleText("Oups ...");
+                        sDialog.setContentText("mot de passe incorrecte");
+                        sDialog.setCancelable(true);
+                        sDialog.show();
+                    }
+
                 }else{
                     SweetAlertDialog sDialog = new SweetAlertDialog(ConnexionActivity.this, SweetAlertDialog.ERROR_TYPE);
                     sDialog.setTitleText("Oups ...");
-                    sDialog.setContentText("identifiant ou mot de passe incorrecte");
+                    sDialog.setContentText("Vos identifiants sont incorrectes");
                     sDialog.setCancelable(true);
                     sDialog.show();
                 }
+
+
+
 
             }
         });

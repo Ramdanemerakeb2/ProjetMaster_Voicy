@@ -71,10 +71,8 @@ public class InscriptionActivity extends AppCompatActivity {
 
                     //Clinicien non existant sur la BD (Succes)
                     if(dbClinicien.addClinicien(clinicienSin)){
-                        SweetAlertDialog sDialog = new SweetAlertDialog(InscriptionActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                        sDialog.setContentText("Inscription réussite, on vous invite a vous conectez");
-                        sDialog.setCancelable(true);
-                        sDialog.show();
+                        Intent it = new Intent(InscriptionActivity.this, ConnexionActivity.class);
+                        startActivity(it);
                     }else{
                         SweetAlertDialog sDialog = new SweetAlertDialog(InscriptionActivity.this, SweetAlertDialog.ERROR_TYPE);
                         sDialog.setTitleText("Oups ...");
@@ -82,8 +80,7 @@ public class InscriptionActivity extends AppCompatActivity {
                         sDialog.setCancelable(true);
                         sDialog.show();
                     }
-                    Intent it = new Intent(InscriptionActivity.this, ConnexionActivity.class);
-                    startActivity(it);
+
                 }else{
                     SweetAlertDialog sDialog = new SweetAlertDialog(InscriptionActivity.this, SweetAlertDialog.ERROR_TYPE);
                     sDialog.setTitleText("Oups ...");

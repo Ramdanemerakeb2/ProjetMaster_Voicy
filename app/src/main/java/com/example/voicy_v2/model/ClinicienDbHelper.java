@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
+import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
 
 public class ClinicienDbHelper extends SQLiteOpenHelper {
 
@@ -109,9 +110,12 @@ public class ClinicienDbHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_CLINICIEN_ID,
                         COLUMN_NOM, COLUMN_PRENOM, COLUMN_CLINICIEN_MDP}, COLUMN_CLINICIEN_ID + "=?",
                 new String[] { id }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
 
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }else{
+            return null ;
+        }
         //Clinicien clinicien = new Clinicien(cursor.getString(0)), cursor.getString(1), cursor.getString(2),cursor.getString(3));
 
         Clinicien clinicien = new Clinicien(cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_ID)),
