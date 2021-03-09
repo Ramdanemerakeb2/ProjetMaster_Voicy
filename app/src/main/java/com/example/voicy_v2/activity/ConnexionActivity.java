@@ -54,23 +54,12 @@ public class ConnexionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-
-                clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString()) ;
+                String shalMdp = new String(Hex.encodeHex(DigestUtils.md5(mdpConnexion.getText().toString())));
+                clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString(),shalMdp) ;
 
                 if(clinicienSup != null){
-                    String shalMdp = new String(Hex.encodeHex(DigestUtils.md5(mdpConnexion.getText().toString())));
-
-                    if(clinicienSup.getMdp().equals(shalMdp)){
                         Intent it = new Intent(ConnexionActivity.this, MainActivity.class);
                         startActivity(it);
-                    }else{
-                        SweetAlertDialog sDialog = new SweetAlertDialog(ConnexionActivity.this, SweetAlertDialog.ERROR_TYPE);
-                        sDialog.setTitleText("Oups ...");
-                        sDialog.setContentText("mot de passe incorrecte");
-                        sDialog.setCancelable(true);
-                        sDialog.show();
-                    }
-
                 }else{
                     SweetAlertDialog sDialog = new SweetAlertDialog(ConnexionActivity.this, SweetAlertDialog.ERROR_TYPE);
                     sDialog.setTitleText("Oups ...");
@@ -78,9 +67,6 @@ public class ConnexionActivity extends AppCompatActivity {
                     sDialog.setCancelable(true);
                     sDialog.show();
                 }
-
-
-
 
             }
         });

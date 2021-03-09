@@ -102,29 +102,33 @@ public class ClinicienDbHelper extends SQLiteOpenHelper {
                 new String[] { String.valueOf(clinicien.getIdentifiant()) }, CONFLICT_IGNORE);
     }
 
-    public Clinicien getClinicien(String id) {
+    public Clinicien getClinicien(String id, String mdp) {
         Log.i(TAG, "MyDatabaseHelper.getClinicien ... " + id);
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, new String[] { COLUMN_CLINICIEN_ID,
-                        COLUMN_NOM, COLUMN_PRENOM, COLUMN_CLINICIEN_MDP}, COLUMN_CLINICIEN_ID + "=?",
-                new String[] { id }, null, null, null, null);
+                        COLUMN_NOM, COLUMN_PRENOM, COLUMN_CLINICIEN_MDP}, COLUMN_CLINICIEN_ID + "= ? AND " + COLUMN_CLINICIEN_MDP +"= ?",
+                new String[] { id,mdp }, null, null, null, null);
 
-        if (cursor != null) {
-            cursor.moveToFirst();
+        if (cursor != null && cursor.moveToFirst()) {
+            Clinicien clinicien = new Clinicien(cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_ID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_NOM)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_PRENOM)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_MDP)) );
+            cursor.close();
+            db.close();
+            return clinicien;
+
         }else{
+            cursor.close();
+            db.close();
             return null ;
         }
-        //Clinicien clinicien = new Clinicien(cursor.getString(0)), cursor.getString(1), cursor.getString(2),cursor.getString(3));
-
-        Clinicien clinicien = new Clinicien(cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_ID)),
-                cursor.getString(cursor.getColumnIndex(COLUMN_NOM)),
-                cursor.getString(cursor.getColumnIndex(COLUMN_PRENOM)),
-                cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_MDP)) );
 
 
-        return clinicien;
+
+
     }
 
 
