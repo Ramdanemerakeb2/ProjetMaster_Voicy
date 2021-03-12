@@ -54,6 +54,21 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="#DCC77B"/>
 
+
+    <Button
+        android:id="@+id/btn_fonctionnalites"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="316dp"
+        android:background="#2196F3"
+        android:text="fonctionnalités"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_phoneme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_rslt"
+        app:layout_constraintVertical_bias="0.565" />
+
     <Button
         android:id="@+id/btn_rslt"
         style="@style/Widget.AppCompat.Button"
@@ -63,6 +78,8 @@
         android:background="#79D38C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
     <TextView
         android:id="@+id/textView2"
