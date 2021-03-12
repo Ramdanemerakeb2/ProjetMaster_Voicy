@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="398dp"
+        android:layout_height="58dp"
+        android:text="Ajouter un Patient"
+        android:background="@color/blue_btn_bg_color"
+        android:drawablePadding="16dp"
+        android:textSize="32dp"
+        android:gravity="center"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <EditText
+        android:id="@+id/idPatient"
+        android:layout_width="390dp"
+        android:layout_height="47dp"
+        android:background="@color/blue_btn_bg_color"
+        android:drawablePadding="16dp"
+        android:gravity="center"
+        android:hint="Identifiant du Patient"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000"
+        tools:ignore="MissingClass,MissingConstraints"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="215dp" />
+
+    <EditText
+        android:id="@+id/genre"
+        android:layout_width="388dp"
+        android:layout_height="44dp"
+        android:background="@color/blue_btn_bg_color"
+        android:drawablePadding="16dp"
+        android:gravity="center"
+        android:hint="Genre du Patient"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000"
+        tools:ignore="MissingClass,MissingConstraints"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="299dp" />
+
+    <EditText
+        android:id="@+id/commentaire"
+        android:layout_width="385dp"
+        android:layout_height="127dp"
+        android:background="@color/blue_btn_bg_color"
+        android:drawablePadding="16dp"
+        android:gravity="center"
+        android:hint="Commentaire global"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000"
+        tools:ignore="MissingClass,MissingConstraints"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="410dp" />
+
+    <Button
+        android:id="@+id/btnAjout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green_button_background"
+        android:text="Ajouter"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="576dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
