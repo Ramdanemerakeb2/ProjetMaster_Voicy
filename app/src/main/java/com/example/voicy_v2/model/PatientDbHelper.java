@@ -12,9 +12,9 @@ public class PatientDbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = PatientDbHelper.class.getSimpleName();
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
-    public static final String DATABASE_NAME = "Voicy.db";
+    public static final String DATABASE_NAME = "Voicy1.db";
 
     public static final String TABLE_NAME = "patient";
 
