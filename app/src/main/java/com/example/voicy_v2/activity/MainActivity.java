@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     private ServerRequest requestPhoneme, requestPhrase;
 
-    private Button btn_phoneme, btn_rslt, btn_sentence, btn_attente, btn_fonctionnalites;
+    private Button btn_phoneme, btn_rslt, btn_sentence, btn_attente, btn_fonctionnalites, btn_ajoutPatient;
     private Toolbar toolbar;
     private ConstraintLayout constraintLayout;
 
@@ -128,6 +128,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        btn_ajoutPatient.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent it = new Intent(MainActivity.this, AjoutPatientActivity.class);
+                startActivity(it);
+            }
+        });
+
         testAttenteResultatFichier();
     }
 
@@ -165,6 +175,7 @@ public class MainActivity extends AppCompatActivity
         btn_rslt = findViewById(R.id.btn_rslt);
         btn_attente = findViewById(R.id.btn_attente);
         btn_fonctionnalites = findViewById(R.id.btn_fonctionnalites);
+        btn_ajoutPatient = findViewById(R.id.btn_ajoutPatient);
     }
 
     @Override

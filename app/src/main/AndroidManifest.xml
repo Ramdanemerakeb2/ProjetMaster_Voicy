@@ -28,19 +28,17 @@
         <activity
             android:name=".activity.ConnexionActivity"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-       </activity>
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".activity.AttenteExerciceActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ConfigurationExerciceActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.AjoutPatientActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity

@@ -33,13 +33,12 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
+        android:background="#E46767"
         android:text="PHRASE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_phoneme"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="#E46767" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_phoneme"
@@ -60,14 +59,28 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="316dp"
+        android:layout_marginEnd="156dp"
         android:background="#2196F3"
         android:text="fonctionnalités"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/btn_phoneme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_rslt"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.571" />
+
+    <Button
+        android:id="@+id/btn_ajoutPatient"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="464dp"
+        android:background="#FF5722"
+        android:text="Ajout patient"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_sentence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_rslt"
+        app:layout_constraintVertical_bias="0.571" />
 
     <Button
         android:id="@+id/btn_rslt"
