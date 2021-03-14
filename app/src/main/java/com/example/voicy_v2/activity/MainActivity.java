@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     private ServerRequest requestPhoneme, requestPhrase;
 
-    private Button btn_phoneme, btn_rslt, btn_sentence, btn_attente;
+    private Button btn_phoneme, btn_rslt, btn_sentence, btn_attente, btn_fonctionnalites, btn_ajoutPatient,btn_test;
     private Toolbar toolbar;
     private ConstraintLayout constraintLayout;
 
@@ -61,6 +61,14 @@ public class MainActivity extends AppCompatActivity
 
     private void initialisationOfAllButtonListener()
     {
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RecherchePatientActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btn_phoneme.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(DirectoryManager.getInstance().getAvailableMo() > 100)
@@ -117,6 +125,27 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //switch vers le menu des fonctionnalités
+        btn_fonctionnalites.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent it = new Intent(MainActivity.this, ListePatientActivity.class);
+                startActivity(it);
+            }
+        });
+
+        btn_ajoutPatient.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent it = new Intent(MainActivity.this, AjoutPatientActivity.class);
+                startActivity(it);
+            }
+        });
+
         testAttenteResultatFichier();
     }
 
@@ -153,6 +182,9 @@ public class MainActivity extends AppCompatActivity
         btn_sentence = findViewById(R.id.btn_sentence);
         btn_rslt = findViewById(R.id.btn_rslt);
         btn_attente = findViewById(R.id.btn_attente);
+        btn_fonctionnalites = findViewById(R.id.btn_fonctionnalites);
+        btn_ajoutPatient = findViewById(R.id.btn_ajoutPatient);
+        btn_test = findViewById(R.id.btn_test);
     }
 
     @Override

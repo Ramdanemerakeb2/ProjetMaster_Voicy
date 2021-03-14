@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titre_recherchePatient"
+        android:layout_width="480dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/box_titre"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="Rechrche d'un patient"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:translationX="150dp" />
+
+    <customfonts.MyEditText
+        android:id="@+id/idRech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="10dp"
+        android:background="#f0f0f4"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="16dp"
+        android:hint="Identifiant Patient"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000" />
+
+    <customfonts.MyRegulerText
+        android:id="@+id/btnRech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="250dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btnformate"
+        android:gravity="center"
+        android:padding="14dp"
+        android:text="Rechercher"
+        android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="16dp" />
+</LinearLayout>

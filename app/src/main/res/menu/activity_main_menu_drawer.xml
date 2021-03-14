@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Menu" />
+    </group>
+
+    <item android:title="Configuration">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_main_drawer_acceuil"
+                    android:icon="@drawable/acceuil"
+                    android:title="Acceuil" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Gestion de patient">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_main_drawer_ajoutPatient"
+                    android:icon="@drawable/ajout_patient"
+                    android:title="Ajouter un patient" />
+                <item
+                    android:id="@+id/activity_main_drawer_recherchePatient"
+                    android:icon="@drawable/recherche"
+                    android:title="Recherche d'un patient" />
+                <item
+                    android:id="@+id/activity_main_drawer_listePatient"
+                    android:icon="@drawable/liste_patient"
+                    android:title="Liste des patients" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Gestion des exercices">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_main_drawer_ajoutExo"
+                    android:icon="@drawable/ajout_exo"
+                    android:title="Ajouter un exercice" />
+                <item
+                    android:id="@+id/activity_main_drawer_rechercheExo"
+                    android:icon="@drawable/recherche"
+                    android:title="Recherche d'un exercice" />
+
+            </group>
+        </menu>
+    </item>
+
+
+</menu>
