@@ -5,7 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.voicy_v2.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
@@ -194,8 +202,61 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
             return null ;
         }
 
+    }
 
+    /**
+     * Returns a cursor on all the Patient of the data base
+     */
+    public Cursor fetchAllProduct() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_PATIENT, null,
+                null, null, null, null, COLUMN_PATIENT_ID +" ASC", null);
+
+        Log.d(TAG, "call fetchAllProduct()");
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+    /**
+     * Returns a list on all the MuseumProduct of the data base
+     */
+    public List<Patient> getAllPatient() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_PATIENT, null,
+                null, null, null, null, COLUMN_PATIENT_ID +" ASC", null);
+
+        Log.d(TAG, "call getAllPatient()");
+        if (cursor != null && cursor.moveToFirst()) {
+
+            List<Patient> res = new ArrayList<>();
+
+            while (!cursor.isAfterLast()){
+                Patient patient = new Patient(cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_ID)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_GENRE)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_COMMENTAIRE)) );
+
+                res.add(patient);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            db.close();
+            return res;
+        }else{
+            return null;
+        }
 
 
     }
+
+    public void deletePatient(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PATIENT, COLUMN_PATIENT_ID + " = ?",
+                new String[]{id});
+        db.close();
+    }
+
+
 }

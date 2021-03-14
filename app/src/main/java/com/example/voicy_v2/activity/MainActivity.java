@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent it = new Intent(MainActivity.this, FonctionnaliteActivity.class);
+                Intent it = new Intent(MainActivity.this, ListePatientActivity.class);
                 startActivity(it);
             }
         });
