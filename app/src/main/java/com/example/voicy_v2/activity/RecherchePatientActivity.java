@@ -1,6 +1,8 @@
 package com.example.voicy_v2.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,7 +36,9 @@ public class RecherchePatientActivity extends AppCompatActivity implements Seria
                // clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString(),shalMdp) ;
                 patient = patientDbHelper.getPatient(idPatient.getText().toString());
                 if (patient != null){
-                   // Intent = n
+                    Intent intent = new Intent(RecherchePatientActivity.this, AffichagePatientActivity.class);
+                    intent.putExtra("patient", patient.getId().toString());
+                    startActivity(intent);
 
                 }
             }

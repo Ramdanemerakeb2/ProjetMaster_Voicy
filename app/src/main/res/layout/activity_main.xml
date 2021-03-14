@@ -55,18 +55,32 @@
 
 
     <Button
+        android:id="@+id/btn_test"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="296dp"
+        android:background="@color/main_orange_color"
+        android:text="testpat"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_phoneme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_rslt"
+        app:layout_constraintVertical_bias="0.315" />
+
+    <Button
         android:id="@+id/btn_fonctionnalites"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="156dp"
+        android:layout_marginEnd="148dp"
         android:background="#2196F3"
         android:text="fonctionnalités"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/btn_phoneme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_rslt"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintVertical_bias="0.585" />
 
     <Button
         android:id="@+id/btn_ajoutPatient"

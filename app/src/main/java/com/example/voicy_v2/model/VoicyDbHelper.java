@@ -140,6 +140,21 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
 
 
     //******************** gestion de Patient ********************
+
+    public int updatePatient(Patient patient) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PATIENT_ID, patient.getId());
+        values.put(COLUMN_PATIENT_GENRE, patient.getGenre());
+        values.put(COLUMN_PATIENT_COMMENTAIRE, patient.getCommentaire());
+
+        // updating row
+        return db.updateWithOnConflict(TABLE_PATIENT, values, COLUMN_PATIENT_ID + " = ?",
+                new String[] { String.valueOf(patient.getId()) }, CONFLICT_IGNORE);
+    }
+
+
     public boolean ajoutPatient(Patient patient) {
         Log.i(TAG, "Ajout du patient num :  " + patient.getId());
 
