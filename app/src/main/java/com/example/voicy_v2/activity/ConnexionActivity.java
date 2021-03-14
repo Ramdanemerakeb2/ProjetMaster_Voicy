@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Clinicien;
 import com.example.voicy_v2.model.ClinicienDbHelper;
+import com.example.voicy_v2.model.VoicyDbHelper;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -20,7 +21,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ConnexionActivity extends AppCompatActivity {
 
-    public static ClinicienDbHelper dbClinicien;
+    public static VoicyDbHelper dbClinicien;
     private Clinicien clinicienSup ;
 
     @Override
@@ -28,7 +29,7 @@ public class ConnexionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
 
-        dbClinicien = new ClinicienDbHelper(this);
+        dbClinicien = new VoicyDbHelper(this);
 
 
         TextView sup = (TextView) findViewById(R.id.sup);

@@ -14,12 +14,13 @@ import android.widget.TextView;
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Clinicien;
 import com.example.voicy_v2.model.ClinicienDbHelper;
+import com.example.voicy_v2.model.VoicyDbHelper;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class InscriptionActivity extends AppCompatActivity {
 
-    public static ClinicienDbHelper dbClinicien;
+    public static VoicyDbHelper dbClinicien;
     private Clinicien clinicienSin ;
 
 
@@ -28,7 +29,7 @@ public class InscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
-        dbClinicien = new ClinicienDbHelper(this);
+        dbClinicien = new VoicyDbHelper(this);
 
         TextView sin = (TextView) findViewById(R.id.sin);
         final TextView nomInscription = (TextView) findViewById(R.id.nomInscription);
