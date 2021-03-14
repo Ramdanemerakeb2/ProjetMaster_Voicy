@@ -1,5 +1,6 @@
 package com.example.voicy_v2.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +44,7 @@ import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ExerciceActivity extends AppCompatActivity implements CallbackServer
+public class ExerciceActivity extends FonctionnaliteActivity implements CallbackServer
 {
     private Toolbar toolbar;
     private Button btnAnnuler;
@@ -67,7 +69,14 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercice);
+        //setContentView(R.layout.activity_exercice);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_exercice, null, false);
+        drawerLayout.addView(contentView, 0);
 
         // Initialise le prompteur
         lePrompteur = findViewById(R.id.prompteur);

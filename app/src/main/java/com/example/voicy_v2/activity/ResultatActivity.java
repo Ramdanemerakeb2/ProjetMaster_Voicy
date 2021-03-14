@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.DirectoryManager;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ResultatActivity extends AppCompatActivity
+public class ResultatActivity extends FonctionnaliteActivity
 {
     private RecyclerView recyclerView;
     public static RecyclerResultAdapter rAdapter;
@@ -38,7 +41,14 @@ public class ResultatActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resultat);
+        //setContentView(R.layout.activity_resultat);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_resultat, null, false);
+        drawerLayout.addView(contentView, 0);
 
         configOfToolbar();
 

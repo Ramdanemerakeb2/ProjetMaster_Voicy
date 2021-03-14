@@ -1,5 +1,6 @@
 package com.example.voicy_v2.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -46,7 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AffichageExerciceActivity extends AppCompatActivity
+public class AffichageExerciceActivity extends FonctionnaliteActivity
 {
     private ResultFile resultFile;
     private String fileTXT = "";
@@ -73,7 +74,14 @@ public class AffichageExerciceActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_affichage_exercice);
+        //setContentView(R.layout.activity_affichage_exercice);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate of ListePatientActivity !
+        View contentView = inflater.inflate(R.layout.activity_affichage_exercice, null, false);
+        drawerLayout.addView(contentView, 0);
 
         configOfToolbar();
 

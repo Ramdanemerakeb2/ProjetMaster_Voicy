@@ -7,10 +7,10 @@
     tools:context=".activity.ListePatientActivity">
 
     <TextView
+        android:id="@+id/titre_listPatient"
         android:layout_width="450dp"
         android:layout_height="80dp"
-        android:id="@+id/titre_listPatient"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/box_titre"
         android:fontFamily="casual"
         android:gravity="center"

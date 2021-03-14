@@ -10,6 +10,7 @@ import com.example.voicy_v2.R;
 import com.google.android.material.navigation.NavigationView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -17,7 +18,7 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
 
     //FOR DESIGN
     private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
+    protected DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
     @Override
@@ -53,12 +54,20 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
 
         switch (id){
             case R.id.activity_main_drawer_acceuil :
+                Intent intentMain = new Intent(FonctionnaliteActivity.this, MainActivity.class);
+                startActivity(intentMain);
                 break;
             case R.id.activity_main_drawer_ajoutPatient:
+                Intent intentAjoutPatient = new Intent(FonctionnaliteActivity.this, AjoutPatientActivity.class);
+                startActivity(intentAjoutPatient);
                 break;
             case R.id.activity_main_drawer_recherchePatient:
+                Intent intentRecherchePatient = new Intent(FonctionnaliteActivity.this, RecherchePatientActivity.class);
+                startActivity(intentRecherchePatient);
                 break;
             case R.id.activity_main_drawer_listePatient:
+                Intent intentListPatient = new Intent(FonctionnaliteActivity.this, ListePatientActivity.class);
+                startActivity(intentListPatient);
                 break;
             case R.id.activity_main_drawer_ajoutExo:
                 break;

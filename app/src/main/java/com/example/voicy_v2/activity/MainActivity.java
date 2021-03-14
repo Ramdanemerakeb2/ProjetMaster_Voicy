@@ -1,10 +1,12 @@
 package com.example.voicy_v2.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,13 +27,13 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.example.voicy_v2.services.ServiceTraitementExercice.WORKING_ON;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends FonctionnaliteActivity
 {
     private static final String TOOLBAR_TITLE = "Voicy";
 
     private ServerRequest requestPhoneme, requestPhrase;
 
-    private Button btn_phoneme, btn_rslt, btn_sentence, btn_attente, btn_fonctionnalites, btn_ajoutPatient;
+    private Button btn_phoneme, btn_rslt, btn_sentence, btn_attente;
     private Toolbar toolbar;
     private ConstraintLayout constraintLayout;
 
@@ -39,7 +41,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_main, null, false);
+        drawerLayout.addView(contentView, 0);
 
         // Bug tablette le backgroudn color devient noir alors je le repasse blanc
         constraintLayout = findViewById(R.id.mainLayout);
@@ -117,26 +126,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //switch vers le menu des fonctionnalités
-        btn_fonctionnalites.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent it = new Intent(MainActivity.this, ListePatientActivity.class);
-                startActivity(it);
-            }
-        });
-
-        btn_ajoutPatient.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent it = new Intent(MainActivity.this, AjoutPatientActivity.class);
-                startActivity(it);
-            }
-        });
 
         testAttenteResultatFichier();
     }
@@ -174,8 +163,6 @@ public class MainActivity extends AppCompatActivity
         btn_sentence = findViewById(R.id.btn_sentence);
         btn_rslt = findViewById(R.id.btn_rslt);
         btn_attente = findViewById(R.id.btn_attente);
-        btn_fonctionnalites = findViewById(R.id.btn_fonctionnalites);
-        btn_ajoutPatient = findViewById(R.id.btn_ajoutPatient);
     }
 
     @Override
