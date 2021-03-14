@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +36,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class AttenteExerciceActivity extends AppCompatActivity
+public class AttenteExerciceActivity extends FonctionnaliteActivity
 {
     private RecyclerView recyclerView;
     public static RecyclerAttenteAdapter rAdapter;
@@ -43,7 +45,15 @@ public class AttenteExerciceActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attente_exercice);
+        //setContentView(R.layout.activity_attente_exercice);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_attente_exercice, null, false);
+        drawerLayout.addView(contentView, 0);
+
         configOfToolbar();
 
         List<ResultFile> listeResult = getAllAttenteFromAppFolder();

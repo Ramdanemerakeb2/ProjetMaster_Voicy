@@ -1,7 +1,9 @@
 package com.example.voicy_v2.activity;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -16,14 +18,21 @@ import com.example.voicy_v2.model.VoicyDbHelper;
 
 import java.util.List;
 
-public class ListePatientActivity extends AppCompatActivity {
+public class ListePatientActivity extends FonctionnaliteActivity {
 
     public static VoicyDbHelper dbPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_liste_patient);
+        //setContentView(R.layout.activity_liste_patient);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate of ListePatientActivity !
+        View contentView = inflater.inflate(R.layout.activity_liste_patient, null, false);
+        drawerLayout.addView(contentView, 0);
 
         dbPatient = new VoicyDbHelper(this);
         List<Patient> listePatients = dbPatient.getAllPatient();

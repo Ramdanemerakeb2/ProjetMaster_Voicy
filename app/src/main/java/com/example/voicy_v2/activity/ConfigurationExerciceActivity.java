@@ -3,8 +3,10 @@ package com.example.voicy_v2.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +21,7 @@ import com.szagurskii.patternedtextwatcher.PatternedTextWatcher;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ConfigurationExerciceActivity extends AppCompatActivity
+public class ConfigurationExerciceActivity extends FonctionnaliteActivity
 {
 
     private Toolbar toolbar;
@@ -31,7 +33,14 @@ public class ConfigurationExerciceActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuration);
+        //setContentView(R.layout.activity_configuration);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_configuration, null, false);
+        drawerLayout.addView(contentView, 0);
 
         // Permet de récuperer le paramètre envoyer par l'activité précédente
         Bundle param = getIntent().getExtras();

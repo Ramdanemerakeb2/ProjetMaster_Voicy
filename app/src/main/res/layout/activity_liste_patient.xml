@@ -7,10 +7,10 @@
     tools:context=".activity.ListePatientActivity">
 
     <TextView
+        android:id="@+id/titre_listPatient"
         android:layout_width="450dp"
         android:layout_height="80dp"
-        android:id="@+id/titre_recherchePatient"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/box_titre"
         android:fontFamily="casual"
         android:gravity="center"
@@ -27,7 +27,7 @@
         android:layout_marginTop="150dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/list_patients"
-        app:layout_constraintTop_toBottomOf="@+id/titre_recherchePatient"
+        app:layout_constraintTop_toBottomOf="@+id/titre_listPatient"
         tools:layout_editor_absoluteX="-16dp" />
 
     <ListView
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titre_recherchePatient" />
+        app:layout_constraintTop_toBottomOf="@+id/titre_listPatient" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
