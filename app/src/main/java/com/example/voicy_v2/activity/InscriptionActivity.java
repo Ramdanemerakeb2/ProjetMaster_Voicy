@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Clinicien;
-import com.example.voicy_v2.model.ClinicienDbHelper;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;

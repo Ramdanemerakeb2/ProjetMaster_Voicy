@@ -156,4 +156,31 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
         return (rowID != -1);
 
     }
+    public Patient getPatient(String id) {
+        Log.i(TAG, "MyDatabaseHelper.getPatient ... " + id);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_PATIENT, new String[] { COLUMN_PATIENT_ID,
+                        COLUMN_PATIENT_GENRE, COLUMN_PATIENT_COMMENTAIRE}, COLUMN_PATIENT_ID + "= ? ",
+                new String[] { id}, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Patient patient = new Patient(cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_ID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_GENRE)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_COMMENTAIRE)) );
+            cursor.close();
+            db.close();
+            return patient;
+
+        }else{
+            cursor.close();
+            db.close();
+            return null ;
+        }
+
+
+
+
+    }
 }

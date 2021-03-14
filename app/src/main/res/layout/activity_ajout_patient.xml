@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="398dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
         android:text="Ajouter un Patient"
         android:background="@color/blue_btn_bg_color"
@@ -21,60 +17,67 @@
         tools:layout_editor_absoluteX="6dp"
         tools:layout_editor_absoluteY="53dp" />
 
-    <EditText
+    <customfonts.MyEditText
         android:id="@+id/idPatient"
-        android:layout_width="390dp"
-        android:layout_height="47dp"
-        android:background="@color/blue_btn_bg_color"
-        android:drawablePadding="16dp"
-        android:gravity="center"
-        android:hint="Identifiant du Patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Identifiant Patient"
         android:inputType="text"
-        android:padding="12dp"
         android:textColor="#000"
-        tools:ignore="MissingClass,MissingConstraints"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="215dp" />
-
-    <EditText
+        android:background="#f0f0f4"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="16dp"
+        />
+    <customfonts.MyEditText
         android:id="@+id/genre"
-        android:layout_width="388dp"
-        android:layout_height="44dp"
-        android:background="@color/blue_btn_bg_color"
-        android:drawablePadding="16dp"
-        android:gravity="center"
-        android:hint="Genre du Patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Genre Patient"
         android:inputType="text"
-        android:padding="12dp"
         android:textColor="#000"
-        tools:ignore="MissingClass,MissingConstraints"
-        tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="299dp" />
-
-    <EditText
-        android:id="@+id/commentaire"
-        android:layout_width="385dp"
-        android:layout_height="127dp"
-        android:background="@color/blue_btn_bg_color"
+        android:background="#f0f0f4"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/email"
         android:drawablePadding="16dp"
-        android:gravity="center"
+        />
+    <customfonts.MyEditText
+        android:id="@+id/commentaire"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:hint="Commentaire global"
         android:inputType="text"
-        android:padding="12dp"
         android:textColor="#000"
-        tools:ignore="MissingClass,MissingConstraints"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="410dp" />
-
-    <Button
+        android:background="#f0f0f4"
+        android:padding="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="16dp"
+        />
+    <customfonts.MyRegulerText
         android:id="@+id/btnAjout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/green_button_background"
+        android:background="@drawable/btnformate"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="250dp"
+        android:textAlignment="center"
+        android:padding="14dp"
+        android:gravity="center"
         android:text="Ajouter"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="576dp" />
-
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+        android:textSize="16dp"
+        android:textColor="#fff"
+        />
+</LinearLayout>

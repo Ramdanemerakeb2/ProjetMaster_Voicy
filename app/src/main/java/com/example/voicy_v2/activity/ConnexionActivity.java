@@ -5,13 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Clinicien;
-import com.example.voicy_v2.model.ClinicienDbHelper;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
 import org.apache.commons.codec.binary.Hex;
