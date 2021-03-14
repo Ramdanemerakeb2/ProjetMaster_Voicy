@@ -6,15 +6,15 @@
     android:orientation="vertical">
     <TextView
         android:id="@+id/idPatient"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="@color/blue_btn_bg_color"
-        android:drawablePadding="16dp"
-        android:textSize="32dp"
+        android:layout_width="480dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/box_titre"
+        android:fontFamily="casual"
         android:gravity="center"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="53dp" />
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:translationX="150dp" />
 
     <customfonts.MyEditText
         android:id="@+id/genre"
@@ -29,13 +29,13 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/email"
+        android:drawableLeft="@drawable/genre"
         android:drawablePadding="16dp"
         />
     <customfonts.MyEditText
         android:id="@+id/commentaire"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:hint="commentire Patient"
         android:inputType="text"
         android:textColor="#000"
@@ -45,7 +45,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/email"
+        android:drawableLeft="@drawable/commentaire"
         android:drawablePadding="16dp"
         />
 
