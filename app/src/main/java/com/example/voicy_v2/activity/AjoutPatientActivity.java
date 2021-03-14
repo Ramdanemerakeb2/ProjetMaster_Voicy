@@ -12,17 +12,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.PatientDbHelper;
+import com.example.voicy_v2.model.VoicyDbHelper;
 
 public class AjoutPatientActivity extends AppCompatActivity {
     private Patient patient;
-    public static PatientDbHelper patientDbHelper;
+    public static VoicyDbHelper patientDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout_patient);
 
-        patientDbHelper = new PatientDbHelper(this);
+        patientDbHelper = new VoicyDbHelper(this);
 
         final TextView idPatient = (TextView) findViewById(R.id.idPatient);
         final TextView genrePatient = (TextView) findViewById(R.id.genre);
