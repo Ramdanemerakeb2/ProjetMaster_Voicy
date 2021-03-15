@@ -2,7 +2,9 @@ package com.example.voicy_v2.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +23,11 @@ public class ConnexionActivity extends AppCompatActivity {
 
     public static VoicyDbHelper dbClinicien;
     private Clinicien clinicienSup ;
+
+    //Pour la gestion des sessions
+    public static final String clinicienSession = "clinicienSession" ;
+    public static final String sessionIdClinicien = "idClinicien";
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +64,15 @@ public class ConnexionActivity extends AppCompatActivity {
                 clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString(),shalMdp) ;
 
                 if(clinicienSup != null){
-                        Intent it = new Intent(ConnexionActivity.this, MainActivity.class);
-                        startActivity(it);
+
+                    //creation de session pour le clinicien (stock id)
+                    sharedpreferences = getSharedPreferences(clinicienSession, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString(sessionIdClinicien, clinicienSup.getIdentifiant());
+                    editor.commit();
+
+                    Intent it = new Intent(ConnexionActivity.this, MainActivity.class);
+                    startActivity(it);
                 }else{
                     SweetAlertDialog sDialog = new SweetAlertDialog(ConnexionActivity.this, SweetAlertDialog.ERROR_TYPE);
                     sDialog.setTitleText("Oups ...");

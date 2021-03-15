@@ -7,12 +7,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.voicy_v2.R;
+import com.example.voicy_v2.model.Clinicien;
+import com.example.voicy_v2.model.VoicyDbHelper;
 import com.google.android.material.navigation.NavigationView;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class FonctionnaliteActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,10 +27,15 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
     protected DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    public static VoicyDbHelper dbClinicien;
+    private Clinicien clinicienSup ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fonctionnalite);
+
+        dbClinicien = new VoicyDbHelper(this);
 
         // 6 - Configure all views
 
@@ -106,7 +117,15 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
 
     // 3 - Configure NavigationView
     private void configureNavigationView(){
+        //recuperation de l'id du clinicien connecté
+        SharedPreferences session = getSharedPreferences(ConnexionActivity.clinicienSession, Context.MODE_PRIVATE);
+        System.out.println("le id clinicien"+session.getString(ConnexionActivity.sessionIdClinicien,null));
+
         this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //chragement du header du menu
+        View header= navigationView.getHeaderView(0);
+        final TextView titre_clinicienInfo = (TextView) header.findViewById(R.id.titre_clinicienInfo);
+        titre_clinicienInfo.setText(dbClinicien.getClinicienInfo(session.getString(ConnexionActivity.sessionIdClinicien,null)));
     }
 }
