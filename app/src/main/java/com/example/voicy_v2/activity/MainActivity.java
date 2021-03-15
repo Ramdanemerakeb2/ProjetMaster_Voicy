@@ -56,7 +56,7 @@ public class MainActivity extends FonctionnaliteActivity
 
         LogVoicy.getInstance().createLogInfo("Arriver sur l'activity MainActivity");
 
-        configOfToolbar();
+        //configOfToolbar();
 
         // Créer l'architecture dossier de l'application (si cela n'est pas déjà fait)
         DirectoryManager.getInstance().initProject();

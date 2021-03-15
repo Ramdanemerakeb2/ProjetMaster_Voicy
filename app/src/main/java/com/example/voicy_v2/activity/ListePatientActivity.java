@@ -2,6 +2,7 @@ package com.example.voicy_v2.activity;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
 import java.util.List;
+import java.util.Random;
 
 public class ListePatientActivity extends FonctionnaliteActivity {
 
@@ -46,7 +48,21 @@ public class ListePatientActivity extends FonctionnaliteActivity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
                 Patient patient = (Patient) o;
-                Toast.makeText(ListePatientActivity.this, "Selected :" + " " + patient.getId(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(ListePatientActivity.this, "Selected :" + " " + patient.getId(), Toast.LENGTH_LONG).show();
+
+                String[] typeExo = {"phrase","logatome"};
+
+                Random rand = new Random();
+
+                // Obtain a number between [0 - 1].
+                int n = rand.nextInt(2);
+
+
+                Intent intent = new Intent(ListePatientActivity.this, ExerciceActivity.class);
+                intent.putExtra("type", typeExo[n]);
+                intent.putExtra("genre", ((Patient) o).getGenre());
+                intent.putExtra("iteration", 1);
+                startActivityForResult(intent, 0);
             }
         });
     }
