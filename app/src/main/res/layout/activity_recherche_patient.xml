@@ -9,11 +9,11 @@
         android:id="@+id/titre_recherchePatient"
         android:layout_width="480dp"
         android:layout_height="80dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/box_titre"
         android:fontFamily="casual"
         android:gravity="center"
-        android:text="Rechrche d'un patient"
+        android:text="Recheche d'un patient"
         android:textSize="46sp"
         android:textStyle="bold"
         android:translationX="150dp" />

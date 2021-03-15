@@ -3,24 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+
     <group android:checkableBehavior="single">
         <item
-            android:title="Menu" />
+            android:id="@+id/activity_main_drawer_acceuil"
+            android:icon="@drawable/acceuil"
+            android:title="Acceuil" />
+
     </group>
 
-    <item android:title="Configuration">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/activity_main_drawer_acceuil"
-                    android:icon="@drawable/acceuil"
-                    android:title="Acceuil" />
 
-            </group>
-        </menu>
-    </item>
-
-    <item android:title="Gestion de patient">
+    <item android:title="Gestion des patients">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -54,6 +48,19 @@
             </group>
         </menu>
     </item>
+
+    <item
+        android:title=""
+        android:enabled="false" >
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_logout"
+            android:icon="@drawable/logout"
+            android:title="Deconnexion" />
+
+    </group>
 
 
 </menu>

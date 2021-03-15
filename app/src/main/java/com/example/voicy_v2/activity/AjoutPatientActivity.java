@@ -14,6 +14,8 @@ import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class AjoutPatientActivity extends FonctionnaliteActivity  {
     private Patient patient;
     public static VoicyDbHelper patientDbHelper;
@@ -42,14 +44,32 @@ public class AjoutPatientActivity extends FonctionnaliteActivity  {
             @Override
             public void onClick(View v)
             {
-                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getText().toString().isEmpty())&&(commentairePatient.getText().toString().isEmpty()))){
+                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getText().toString().isEmpty()))){
                     patient = new Patient(idPatient.getText().toString(),genrePatient.getText().toString(),commentairePatient.getText().toString());
                     if(patientDbHelper.ajoutPatient(patient)){
                         Toast.makeText(AjoutPatientActivity.this, patient.getId().toString()+" ajouté",Toast.LENGTH_LONG).show();
+
+                        /*SweetAlertDialog sDialog = new SweetAlertDialog(AjoutPatientActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                        sDialog.setContentText("Le patient "+patient.getId()+" est ajouté ");
+                        sDialog.setCancelable(true);
+                        sDialog.show();*/
+
                         Intent intent = new Intent(AjoutPatientActivity.this, MainActivity.class);
                         startActivity(intent);
 
+                    }else{
+                        SweetAlertDialog sDialog = new SweetAlertDialog(AjoutPatientActivity.this, SweetAlertDialog.ERROR_TYPE);
+                        sDialog.setTitleText("Oups ...");
+                        sDialog.setContentText("Le patient "+patient.getId()+" existe sur la Base de données");
+                        sDialog.setCancelable(true);
+                        sDialog.show();
                     }
+                }else{
+                    SweetAlertDialog sDialog = new SweetAlertDialog(AjoutPatientActivity.this, SweetAlertDialog.ERROR_TYPE);
+                    sDialog.setTitleText("Oups ...");
+                    sDialog.setContentText("veuillez renseigner les informations SVP ");
+                    sDialog.setCancelable(true);
+                    sDialog.show();
                 }
             }
         });

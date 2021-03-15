@@ -1,6 +1,7 @@
 package com.example.voicy_v2.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
 import java.io.Serializable;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class RecherchePatientActivity extends FonctionnaliteActivity implements Serializable {
     private Patient patient;
@@ -40,11 +43,19 @@ public class RecherchePatientActivity extends FonctionnaliteActivity implements 
             @Override
             public void onClick(View v)
             {
-               // clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString(),shalMdp) ;
+                // clinicienSup = dbClinicien.getClinicien(idConnexion.getText().toString(),shalMdp) ;
                 patient = patientDbHelper.getPatient(idPatient.getText().toString());
                 if (patient != null){
-                   // Intent = n
+                    Intent intent = new Intent(RecherchePatientActivity.this, AffichagePatientActivity.class);
+                    intent.putExtra("patient", patient.getId().toString());
+                    startActivity(intent);
 
+                }else{
+                    SweetAlertDialog sDialog = new SweetAlertDialog(RecherchePatientActivity.this, SweetAlertDialog.WARNING_TYPE);
+                    sDialog.setTitleText("Oups ...");
+                    sDialog.setContentText("Le patient "+idPatient.getText().toString()+" n'existe pas sur la Base de données");
+                    sDialog.setCancelable(true);
+                    sDialog.show();
                 }
             }
         });

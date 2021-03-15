@@ -23,7 +23,10 @@
             android:name=".activity.FonctionnaliteActivity"
             android:label="@string/title_activity_fonctionnalite"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activity.InscriptionActivity" />
+        <activity
+            android:name=".activity.InscriptionActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".activity.ConnexionActivity"
             android:screenOrientation="portrait"
@@ -42,6 +45,10 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.AjoutPatientActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.AffichagePatientActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity

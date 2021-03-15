@@ -73,6 +73,10 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
                 break;
             case R.id.activity_main_drawer_rechercheExo:
                 break;
+            case R.id.activity_main_drawer_logout:
+                Intent intentLogout = new Intent(FonctionnaliteActivity.this, ConnexionActivity.class);
+                startActivity(intentLogout);
+                break;
             default:
                 break;
         }
