@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.voicy_v2.R;
+import com.example.voicy_v2.model.DirectoryManager;
+import com.example.voicy_v2.model.LogVoicy;
 import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
@@ -44,6 +47,8 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
         final TextView genre = (TextView) findViewById(R.id.genre);
         final TextView commentaire = (TextView) findViewById(R.id.commentaire);
         final TextView btnsave = (TextView) findViewById(R.id.btnSave);
+        final Button btnPhrase = findViewById(R.id.btnPhrase);
+        final Button btnLog = findViewById(R.id.btnLog);
 
         idPatient.setText(patient.getId());
         genre.setText(patient.getGenre());
@@ -66,6 +71,37 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
                     sDialog.setContentText("veuillez renseigner les informations SVP ");
                     sDialog.setCancelable(true);
                     sDialog.show();
+                }
+            }
+        });
+
+        btnLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(DirectoryManager.getInstance().getAvailableMo() > 100)
+                {
+                    LogVoicy.getInstance().createLogInfo("Clique sur le bouton exercice phonème détecté");
+                    LogVoicy.getInstance().createLogInfo("Changement de page vers ExerciceActivity avec envoie du paramètre [type: logatome]");
+                    Intent intent = new Intent(getApplicationContext(), ConfigurationExerciceActivity.class);
+                    intent.putExtra("type", "logatome");
+                    startActivityForResult(intent, 0);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+
+            }
+        });
+
+        btnPhrase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(DirectoryManager.getInstance().getAvailableMo() > 100)
+                {
+                    LogVoicy.getInstance().createLogInfo("Clique sur le bouton exercice phrase détecté");
+                    LogVoicy.getInstance().createLogInfo("Changement de page vers PhonemeActivity avec envoie du paramètre [type: phrase]");
+                    Intent intent = new Intent(getApplicationContext(), ConfigurationExerciceActivity.class);
+                    intent.putExtra("type", "phrase");
+                    startActivityForResult(intent, 1);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         });
