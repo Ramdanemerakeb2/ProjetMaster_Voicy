@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class AjoutPatientActivity extends FonctionnaliteActivity  {
     private Patient patient;
     public static VoicyDbHelper patientDbHelper;
+    private Spinner genrePatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +38,23 @@ public class AjoutPatientActivity extends FonctionnaliteActivity  {
         patientDbHelper = new VoicyDbHelper(this);
 
         final TextView idPatient = (TextView) findViewById(R.id.idPatient);
-        final TextView genrePatient = (TextView) findViewById(R.id.genre);
+        genrePatient = findViewById(R.id.spinner_genre);
+        //final TextView genrePatient = (TextView) findViewById(R.id.genre);
         final TextView commentairePatient = (TextView) findViewById(R.id.commentaire);
         final TextView btnAjout = (TextView) findViewById(R.id.btnAjout);
+
+        //ajout de la liste des genre pour le comobox
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.genre , android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genrePatient.setAdapter(adapter);
 
         btnAjout.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getText().toString().isEmpty()))){
-                    patient = new Patient(idPatient.getText().toString(),genrePatient.getText().toString(),commentairePatient.getText().toString());
+                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getSelectedItem().toString().isEmpty()))){
+                    patient = new Patient(idPatient.getText().toString(),genrePatient.getSelectedItem().toString(),commentairePatient.getText().toString());
                     if(patientDbHelper.ajoutPatient(patient)){
                         Toast.makeText(AjoutPatientActivity.this, patient.getId().toString()+" ajouté",Toast.LENGTH_LONG).show();
 

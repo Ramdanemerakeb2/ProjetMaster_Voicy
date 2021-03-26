@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.DirectoryManager;
@@ -24,6 +27,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class AffichagePatientActivity extends FonctionnaliteActivity implements Serializable {
     private Patient patient;
     public static VoicyDbHelper patientDbHelper;
+    private Spinner genrePatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +48,28 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
         final Patient patient = patientDbHelper.getPatient(patientId);
 
         final TextView idPatient = (TextView) findViewById(R.id.idPatient);
-        final TextView genre = (TextView) findViewById(R.id.genre);
+        //final TextView genre = (TextView) findViewById(R.id.genre);
+        genrePatient = findViewById(R.id.spinner_genre);
         final TextView commentaire = (TextView) findViewById(R.id.commentaire);
         final TextView btnsave = (TextView) findViewById(R.id.btnSave);
         final Button btnPhrase = findViewById(R.id.btnPhrase);
         final Button btnLog = findViewById(R.id.btnLog);
 
+        //ajout de la liste des genre pour le comobox
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.genre , android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genrePatient.setAdapter(adapter);
+
         idPatient.setText(patient.getId());
-        genre.setText(patient.getGenre());
+        //genre.setText(patient.getGenre());
+        selectSpinnerItemByValue(genrePatient,patient.getGenre());
         commentaire.setText(patient.getCommentaire());
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!((idPatient.getText().toString().isEmpty())&&(genre.getText().toString().isEmpty())))
-                {   Patient patient1 = new Patient(idPatient.getText().toString(),genre.getText().toString(),commentaire.getText().toString());
+                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getSelectedItem().toString().isEmpty())))
+                {   Patient patient1 = new Patient(idPatient.getText().toString(),genrePatient.getSelectedItem().toString(),commentaire.getText().toString());
                     patientDbHelper.updatePatient(patient1);
 
                     Toast.makeText(AffichagePatientActivity.this, patient.getId().toString() + " mis a jour", Toast.LENGTH_LONG).show();
@@ -106,5 +117,15 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
             }
         });
 
+    }
+    //cette fonction permet de selctionner une valeur passé en argument sur le combobox
+    public static void selectSpinnerItemByValue(Spinner spnr, String value) {
+        ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) spnr.getAdapter();
+        for (int position = 0; position < adapter.getCount(); position++) {
+            if(adapter.getItem(position).toString().equals(value) ) {
+                spnr.setSelection(position);
+                return;
+            }
+        }
     }
 }

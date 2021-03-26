@@ -33,6 +33,19 @@
         android:drawableLeft="@drawable/email"
         android:drawablePadding="16dp"
         />
+
+    <Spinner
+        android:id="@+id/spinner_genre"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="50dp"
+        android:background="@drawable/gradient_spinner"
+         />
+    <!--
     <customfonts.MyEditText
         android:id="@+id/genre"
         android:layout_width="match_parent"
@@ -49,6 +62,7 @@
         android:drawableLeft="@drawable/genre"
         android:drawablePadding="16dp"
         />
+         -->
     <customfonts.MyEditText
         android:id="@+id/commentaire"
         android:layout_width="match_parent"
