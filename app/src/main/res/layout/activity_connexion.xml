@@ -7,11 +7,11 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="329dp">
+        android:layout_height="400dp">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="310dp"
+            android:layout_height="400dp"
             android:background="@drawable/login" />
 
         <LinearLayout
@@ -31,7 +31,7 @@
                 android:padding="16dp"
                 android:text="Connexion"
                 android:textColor="#000000"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/sup"
@@ -43,54 +43,55 @@
                 android:padding="16dp"
                 android:text="Inscription"
                 android:textColor="#fff"
-                android:textSize="16dp" />
+                android:textSize="18dp" />
         </LinearLayout>
     </FrameLayout>
+
     <customfonts.MyEditText
         android:id="@+id/idConnexion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Identifiant"
-        android:inputType="text"
-        android:textColor="#000"
-        android:background="#f0f0f4"
-        android:padding="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="80dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_background"
         android:drawableLeft="@drawable/email"
         android:drawablePadding="16dp"
-        />
+        android:hint="Identifiant"
+        android:inputType="text"
+        android:padding="12dp"
+        android:textColor="#000" />
+
     <customfonts.MyEditText
         android:id="@+id/mdpConnexion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/lockers"
+        android:drawablePadding="16dp"
         android:hint="Mot de passe"
         android:inputType="textPassword"
-        android:background="#f0f0f4"
-        android:textColor="#000"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
         android:padding="12dp"
-        android:drawablePadding="16dp"
-        android:drawableLeft="@drawable/lockers"
-        />
+        android:textColor="#000" />
+
     <customfonts.MyRegulerText
         android:id="@+id/btnConnexion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btnformate"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="250dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="250dp"
-        android:textAlignment="center"
-        android:padding="14dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btnformate"
         android:gravity="center"
-        android:text="Connexion"
-        android:textSize="16dp"
+        android:padding="14dp"
+        android:text="Se connecter"
+        android:textAlignment="center"
         android:textColor="#fff"
-        />
+        android:textSize="16dp" />
 </LinearLayout>
