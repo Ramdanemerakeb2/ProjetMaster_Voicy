@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.ListePatientAdapter;
@@ -23,6 +24,9 @@ import java.util.Random;
 public class ListePatientActivity extends FonctionnaliteActivity {
 
     public static VoicyDbHelper dbPatient;
+    SearchView searchView;
+    ListView listView;
+    ListePatientAdapter adapter ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +40,15 @@ public class ListePatientActivity extends FonctionnaliteActivity {
         View contentView = inflater.inflate(R.layout.activity_liste_patient, null, false);
         drawerLayout.addView(contentView, 0);
 
+
         dbPatient = new VoicyDbHelper(this);
+
+        searchView = (SearchView) findViewById(R.id.btnRechPatientId);
+
         List<Patient> listePatients = dbPatient.getAllPatient();
-        final ListView listView = (ListView) findViewById(R.id.list_patients);
-        listView.setAdapter(new ListePatientAdapter(this, listePatients));
+        listView = (ListView) findViewById(R.id.list_patients);
+        adapter = new ListePatientAdapter(this, listePatients);
+        listView.setAdapter(adapter);
 
         // When the user clicks on the ListItem
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,5 +74,24 @@ public class ListePatientActivity extends FonctionnaliteActivity {
                 startActivityForResult(intent, 0);
             }
         });
+
+        //https://www.javatpoint.com/android-searchview
+        //elle permet de filter la liste des patient selon l'id entrer par le clinicien
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                searchView.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ListePatientActivity.this.adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+
     }
 }

@@ -20,18 +20,32 @@
             android:layout_height="match_parent"
             app:srcCompat="@drawable/titre_image" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="500dp"
+            android:layout_height="150dp"
             android:layout_centerInParent="true"
-            android:fontFamily="serif"
-            android:text="Liste des patients"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#FFFFFF"
-            android:textSize="50dp"
-            android:textStyle="bold|italic" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="serif"
+                android:text="Liste des patients"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="50dp"
+                android:textStyle="bold|italic" />
+
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="323dp"
+                android:layout_height="68dp"
+                android:id="@+id/btnRechPatientId"
+                style="@style/SearchViewStyle"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
     </RelativeLayout>
 

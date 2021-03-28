@@ -6,17 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.voicy_v2.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListePatientAdapter extends BaseAdapter {
+public class ListePatientAdapter extends BaseAdapter implements Filterable {
 
     private List<Patient> listData;
     private LayoutInflater layoutInflater;
     private Context context;
+    public static VoicyDbHelper dbPatient;
 
     public ListePatientAdapter(Context aContext,  List<Patient> listData) {
         this.context = aContext;
@@ -58,8 +62,51 @@ public class ListePatientAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+
     static class ViewHolder {
         TextView liste_patients_id;
         TextView liste_patients_genre;
+    }
+    //elle est utilser pour le filre de a liste des patient selon l'id enter par le clinicien
+    //https://stackoverflow.com/questions/14663725/list-view-filter-android/14663821#14663821
+    public Filter getFilter() {
+        dbPatient = new VoicyDbHelper(this.context);
+        Filter filter = new Filter() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                listData = (List<Patient>) results.values;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+                ArrayList<Patient> FilteredArrayNames = new ArrayList<Patient>();
+
+                // perform your search here using the searchConstraint String.
+
+                constraint = constraint.toString().toLowerCase();
+                for (int i = 0; i < dbPatient.getAllPatient().size(); i++) {
+                    Patient dataId = dbPatient.getAllPatient().get(i);
+                    if (dataId.getId().toLowerCase().startsWith(constraint.toString()))  {
+                        FilteredArrayNames.add(dataId);
+                    }
+                }
+
+                results.count = FilteredArrayNames.size();
+                results.values = FilteredArrayNames;
+                Log.e("VALUES", results.values.toString());
+
+                return results;
+            }
+        };
+
+        return filter;
+
     }
 }
