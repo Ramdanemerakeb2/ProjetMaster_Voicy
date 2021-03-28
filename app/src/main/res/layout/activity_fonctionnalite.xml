@@ -22,7 +22,7 @@
             android:id="@+id/activity_main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#2C8FFB"
             app:theme="@style/ThemeOverlay.AppCompat.Light"/>
         <!-- FrameLayout for our fragments -->
         <FrameLayout

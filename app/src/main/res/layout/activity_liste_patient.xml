@@ -6,20 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".activity.ListePatientActivity">
 
-    <TextView
-        android:id="@+id/titre_listPatient"
-        android:layout_width="450dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="140dp"
-        android:background="@drawable/box_titre"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:text="Liste des Patients"
-        android:textSize="46sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/titre_image" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="serif"
+            android:text="Liste des patients"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#FFFFFF"
+            android:textSize="50dp"
+            android:textStyle="bold|italic" />
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -28,7 +42,7 @@
         android:id="@+id/list_separator"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/list_patients"
-        app:layout_constraintTop_toBottomOf="@+id/titre_listPatient"
+        app:layout_constraintTop_toBottomOf="@+id/relative_layout"
         tools:layout_editor_absoluteX="-16dp" />
 
     <ListView
