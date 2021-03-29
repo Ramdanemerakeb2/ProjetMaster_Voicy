@@ -3,6 +3,7 @@ package com.example.voicy_v2.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.voicy_v2.model.ListePatientAdapter;
 import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,8 +27,10 @@ public class ListePatientActivity extends FonctionnaliteActivity {
 
     public static VoicyDbHelper dbPatient;
     SearchView searchView;
-    ListView listView;
+    ListView listView ;
     ListePatientAdapter adapter ;
+    SharedPreferences sharedpreferences;
+    List<Patient> listePatients ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,9 @@ public class ListePatientActivity extends FonctionnaliteActivity {
 
         searchView = (SearchView) findViewById(R.id.btnRechPatientId);
 
-        List<Patient> listePatients = dbPatient.getAllPatient();
+        sharedpreferences = getSharedPreferences(ConnexionActivity.clinicienSession, Context.MODE_PRIVATE);
+
+        listePatients = dbPatient.getAllPatient(sharedpreferences.getString(ConnexionActivity.sessionIdClinicien, null));
         listView = (ListView) findViewById(R.id.list_patients);
         adapter = new ListePatientAdapter(this, listePatients);
         listView.setAdapter(adapter);

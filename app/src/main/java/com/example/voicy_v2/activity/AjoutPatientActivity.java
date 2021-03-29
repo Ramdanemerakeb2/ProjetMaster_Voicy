@@ -2,6 +2,7 @@ package com.example.voicy_v2.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ public class AjoutPatientActivity extends FonctionnaliteActivity  {
     private Patient patient;
     public static VoicyDbHelper patientDbHelper;
     private Spinner genrePatient;
+
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,10 @@ public class AjoutPatientActivity extends FonctionnaliteActivity  {
             {
                 if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getSelectedItem().toString().isEmpty()))){
                     patient = new Patient(idPatient.getText().toString(),genrePatient.getSelectedItem().toString(),commentairePatient.getText().toString());
-                    if(patientDbHelper.ajoutPatient(patient)){
+                    //recuperer l'id du clinicien connecté
+                    sharedpreferences = getSharedPreferences(ConnexionActivity.clinicienSession, Context.MODE_PRIVATE);
+
+                    if(patientDbHelper.ajoutPatient(patient,sharedpreferences.getString(ConnexionActivity.sessionIdClinicien, null))){
                         Toast.makeText(AjoutPatientActivity.this, patient.getId().toString()+" ajouté",Toast.LENGTH_LONG).show();
 
                         /*SweetAlertDialog sDialog = new SweetAlertDialog(AjoutPatientActivity.this, SweetAlertDialog.SUCCESS_TYPE);

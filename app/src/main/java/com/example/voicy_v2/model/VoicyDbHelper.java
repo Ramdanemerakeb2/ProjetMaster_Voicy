@@ -38,6 +38,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PATIENT_ID = "id";
     public static final String COLUMN_PATIENT_GENRE = "genre";
     public static final String COLUMN_PATIENT_COMMENTAIRE = "commentaire";
+    public static final String COLUMN_CLINICIEN = "id_clinicien";
 
     public VoicyDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,6 +63,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
                 COLUMN_PATIENT_ID + " TEXT PRIMARY KEY," +
                 COLUMN_PATIENT_GENRE + " TEXT , " +
                 COLUMN_PATIENT_COMMENTAIRE + " TEXT, " +
+                COLUMN_CLINICIEN + " TEXT, " +
                 " UNIQUE (" + COLUMN_PATIENT_ID + ") ON CONFLICT ROLLBACK);";
 
         db.execSQL(SQL_CREATE_PATIENT_TABLE);
@@ -185,7 +187,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean ajoutPatient(Patient patient) {
+    public boolean ajoutPatient(Patient patient,String idClinicien) {
         Log.i(TAG, "Ajout du patient num :  " + patient.getId());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -194,6 +196,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PATIENT_ID, patient.getId());
         values.put(COLUMN_PATIENT_GENRE, patient.getGenre());
         values.put(COLUMN_PATIENT_COMMENTAIRE, patient.getCommentaire());
+        values.put(COLUMN_CLINICIEN, idClinicien);
 
         long rowID = db.insertWithOnConflict(TABLE_PATIENT, null, values, CONFLICT_IGNORE);
         db.close();
@@ -227,28 +230,17 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Returns a cursor on all the Patient of the data base
-     */
-    public Cursor fetchAllProduct() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_PATIENT, null,
-                null, null, null, null, COLUMN_PATIENT_ID +" ASC", null);
-
-        Log.d(TAG, "call fetchAllProduct()");
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }
-
-    /**
      * Returns a list on all the MuseumProduct of the data base
      */
-    public List<Patient> getAllPatient() {
+    public List<Patient> getAllPatient(String idClinicien) {
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_PATIENT, null,
-                null, null, null, null, COLUMN_PATIENT_ID +" ASC", null);
+        /*Cursor cursor = db.query(TABLE_PATIENT, null,
+                null, null, null, null, COLUMN_PATIENT_ID +" ASC", null);*/
+
+        Cursor cursor = db.query(TABLE_PATIENT, new String[] { COLUMN_PATIENT_ID,
+                        COLUMN_PATIENT_GENRE, COLUMN_PATIENT_COMMENTAIRE}, COLUMN_CLINICIEN + "= ? ",
+                new String[] { idClinicien}, null, null, null, null);
 
         Log.d(TAG, "call getAllPatient()");
         if (cursor != null && cursor.moveToFirst()) {
@@ -267,7 +259,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
             db.close();
             return res;
         }else{
-            return null;
+            return new ArrayList<Patient>();
         }
 
 

@@ -1,6 +1,7 @@
 package com.example.voicy_v2.model;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.voicy_v2.R;
+import com.example.voicy_v2.activity.ConnexionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class ListePatientAdapter extends BaseAdapter implements Filterable {
     private LayoutInflater layoutInflater;
     private Context context;
     public static VoicyDbHelper dbPatient;
+    SharedPreferences sharedpreferences;
 
     public ListePatientAdapter(Context aContext,  List<Patient> listData) {
         this.context = aContext;
@@ -85,14 +88,16 @@ public class ListePatientAdapter extends BaseAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
+                sharedpreferences = context.getApplicationContext().getSharedPreferences(ConnexionActivity.clinicienSession, Context.MODE_PRIVATE);
+
                 FilterResults results = new FilterResults();
                 ArrayList<Patient> FilteredArrayNames = new ArrayList<Patient>();
 
                 // perform your search here using the searchConstraint String.
 
                 constraint = constraint.toString().toLowerCase();
-                for (int i = 0; i < dbPatient.getAllPatient().size(); i++) {
-                    Patient dataId = dbPatient.getAllPatient().get(i);
+                for (int i = 0; i < dbPatient.getAllPatient(sharedpreferences.getString(ConnexionActivity.sessionIdClinicien, null)).size(); i++) {
+                    Patient dataId = dbPatient.getAllPatient(sharedpreferences.getString(ConnexionActivity.sessionIdClinicien, null)).get(i);
                     if (dataId.getId().toLowerCase().startsWith(constraint.toString()))  {
                         FilteredArrayNames.add(dataId);
                     }

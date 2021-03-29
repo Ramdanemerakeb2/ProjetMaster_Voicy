@@ -5,19 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
-    <!--
-    <TextView
-        android:id="@+id/titre_ajoutPatient"
-        android:layout_width="480dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="140dp"
-        android:background="@drawable/box_titre"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:text="Ajouter un patient"
-        android:textSize="46sp"
-        android:textStyle="bold"
-        android:translationX="150dp" />-->
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,7 +45,6 @@
         android:hint="Identifiant Patient"
         android:inputType="text"
         android:textColor="#000"
-        android:background="#f0f0f4"
         android:padding="12dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -65,6 +52,7 @@
         android:layout_marginRight="80dp"
         android:drawableLeft="@drawable/email"
         android:drawablePadding="16dp"
+        android:background="@drawable/edit_text_background"
         />
 
     <Spinner
@@ -78,24 +66,7 @@
         android:paddingLeft="50dp"
         android:background="@drawable/gradient_spinner"
          />
-    <!--
-    <customfonts.MyEditText
-        android:id="@+id/genre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Genre Patient"
-        android:inputType="text"
-        android:textColor="#000"
-        android:background="#f0f0f4"
-        android:padding="12dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/genre"
-        android:drawablePadding="16dp"
-        />
-         -->
+
     <customfonts.MyEditText
         android:id="@+id/commentaire"
         android:layout_width="match_parent"
@@ -103,7 +74,6 @@
         android:hint="Commentaire global"
         android:inputType="text"
         android:textColor="#000"
-        android:background="#f0f0f4"
         android:padding="12dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -111,6 +81,7 @@
         android:layout_marginRight="80dp"
         android:drawableLeft="@drawable/commentaire"
         android:drawablePadding="16dp"
+        android:background="@drawable/edit_text_background"
         />
     <customfonts.MyRegulerText
         android:id="@+id/btnAjout"
