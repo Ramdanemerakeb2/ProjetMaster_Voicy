@@ -65,7 +65,7 @@ public class ListePatientActivity extends FonctionnaliteActivity {
                 Patient patient = (Patient) o;
                 //Toast.makeText(ListePatientActivity.this, "Selected :" + " " + patient.getId(), Toast.LENGTH_LONG).show();
 
-                String[] typeExo = {"phrase","logatome"};
+               /* String[] typeExo = {"phrase","logatome"};
 
                 Random rand = new Random();
 
@@ -77,7 +77,10 @@ public class ListePatientActivity extends FonctionnaliteActivity {
                 intent.putExtra("type", typeExo[n]);
                 intent.putExtra("genre", ((Patient) o).getGenre());
                 intent.putExtra("iteration", 1);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, 0);*/
+                Intent intent = new Intent(ListePatientActivity.this, InfosPatientActivity.class);
+                intent.putExtra("idPatient", patient.getId().toString());
+                startActivity(intent);
             }
         });
 

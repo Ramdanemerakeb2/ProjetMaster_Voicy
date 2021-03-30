@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-
+<!--
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -32,11 +32,24 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#FFFFFF"
             android:textSize="50dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
-
+-->
+    <TextView
+        android:id="@+id/TexteTitre1"
+        android:layout_width="550dp"
+        android:layout_height="90dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/box_titre"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:text="Ajouter un patient"
+        android:textColor="#FFFFFF"
+        android:textSize="40dp"
+        android:textStyle="bold" />
 
     <customfonts.MyEditText
         android:id="@+id/idPatient"
@@ -46,13 +59,13 @@
         android:inputType="text"
         android:textColor="#000"
         android:padding="12dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:drawableLeft="@drawable/email"
         android:drawablePadding="16dp"
-        android:background="@drawable/edit_text_background"
+        android:background="#f0f0f4"
         />
 
     <Spinner
@@ -81,7 +94,7 @@
         android:layout_marginRight="80dp"
         android:drawableLeft="@drawable/commentaire"
         android:drawablePadding="16dp"
-        android:background="@drawable/edit_text_background"
+        android:background="#f0f0f4"
         />
     <customfonts.MyRegulerText
         android:id="@+id/btnAjout"
@@ -89,8 +102,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/btnformate"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginRight="250dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginRight="300dp"
         android:textAlignment="center"
         android:padding="14dp"
         android:gravity="center"

@@ -44,7 +44,7 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
         patientDbHelper = new VoicyDbHelper(this);
 
         Intent i = getIntent();
-        String patientId = (String) i.getStringExtra("patient");
+        String patientId = (String) i.getStringExtra("idPatient");
         final Patient patient = patientDbHelper.getPatient(patientId);
 
         final TextView idPatient = (TextView) findViewById(R.id.idPatient);
@@ -52,16 +52,13 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
         genrePatient = findViewById(R.id.spinner_genre);
         final TextView commentaire = (TextView) findViewById(R.id.commentaire);
         final TextView btnsave = (TextView) findViewById(R.id.btnSave);
-        final Button btnPhrase = findViewById(R.id.btnPhrase);
-        final Button btnLog = findViewById(R.id.btnLog);
 
         //ajout de la liste des genre pour le comobox
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.genre , android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genrePatient.setAdapter(adapter);
 
-        idPatient.setText(patient.getId());
-        //genre.setText(patient.getGenre());
+        idPatient.setText("Informations du patient "+patient.getId());
         selectSpinnerItemByValue(genrePatient,patient.getGenre());
         commentaire.setText(patient.getCommentaire());
 
@@ -82,37 +79,6 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
                     sDialog.setContentText("veuillez renseigner les informations SVP ");
                     sDialog.setCancelable(true);
                     sDialog.show();
-                }
-            }
-        });
-
-        btnLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(DirectoryManager.getInstance().getAvailableMo() > 100)
-                {
-                    LogVoicy.getInstance().createLogInfo("Clique sur le bouton exercice phonème détecté");
-                    LogVoicy.getInstance().createLogInfo("Changement de page vers ExerciceActivity avec envoie du paramètre [type: logatome]");
-                    Intent intent = new Intent(getApplicationContext(), ConfigurationExerciceActivity.class);
-                    intent.putExtra("type", "logatome");
-                    startActivityForResult(intent, 0);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                }
-
-            }
-        });
-
-        btnPhrase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(DirectoryManager.getInstance().getAvailableMo() > 100)
-                {
-                    LogVoicy.getInstance().createLogInfo("Clique sur le bouton exercice phrase détecté");
-                    LogVoicy.getInstance().createLogInfo("Changement de page vers PhonemeActivity avec envoie du paramètre [type: phrase]");
-                    Intent intent = new Intent(getApplicationContext(), ConfigurationExerciceActivity.class);
-                    intent.putExtra("type", "phrase");
-                    startActivityForResult(intent, 1);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             }
         });

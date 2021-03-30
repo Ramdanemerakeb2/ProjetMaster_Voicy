@@ -6,14 +6,6 @@
         </item>
         <item><shape>
             <padding android:left="13dp" />
-            <!-- Background Color -->
-            <solid android:color="#f0f0f4" />
-
-            <!-- Border Color -->
-            <stroke android:width="2dp" android:color="#C4FAF8" />
-
-            <!-- Round Corners -->
-            <corners android:radius="15dp" />
         </shape></item>
         <item ><bitmap android:gravity="left|center" android:src="@drawable/genre" />
         </item>
