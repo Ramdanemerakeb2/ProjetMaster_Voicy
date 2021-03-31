@@ -174,6 +174,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     //******************** gestion de Patient ********************
 
     public int updatePatient(Patient patient) {
+        Log.i(TAG, "M.A.J du patient num :  " + patient.getId());
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

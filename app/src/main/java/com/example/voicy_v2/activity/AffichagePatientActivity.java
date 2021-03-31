@@ -1,3 +1,4 @@
+
 package com.example.voicy_v2.activity;
 
 import android.content.Context;
@@ -28,6 +29,7 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
     private Patient patient;
     public static VoicyDbHelper patientDbHelper;
     private Spinner genrePatient;
+    String patientIdIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,8 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
         patientDbHelper = new VoicyDbHelper(this);
 
         Intent i = getIntent();
-        String patientId = (String) i.getStringExtra("idPatient");
-        final Patient patient = patientDbHelper.getPatient(patientId);
+        patientIdIntent = (String) i.getStringExtra("idPatient");
+        final Patient patient = patientDbHelper.getPatient(patientIdIntent);
 
         final TextView idPatient = (TextView) findViewById(R.id.idPatient);
         //final TextView genre = (TextView) findViewById(R.id.genre);
@@ -66,7 +68,7 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
             @Override
             public void onClick(View view) {
                 if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getSelectedItem().toString().isEmpty())))
-                {   Patient patient1 = new Patient(idPatient.getText().toString(),genrePatient.getSelectedItem().toString(),commentaire.getText().toString());
+                {   Patient patient1 = new Patient(patientIdIntent,genrePatient.getSelectedItem().toString(),commentaire.getText().toString());
                     patientDbHelper.updatePatient(patient1);
 
                     Toast.makeText(AffichagePatientActivity.this, patient.getId().toString() + " mis a jour", Toast.LENGTH_LONG).show();
