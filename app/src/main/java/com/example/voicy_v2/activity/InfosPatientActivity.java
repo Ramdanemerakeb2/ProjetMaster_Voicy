@@ -53,6 +53,15 @@ public class InfosPatientActivity extends FonctionnaliteActivity {
             }
         });
 
+        btnListerExo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InfosPatientActivity.this, ExoSpecifiqueActivity.class);
+                intent.putExtra("idPatient", idPatient);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
