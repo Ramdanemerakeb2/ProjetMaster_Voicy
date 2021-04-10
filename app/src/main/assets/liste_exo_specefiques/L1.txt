@@ -1,0 +1,45 @@
+1	babant	bb aa bb an
+2	babin	bb aa bb in
+3	babla	bb aa bb ll aa
+4	bablant	bb aa bb ll an
+5	babli	bb aa bb ll ii
+6	bablin	bb aa bb ll in
+7	bablo	bb aa bb ll au
+8	bablou	bb aa bb ll ou
+9	bablu	bb aa bb ll uu
+10	babra	bb aa bb rr aa
+11	babrant	bb aa bb rr an
+12	babri	bb aa bb rr ii
+13	babrin	bb aa bb rr in
+14	babro	bb aa bb rr au
+15	babrou	bb aa bb rr ou
+16	babru	bb aa bb rr uu
+241	banfa	bb an ff aa
+242	banfant	bb an ff an
+243	banfi	bb an ff ii
+244	banfin	bb an ff in
+245	banfla	bb an ff ll aa
+246	banflant	bb an ff ll an
+247	banfli	bb an ff ll ii
+248	banflin	bb an ff ll in
+249	banflo	bb an ff ll au
+250	banflou	bb an ff ll ou
+251	banflu	bb an ff ll uu
+252	banfo	bb an ff au
+253	banfou	bb an ff ou
+254	banfra	bb an ff rr aa
+255	banfrant	bb an ff rr an
+256	banfri	bb an ff rr ii
+257	banfrin	bb an ff rr in
+258	banfro	bb an ff rr au
+259	banfrou	bb an ff rr ou
+260	banfru	bb an ff rr uu
+261	banfu	bb an ff uu
+262	banga	bb an gg aa
+263	bangant	bb an gg an
+264	banglant	bb an gg ll an
+265	bangli	bb an gg ll ii
+266	banglin	bb an gg ll in
+267	banglo	bb an gg ll au
+268	banglou	bb an gg ll ou
+269	banglu	bb an gg ll uu

@@ -1,0 +1,16 @@
+1	babu	bb aa bb uu
+2	bachant	bb aa ch an
+3	bachin	bb aa ch in
+4	bachou	bb aa ch ou
+5	bachu	bb aa ch uu
+6	bacli	bb aa kk ll ii
+7	baclin	bb aa kk ll in
+8	baclo	bb aa kk ll au
+9	baclou	bb aa kk ll ou
+10	baclu	bb aa kk ll uu
+11	bacou	bb aa kk ou
+12	bacra	bb aa kk rr aa
+13	bacrant	bb aa kk rr an
+14	bacri	bb aa kk rr ii
+15	bacrin	bb aa kk rr in
+16	bacro	bb aa kk rr au

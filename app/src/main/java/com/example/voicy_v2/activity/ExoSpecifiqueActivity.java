@@ -41,6 +41,14 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
 
         titre.setText("Exercices spécifiques "+idPatient);
 
+        ajoutExo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListeExoPredefiniActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
+
 
     }
 }

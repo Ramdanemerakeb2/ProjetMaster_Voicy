@@ -1,0 +1,16 @@
+1	bacrou	bb aa kk rr ou
+1	bacru	bb aa kk rr uu
+3	bacta	bb aa kk tt aa
+4	bactant	bb aa kk tt an
+5	bacti	bb aa kk tt ii
+6	bactin	bb aa kk tt in
+7	bacto	bb aa kk tt au
+8	bactou	bb aa kk tt ou
+9	bactu	bb aa kk tt uu
+10	bacu	bb aa kk uu
+11	badou	bb aa dd ou
+12	badra	bb aa dd rr aa
+13	badrant	bb aa dd rr an
+14	badri	bb aa dd rr ii
+15	badrin	bb aa dd rr in
+16	badro	bb aa dd rr au
