@@ -17,7 +17,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
 
     private ListView listView ;
     private TextView titre;
-    private ImageButton ajoutExo;
+    private ImageButton ajoutExo2;
     private String idPatient;
 
     @Override
@@ -36,12 +36,12 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
         idPatient = (String) i.getStringExtra("idPatient");
 
         titre = (TextView) findViewById(R.id.titre_exo);
-        ajoutExo = (ImageButton) findViewById(R.id.btn_ajout_exo);
+        ajoutExo2 = (ImageButton) findViewById(R.id.btn_ajout_exo2);
         listView = (ListView) findViewById(R.id.list_exo_spec);
 
         titre.setText("Exercices spécifiques "+idPatient);
 
-        ajoutExo.setOnClickListener(new View.OnClickListener() {
+        ajoutExo2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListeExoPredefiniActivity.class);
                 startActivity(intent);
