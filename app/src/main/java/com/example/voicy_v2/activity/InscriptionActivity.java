@@ -76,7 +76,7 @@ public class InscriptionActivity extends AppCompatActivity {
                     }else{
                         SweetAlertDialog sDialog = new SweetAlertDialog(InscriptionActivity.this, SweetAlertDialog.ERROR_TYPE);
                         sDialog.setTitleText("Oups ...");
-                        sDialog.setContentText("Veuillez changez l'identifiant SVP");
+                        sDialog.setContentText("Ce patient existe deja");
                         sDialog.setCancelable(true);
                         sDialog.show();
                     }

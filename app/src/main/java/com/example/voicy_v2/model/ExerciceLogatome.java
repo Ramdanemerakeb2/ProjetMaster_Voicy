@@ -34,6 +34,13 @@ public class ExerciceLogatome extends Exercice
         DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
     }
 
+    public ExerciceLogatome(Context c ,String id, String mot, String phonem, String idPatient){
+        super(c);
+        this.id = id;
+        this.listMotString = mot ;
+        this.listPhonemString = phonem;
+        this.patientSpecifiqueId = idPatient;
+    }
     //constructeur d'exo specifique a ajouter dans la bd
     public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String phonemeFiltrage)
     {

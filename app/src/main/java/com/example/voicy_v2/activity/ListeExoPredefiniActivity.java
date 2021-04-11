@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -22,8 +24,10 @@ import android.widget.TextView;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.DirectoryManager;
+import com.example.voicy_v2.model.ExerciceLogatome;
 import com.example.voicy_v2.model.Logatome;
 import com.example.voicy_v2.model.Mot;
+import com.example.voicy_v2.model.VoicyDbHelper;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,6 +35,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
 
@@ -40,7 +47,10 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
     private View customView;
     private PopupWindow popUp;
     private TextView titrePopUp, textClose, listLogatomes;
+    private Button btnAjoutExo;
     private LinearLayout linearLayout;
+    public static VoicyDbHelper dbPatientExo;
+    private String idPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +66,15 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
 
         linearLayout = findViewById(R.id.exo_layout);
 
+        dbPatientExo = new VoicyDbHelper(this);
+
         //Inistialiser la vue du popup
         customView = inflater.inflate(R.layout.popup_exo_predefini,null);
 
         listView = (ListView) findViewById(R.id.list_exo_predefini);
 
+        Intent i = getIntent();
+        idPatient = (String) i.getStringExtra("idPatient");
 
 
         try {
@@ -87,7 +101,7 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
     }
 
 
-    private void showResultat(String fichier)
+    private void showResultat(final String fichier)
     {
 
         //Initialisation de la popup
@@ -122,6 +136,39 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
                 popUp.dismiss();
             }
         });
+
+        btnAjoutExo = customView.findViewById(R.id.btn_ajout_exo_spec);
+        btnAjoutExo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] parts = fichier.split(Pattern.quote("."));
+                String idExo = parts[0];
+                String motDb = getTextFromFileV2(fichier)[0];
+                String phonemDb = getTextFromFileV2(fichier)[1];
+                System.out.println(" ********** test des proprietes a ajouter dans la BD ************");
+                System.out.println("idExo "+idExo);
+                System.out.println("motDb "+motDb);
+                System.out.println("phonemDb "+phonemDb);
+                System.out.println("idPatient "+idPatient);
+
+                //exo non existant sur la BD (Succes)
+                if(dbPatientExo.addExerciceLogatomSpecifique(new ExerciceLogatome(getApplicationContext(),idExo,motDb,phonemDb,idPatient))){
+                    popUp.dismiss();
+                    SweetAlertDialog sDialog = new SweetAlertDialog(ListeExoPredefiniActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                    sDialog.setContentText("Exercice ajouté");
+                    sDialog.setCancelable(true);
+                    sDialog.show();
+                }else{
+                    popUp.dismiss();
+                    SweetAlertDialog sDialog = new SweetAlertDialog(ListeExoPredefiniActivity.this, SweetAlertDialog.ERROR_TYPE);
+                    sDialog.setTitleText("Oups ...");
+                    sDialog.setContentText("Ce patient possède déjà cet exercice");
+                    sDialog.setCancelable(true);
+                    sDialog.show();
+                }
+            }
+        });
+
     }
 
 
@@ -149,6 +196,35 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
         {
             e.printStackTrace();
             return result;
+        }
+    }
+
+    private String[] getTextFromFileV2(String file) {
+        String[] res = null;
+        String[] resultMotPhoneme = new String[2];
+
+        // buffer sur la liste présentes dans assets
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("liste_exo_specefiques/"+file))))
+        {
+            String line;
+            while ((line = br.readLine()) != null)
+            {
+                line = line.substring(line.indexOf("\t")+1);
+
+                // split de la ligne par rapport à une tabulation
+                res = line.split("\t");
+
+                resultMotPhoneme[0]  += res[0]+",";
+                resultMotPhoneme[1]  += res[1]+",";
+            }
+            resultMotPhoneme[0] = resultMotPhoneme[0].substring(0, resultMotPhoneme[0].length() - 1);
+            resultMotPhoneme[1] = resultMotPhoneme[1].substring(0, resultMotPhoneme[1].length() - 1);
+            return  resultMotPhoneme;
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            return resultMotPhoneme;
         }
     }
 

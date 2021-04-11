@@ -52,6 +52,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
         ajoutExo2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ListeExoPredefiniActivity.class);
+                intent.putExtra("idPatient", idPatient);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }

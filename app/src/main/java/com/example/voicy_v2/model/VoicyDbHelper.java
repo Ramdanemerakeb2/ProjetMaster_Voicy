@@ -64,7 +64,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
 
                 // To assure the application have just one team entry per
                 // product name , it's created a UNIQUE
-                " UNIQUE (" + COLUMN_CLINICIEN_ID + ") ON CONFLICT ROLLBACK);";
+                " UNIQUE (" + COLUMN_EXCERCICE_ID + ") ON CONFLICT ROLLBACK);";
 
         // creation de la table clinicien
         final String SQL_CREATE_CLINICIEN_TABLE = "CREATE TABLE " + TABLE_CLINICIEN + " (" +
