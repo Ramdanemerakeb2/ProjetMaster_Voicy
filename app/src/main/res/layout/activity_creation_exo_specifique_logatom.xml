@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/titre_image" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="serif"
+            android:text="Ajouter un exercice"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#FFFFFF"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+    <customfonts.MyEditText
+        android:id="@+id/textIteration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de logatomes"
+        android:inputType="text"
+        android:textColor="#000"
+        android:padding="12dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="16dp"
+        android:background="#f0f0f4"
+        />
+    <Spinner
+        android:id="@+id/spinner_genre"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="50dp"
+        android:background="@drawable/gradient_spinner"
+        />
+    <customfonts.MyEditText
+        android:id="@+id/phonemeFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phonemes pour le filtrage(séparés par des ',' . "
+        android:inputType="text"
+        android:textColor="#000"
+        android:padding="12dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="16dp"
+        android:background="#f0f0f4"/>
+
+    <customfonts.MyRegulerText
+        android:id="@+id/btnAjout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btnformate"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginRight="300dp"
+        android:textAlignment="center"
+        android:padding="14dp"
+        android:gravity="center"
+        android:text="Ajouter"
+        android:textSize="16dp"
+        android:textColor="#fff"
+        />
+
+</LinearLayout>

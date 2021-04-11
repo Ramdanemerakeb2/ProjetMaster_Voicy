@@ -45,7 +45,7 @@ import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ExerciceActivity extends FonctionnaliteActivity implements CallbackServer
+public class ExerciceSpecifiqueLogatomLaunchActivity extends FonctionnaliteActivity implements CallbackServer
 {
     private Toolbar toolbar;
     private Button btnAnnuler;
@@ -92,8 +92,8 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
         idExo = param.getString("idExo");
         patientid = param.getString("patientId");
         //
-        listmot = param.getString("listmot");
-        listphoneme = param.getString("listphoneme");
+        listmot = param.getString("logatoms");
+        listphoneme = param.getString("phonems");
         //
         phonemeFiltrage = param.getString("phonemes");
         Log.i("la liste est :",phonemeFiltrage);
@@ -123,9 +123,12 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
     {
         if(typeExercice.equals("logatome"))
         {
+            Log.i("listmot", String.valueOf(listmot));
+            Log.i("listmot",listmot);
             lePrompteur.setTextSize(46);
-            //exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5","zouvrin,zouvro,zucra","zz ou vv rr in,zz ou vv rr au,zz uu kk rr aa");
-            exercice = new ExerciceLogatome(maxIteration, genre,this);
+            exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5",phonemeFiltrage);
+            //exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5",listmot,listphoneme);
+            //exercice = new ExerciceLogatome(maxIteration, genre,this);
             /*
             *  idExo = param.getString("idExo");
         patientid = param.getString("patientId");
@@ -177,7 +180,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
             }
 
 
-            RequestServer requestLogatome = new RequestServer(this, ExerciceActivity.this);
+            RequestServer requestLogatome = new RequestServer(this, ExerciceSpecifiqueLogatomLaunchActivity.this);
             requestLogatome.sendHttpsRequest(params, this.typeExercice);
 
         }
@@ -193,7 +196,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
                 DirectoryManager.getInstance().createFileOnDirectory(exercice.getDirectoryPath(), "resultat.txt", response.toString());
 
-                Intent intent = new Intent(ExerciceActivity.this, ResultatActivity.class);
+                Intent intent = new Intent(ExerciceSpecifiqueLogatomLaunchActivity.this, ResultatActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -211,7 +214,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
         DirectoryManager.getInstance().createFileOnDirectory(pathDestination, "temp.txt", params.toString());
 
-        SweetAlertDialog sDialog = new SweetAlertDialog(ExerciceActivity.this, SweetAlertDialog.ERROR_TYPE);
+        SweetAlertDialog sDialog = new SweetAlertDialog(ExerciceSpecifiqueLogatomLaunchActivity.this, SweetAlertDialog.ERROR_TYPE);
         sDialog.setTitleText("Oups ...");
         sDialog.setContentText(error);
         sDialog.setConfirmText("Ok");

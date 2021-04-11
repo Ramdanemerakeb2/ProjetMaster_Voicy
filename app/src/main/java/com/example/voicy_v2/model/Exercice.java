@@ -12,6 +12,46 @@ public abstract class Exercice
     protected ArrayList<Mot> listeElement;
     protected Context context;
     protected String directoryName;
+    protected String id = null ;
+    protected String listMotString = null;
+    protected String listPhonemString = null;
+    protected String patientSpecifiqueId = null ;
+
+    public String getListPhonemString() {
+        return listPhonemString;
+    }
+
+    public void setListPhonemString(String listPhonemString) {
+        this.listPhonemString = listPhonemString;
+    }
+
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getListMotString() {
+        return listMotString;
+    }
+
+    public void setListMotString(String listMotString) {
+        this.listMotString = listMotString;
+    }
+
+    public String getPatientSpecifiqueId() {
+        return patientSpecifiqueId;
+    }
+
+    public void setPatientSpecifiqueId(String patientSpecifiqueId) {
+        this.patientSpecifiqueId = patientSpecifiqueId;
+    }
+
+
 
     public Exercice(Context c)
     {

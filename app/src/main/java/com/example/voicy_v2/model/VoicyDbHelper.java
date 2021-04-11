@@ -40,6 +40,13 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PATIENT_COMMENTAIRE = "commentaire";
     public static final String COLUMN_CLINICIEN = "id_clinicien";
 
+    //***************Table Exercice Logatom***********************
+    public static final String TABLE_EXERCICE = "ExerciceLogatom";
+    public static final String COLUMN_EXCERCICE_ID = "id";
+    public static final String COLUMN_EXERCICE_LIST_MOT = "logatoms";
+    public static final String COLUMN_EXERCICE_LIST_PHONEM = "phonem" ;
+    public static final String COLUMN_PATIENT_SPECIFIQUE_ID = "patient";
+
     public VoicyDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -47,6 +54,18 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        //creation de la table Excercice
+        final String SQL_CREATE_EXCERCICE_TABLE = "CREATE TABLE " + TABLE_EXERCICE + " (" +
+                COLUMN_EXCERCICE_ID + " TEXT PRIMARY KEY," +
+                COLUMN_EXERCICE_LIST_MOT + " TEXT NOT NULL, " +
+                COLUMN_EXERCICE_LIST_PHONEM + " TEXT NOT NULL, " +
+                COLUMN_PATIENT_SPECIFIQUE_ID + " TEXT, " +
+
+                // To assure the application have just one team entry per
+                // product name , it's created a UNIQUE
+                " UNIQUE (" + COLUMN_CLINICIEN_ID + ") ON CONFLICT ROLLBACK);";
+
         // creation de la table clinicien
         final String SQL_CREATE_CLINICIEN_TABLE = "CREATE TABLE " + TABLE_CLINICIEN + " (" +
                 COLUMN_CLINICIEN_ID + " TEXT PRIMARY KEY," +
@@ -69,12 +88,70 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_PATIENT_TABLE);
 
         db.execSQL(SQL_CREATE_CLINICIEN_TABLE);
+
+        db.execSQL(SQL_CREATE_EXCERCICE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+
+    //******************** gestion des exercices *******************
+
+    //inserer un excercice specifique dans la db
+    public boolean addExerciceLogatomSpecifique(Exercice exercice) {
+        Log.i(TAG, "Ajout du exercice  ... " + exercice.getId()+" au patient "+exercice.getPatientSpecifiqueId());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_EXCERCICE_ID, exercice.getId());
+        values.put(COLUMN_EXERCICE_LIST_MOT, exercice.getListMotString());
+        values.put(COLUMN_EXERCICE_LIST_PHONEM, exercice.getListPhonemString());
+        values.put(COLUMN_PATIENT_SPECIFIQUE_ID, exercice.getPatientSpecifiqueId());
+
+
+        // Inserting Row
+        // The unique used for creating table ensures to have only one copy of each team
+        // If rowID = -1, an error occured
+        long rowID = db.insertWithOnConflict(TABLE_EXERCICE, null, values, CONFLICT_IGNORE);
+        db.close(); // Closing database connection
+
+        return (rowID != -1);
+
+    }
+
+    //getExercice specifique depuis la db
+   /* public Exercice getExcerciceLogatomSpecifique(String idExo) {
+        Log.i(TAG, "MyDatabaseHelper.getClinicien ... " + idExo);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_EXERCICE, new String[] { COLUMN_CLINICIEN_ID,
+                        COLUMN_CLINICIEN_NOM, COLUMN_CLINICIEN_PRENOM, COLUMN_CLINICIEN_MDP}, COLUMN_CLINICIEN_ID + "= ? AND " + COLUMN_CLINICIEN_MDP +"= ?",
+                new String[] { id,mdp }, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Clinicien clinicien = new Clinicien(cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_ID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_NOM)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_PRENOM)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_MDP)) );
+            cursor.close();
+            db.close();
+            return clinicien;
+
+        }else{
+            cursor.close();
+            db.close();
+            return null ;
+        }
+    }*/
+
+
+
+
 
     //******************** gestion de clinicien ********************
     /**
@@ -104,6 +181,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
         return (rowID != -1);
 
     }
+
 
     /**
      * Updates the information of a Clinicien inside the data base
