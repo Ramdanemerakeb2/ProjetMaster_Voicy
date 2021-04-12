@@ -151,21 +151,26 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
                 System.out.println("phonemDb "+phonemDb);
                 System.out.println("idPatient "+idPatient);
 
-                //exo non existant sur la BD (Succes)
-                if(dbPatientExo.addExerciceLogatomSpecifique(new ExerciceLogatome(getApplicationContext(),idExo,motDb,phonemDb,idPatient))){
-                    popUp.dismiss();
-                    SweetAlertDialog sDialog = new SweetAlertDialog(ListeExoPredefiniActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                    sDialog.setContentText("Exercice ajouté");
-                    sDialog.setCancelable(true);
-                    sDialog.show();
-                }else{
-                    popUp.dismiss();
-                    SweetAlertDialog sDialog = new SweetAlertDialog(ListeExoPredefiniActivity.this, SweetAlertDialog.ERROR_TYPE);
-                    sDialog.setTitleText("Oups ...");
-                    sDialog.setContentText("Ce patient possède déjà cet exercice");
-                    sDialog.setCancelable(true);
-                    sDialog.show();
+                if(idExo.charAt(0) == 'L'){
+                    //exo non existant sur la BD (Succes)
+                    if(dbPatientExo.addExercice(new ExerciceLogatome(getApplicationContext(),idExo,motDb,phonemDb,idPatient))){
+                        popUp.dismiss();
+                        SweetAlertDialog sDialog = new SweetAlertDialog(ListeExoPredefiniActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                        sDialog.setContentText("Exercice ajouté");
+                        sDialog.setCancelable(true);
+                        sDialog.show();
+                    }else{
+                        popUp.dismiss();
+                        SweetAlertDialog sDialog = new SweetAlertDialog(ListeExoPredefiniActivity.this, SweetAlertDialog.ERROR_TYPE);
+                        sDialog.setTitleText("Oups ...");
+                        sDialog.setContentText("Ce patient possède déjà cet exercice");
+                        sDialog.setCancelable(true);
+                        sDialog.show();
+                    }
+                }else if(idExo.charAt(0) == 'P'){
+                    System.out.println(" Mazayyy les phrases");
                 }
+
             }
         });
 
@@ -200,7 +205,7 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
     }
 
     private String[] getTextFromFileV2(String file) {
-        String[] res = null;
+        String[] res = new String[2];
         String[] resultMotPhoneme = new String[2];
 
         // buffer sur la liste présentes dans assets
@@ -217,8 +222,9 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
                 resultMotPhoneme[0]  += res[0]+",";
                 resultMotPhoneme[1]  += res[1]+",";
             }
-            resultMotPhoneme[0] = resultMotPhoneme[0].substring(0, resultMotPhoneme[0].length() - 1);
-            resultMotPhoneme[1] = resultMotPhoneme[1].substring(0, resultMotPhoneme[1].length() - 1);
+            resultMotPhoneme[0] = resultMotPhoneme[0].substring(3, resultMotPhoneme[0].length() - 1);
+            resultMotPhoneme[1] = resultMotPhoneme[1].substring(3, resultMotPhoneme[1].length() - 1);
+
             return  resultMotPhoneme;
         }
         catch(IOException e)

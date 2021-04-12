@@ -73,7 +73,7 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
                         String phonemesFiltrage = lesPhonems.getText().toString();
 
                         //public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String phonemeFiltrage)
-                        if(dbPatientExo.addExerciceLogatomSpecifique(new ExerciceLogatome(Integer.parseInt(String.valueOf(TextIteration.getText())),genrePatient,getApplicationContext(),TextIdentifiantExo.getText().toString(),idPatient,phonemesFiltrage))){
+                        if(dbPatientExo.addExercice(new ExerciceLogatome(Integer.parseInt(String.valueOf(TextIteration.getText())),genrePatient,getApplicationContext(),TextIdentifiantExo.getText().toString(),idPatient,phonemesFiltrage))){
                             SweetAlertDialog sDialog = new SweetAlertDialog(CreationExoSpecifiqueLogatomActivity.this, SweetAlertDialog.SUCCESS_TYPE);
                             sDialog.setContentText("Exercice ajouté");
                             sDialog.setCancelable(true);

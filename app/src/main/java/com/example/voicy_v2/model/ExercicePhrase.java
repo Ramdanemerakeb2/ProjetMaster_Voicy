@@ -26,6 +26,14 @@ public class ExercicePhrase extends Exercice
         DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
     }
 
+    public ExercicePhrase(Context c ,String id, String mot, String phonem, String idPatient){
+        super(c);
+        this.id = id;
+        this.listMotString = mot ;
+        this.listPhonemString = phonem;
+        this.patientSpecifiqueId = idPatient;
+        this.typeExo = "phrase";
+    }
     @Override
     protected void recupereElementExercice(String fileName)
     {

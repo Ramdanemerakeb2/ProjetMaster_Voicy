@@ -12,10 +12,12 @@ public abstract class Exercice
     protected ArrayList<Mot> listeElement;
     protected Context context;
     protected String directoryName;
-    protected String id = null ;
-    protected String listMotString = null;
-    protected String listPhonemString = null;
-    protected String patientSpecifiqueId = null ;
+    protected String id ;
+    protected String idDb ;
+    protected String listMotString;
+    protected String listPhonemString;
+    protected String patientSpecifiqueId ;
+    protected String typeExo ;
 
     public String getListPhonemString() {
         return listPhonemString;
@@ -25,7 +27,13 @@ public abstract class Exercice
         this.listPhonemString = listPhonemString;
     }
 
+    public String getTypeExo() {
+        return typeExo;
+    }
 
+    public void setTypeExo(String typeExo) {
+        this.typeExo = typeExo;
+    }
 
     public String getId() {
         return id;
@@ -33,6 +41,14 @@ public abstract class Exercice
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdDb() {
+        return idDb;
+    }
+
+    public void setIdDb(String idDb) {
+        this.idDb = idDb;
     }
 
     public String getListMotString() {

@@ -20,6 +20,7 @@ import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 public class VoicyDbHelper extends SQLiteOpenHelper {
 
     private static final String TAG = VoicyDbHelper.class.getSimpleName();
+    private Context context;
 
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
@@ -41,23 +42,25 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CLINICIEN = "id_clinicien";
 
     //***************Table Exercice Logatom***********************
-    public static final String TABLE_EXERCICE = "ExerciceLogatom";
-    public static final String COLUMN_EXCERCICE_ID = "id";
-    public static final String COLUMN_EXERCICE_LIST_MOT = "logatoms";
-    public static final String COLUMN_EXERCICE_LIST_PHONEM = "phonem" ;
+    public static final String TABLE_EXERCICE = "Exercice";
+    public static final String COLUMN_EXCERCICE_ID = "idExo";
+    public static final String COLUMN_EXERCICE_TYPE = "type";
+    public static final String COLUMN_EXERCICE_LIST_MOT = "mots";
+    public static final String COLUMN_EXERCICE_LIST_PHONEM = "phonemes" ;
     public static final String COLUMN_PATIENT_SPECIFIQUE_ID = "patient";
 
     public VoicyDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         //creation de la table Excercice
-        final String SQL_CREATE_EXCERCICE_TABLE = "CREATE TABLE " + TABLE_EXERCICE + " (" +
-                COLUMN_EXCERCICE_ID + " TEXT PRIMARY KEY," +
+        final String SQL_CREATE_EXCERCICE_TABLE = "CREATE TABLE " + TABLE_EXERCICE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                COLUMN_EXCERCICE_ID + " TEXT NOT NULL," +
+                COLUMN_EXERCICE_TYPE + " TEXT NOT NULL, " +
                 COLUMN_EXERCICE_LIST_MOT + " TEXT NOT NULL, " +
                 COLUMN_EXERCICE_LIST_PHONEM + " TEXT NOT NULL, " +
                 COLUMN_PATIENT_SPECIFIQUE_ID + " TEXT, " +
@@ -101,13 +104,14 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     //******************** gestion des exercices *******************
 
     //inserer un excercice specifique dans la db
-    public boolean addExerciceLogatomSpecifique(Exercice exercice) {
+    public boolean addExercice(Exercice exercice) {
         Log.i(TAG, "Ajout du exercice  ... " + exercice.getId()+" au patient "+exercice.getPatientSpecifiqueId());
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_EXCERCICE_ID, exercice.getId());
+        values.put(COLUMN_EXERCICE_TYPE, exercice.getTypeExo());
         values.put(COLUMN_EXERCICE_LIST_MOT, exercice.getListMotString());
         values.put(COLUMN_EXERCICE_LIST_PHONEM, exercice.getListPhonemString());
         values.put(COLUMN_PATIENT_SPECIFIQUE_ID, exercice.getPatientSpecifiqueId());
@@ -124,31 +128,62 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
     }
 
     //getExercice specifique depuis la db
-   /* public Exercice getExcerciceLogatomSpecifique(String idExo) {
-        Log.i(TAG, "MyDatabaseHelper.getClinicien ... " + idExo);
+    public Exercice getExcercice(String idExo) {
+        Log.i(TAG, "MyDatabaseHelper.getClinicienInfo ... " + idExo);
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_EXERCICE, new String[] { COLUMN_CLINICIEN_ID,
-                        COLUMN_CLINICIEN_NOM, COLUMN_CLINICIEN_PRENOM, COLUMN_CLINICIEN_MDP}, COLUMN_CLINICIEN_ID + "= ? AND " + COLUMN_CLINICIEN_MDP +"= ?",
-                new String[] { id,mdp }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_EXERCICE, new String[] { "ID",COLUMN_EXCERCICE_ID,
+                        COLUMN_EXERCICE_TYPE, COLUMN_EXERCICE_LIST_MOT, COLUMN_EXERCICE_LIST_PHONEM,COLUMN_PATIENT_SPECIFIQUE_ID }, COLUMN_EXCERCICE_ID+ "= ? " ,
+                new String[] { idExo }, null, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
-            Clinicien clinicien = new Clinicien(cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_ID)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_NOM)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_PRENOM)),
-                    cursor.getString(cursor.getColumnIndex(COLUMN_CLINICIEN_MDP)) );
+            ExerciceLogatome exo = new ExerciceLogatome(context,cursor.getString(cursor.getColumnIndex(COLUMN_EXCERCICE_ID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_LIST_MOT)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_LIST_PHONEM)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_SPECIFIQUE_ID)) );
+            exo.setIdDb(String.valueOf(cursor.getInt(cursor.getColumnIndex("ID"))));
             cursor.close();
             db.close();
-            return clinicien;
+            return exo;
 
         }else{
             cursor.close();
             db.close();
             return null ;
         }
-    }*/
+    }
 
+    //get les exos d'un patient specifique depuis la db
+    public List<Exercice> getExosByPatient(String idPatient) {
+        Log.i(TAG, "MyDatabaseHelper.getExosByPatient ... " + idPatient);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_EXERCICE, new String[] { "ID",COLUMN_EXCERCICE_ID,
+                        COLUMN_EXERCICE_TYPE, COLUMN_EXERCICE_LIST_MOT, COLUMN_EXERCICE_LIST_PHONEM,COLUMN_PATIENT_SPECIFIQUE_ID }, COLUMN_PATIENT_SPECIFIQUE_ID+ "= ? " ,
+                new String[] { idPatient }, null, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            List<Exercice> res = new ArrayList<>();
+
+            while (!cursor.isAfterLast()){
+                ExerciceLogatome exo = new ExerciceLogatome(context,cursor.getString(cursor.getColumnIndex(COLUMN_EXCERCICE_ID)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_LIST_MOT)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_LIST_PHONEM)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_SPECIFIQUE_ID)) );
+                exo.setIdDb(String.valueOf(cursor.getInt(cursor.getColumnIndex("ID"))));
+                res.add(exo);
+                cursor.moveToNext();
+            }
+            cursor.close();
+            db.close();
+            return res;
+        }else{
+            return new ArrayList<>();
+        }
+    }
 
 
 
@@ -187,7 +222,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
      * Updates the information of a Clinicien inside the data base
      * @return the number of updated rows
      */
-    public int update(Clinicien clinicien) {
+    public int updateClinicien(Clinicien clinicien) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

@@ -41,6 +41,7 @@ public class ExerciceLogatome extends Exercice
         this.listMotString = mot ;
         this.listPhonemString = phonem;
         this.patientSpecifiqueId = idPatient;
+        this.typeExo = "logatome";
     }
     //constructeur d'exo specifique a ajouter dans la bd
     public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String phonemeFiltrage)
@@ -48,7 +49,9 @@ public class ExerciceLogatome extends Exercice
         super(c);
         totalIteration = nb;
         genre = leGenre;
-        idExo = id ;
+        //idExo = id ;
+        this.id = idExo ;
+        this.typeExo = "logatome";
 //        listMotString = listmots;
         patientSpecifiqueId = patientId;
 //        listPhonemString = listPhonem ;
@@ -94,6 +97,8 @@ public class ExerciceLogatome extends Exercice
                 listPhonemString += temp.get(k).getPhonemes();
                 listPhonemString += ",";
             }
+            listMotString = listMotString.substring(3, listMotString.length() - 1);
+            listPhonemString = listPhonemString.substring(3, listPhonemString.length() - 1);
         }
 //        listeElement = temp ;
 
