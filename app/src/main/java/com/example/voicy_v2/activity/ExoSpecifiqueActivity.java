@@ -45,7 +45,9 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
         ajoutExo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(ExoSpecifiqueActivity.this, CreationExoSpecifiqueLogatomActivity.class);
+                intent.putExtra("idPatient", idPatient);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

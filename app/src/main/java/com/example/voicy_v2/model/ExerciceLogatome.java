@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -51,21 +52,53 @@ public class ExerciceLogatome extends Exercice
 //        listMotString = listmots;
         patientSpecifiqueId = patientId;
 //        listPhonemString = listPhonem ;
+//        recupereElementExercice("lexique_phone.AA4");
+//        String[] mesFiltres = phonemeFiltrage.split(",");
+//
+//        for (int i =0 ; i<mesFiltres.length;i++){
+//        Log.i("mesFiltre",mesFiltres[i]);
+//            Log.i("size is ", String.valueOf(listeElement.size()));
+//            if (!(listeElement.get(i).getPhonemes().contains(mesFiltres[i]))){
+//                Log.i("mesFiltre","c'est passé");
+//                listeElement.remove(listeElement.get(i));
+//            }
+//        }
+//        Log.i("size is ", String.valueOf(listeElement.size()));
+//        for(int i = 0; i < listeElement.size(); i++) {
+//            //Log.i("mot : ",listeElement.get(i).getMot());
+//            //Log.i("phonem: ",listeElement.get(i).getPhonemes());
+//        }
+//        Log.i("la taille : ", String.valueOf(listeElement.size()));
         recupereElementExercice("lexique_phone.AA4");
         String[] mesFiltres = phonemeFiltrage.split(",");
-        for (int i =0 ; i<mesFiltres.length;i++){
-            if (!(listeElement.get(i).getPhonemes().contains(mesFiltres[i]))){
-                listeElement.remove(i);
+        ArrayList<Mot> temp = new ArrayList<Mot>();
+        int i =0 ;
+        while (temp.size()!=totalIteration){
+            Log.i("mot : ",listeElement.get(i).getMot());
+            for (int j=0;j<mesFiltres.length;j++){
+            if (listeElement.get(i).getPhonemes().contains(mesFiltres[j])){
+                temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+
+            }
+
+
+            }
+            i++;
+        }
+        if (temp.size()!=0){
+            listeElement.clear();
+            for (int k=0 ;k< temp.size();k++){
+                listeElement.add(new Mot(temp.get(k).getMot(),temp.get(k).getPhonemes()));
+                listMotString += temp.get(k).getMot();
+                listMotString += ",";
+                listPhonemString += temp.get(k).getPhonemes();
+                listPhonemString += ",";
             }
         }
-        for(int i = 0; i < listeElement.size(); i++) {
-            Log.i("mot : ",listeElement.get(i).getMot());
-            Log.i("phonem: ",listeElement.get(i).getPhonemes());
-        }
-        Log.i("la taille : ", String.valueOf(listeElement.size()));
+//        listeElement = temp ;
 
-
-        /* if (!phonemeFiltrage.equals("")){
+        //via le fichier de logatomes+phonems
+         /*if (!phonemeFiltrage.equals("")){
             String[] mesFiltres = phonemeFiltrage.split(",");
             String[] res = null;
             try(BufferedReader br = new BufferedReader(new InputStreamReader(context.getAssets().open("lexique_phone.AA4"))))
@@ -77,7 +110,7 @@ public class ExerciceLogatome extends Exercice
 
                     // split de la ligne par rapport à une tabulation
                     res = line.split("\t");
-                    while (listeElement.size()<5) {
+                    for (int j=0;j<=totalIteration;j++) {
                         for (int i = 0; i < mesFiltres.length; i++) {
                             if (res[1].contains(mesFiltres[i])) {
                                 Log.i("le resultat " + i + " est : ", res[i]);
@@ -90,6 +123,7 @@ public class ExerciceLogatome extends Exercice
                             }
                         }
                     }
+                    Log.i("la taille : ", String.valueOf(listeElement.size()));
                     // Log.i("message du mot",res[0]);
                     //Log.i("message du phonem",res[1]);
                     // Ajout du mot dans l'arrayList avec en param 1 = mot et param 2 = phoneme
@@ -135,7 +169,7 @@ public class ExerciceLogatome extends Exercice
         listeElement.clear();
         String[] resLogatoms = listMotString.split(",");
 //        String[] resLogatoms = listMotString.split("|");
-        String[] resPhonems = listPhonemString.split(" ");
+        String[] resPhonems = listPhonemString.split(",");
         Log.i("taille", String.valueOf(resLogatoms.length));
         // String[] resPhonems = listPhonemString.split("|");
         for (int i =1 ; i<resLogatoms.length;i++){

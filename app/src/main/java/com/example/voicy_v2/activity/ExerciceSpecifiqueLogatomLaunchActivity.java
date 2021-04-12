@@ -123,8 +123,6 @@ public class ExerciceSpecifiqueLogatomLaunchActivity extends FonctionnaliteActiv
     {
         if(typeExercice.equals("logatome"))
         {
-            Log.i("listmot", String.valueOf(listmot));
-            Log.i("listmot",listmot);
             lePrompteur.setTextSize(46);
             exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5",phonemeFiltrage);
             //exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5",listmot,listphoneme);
