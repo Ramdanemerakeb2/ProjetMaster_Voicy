@@ -14,13 +14,17 @@ public abstract class Exercice
     protected String directoryName;
     protected String id ;
     protected String idDb ;
-    protected String listMotString;
-    protected String listPhonemString;
+    protected String listMotString = "";
+    protected String listPhonemString = "";
     protected String patientSpecifiqueId ;
     protected String typeExo ;
 
     public String getListPhonemString() {
         return listPhonemString;
+    }
+
+    public ArrayList<Mot> getListElement() {
+        return listeElement;
     }
 
     public void setListPhonemString(String listPhonemString) {

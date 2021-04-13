@@ -167,12 +167,13 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
         if (cursor != null && cursor.moveToFirst()) {
 
             List<Exercice> res = new ArrayList<>();
-
             while (!cursor.isAfterLast()){
                 ExerciceLogatome exo = new ExerciceLogatome(context,cursor.getString(cursor.getColumnIndex(COLUMN_EXCERCICE_ID)),
                         cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_LIST_MOT)),
                         cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_LIST_PHONEM)),
-                        cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_SPECIFIQUE_ID)) );
+                        cursor.getString(cursor.getColumnIndex(COLUMN_EXERCICE_TYPE)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_SPECIFIQUE_ID)),
+                        this.getPatient(cursor.getString(cursor.getColumnIndex(COLUMN_PATIENT_SPECIFIQUE_ID))).getGenre());
                 exo.setIdDb(String.valueOf(cursor.getInt(cursor.getColumnIndex("ID"))));
                 res.add(exo);
                 cursor.moveToNext();

@@ -63,21 +63,6 @@ public class ListePatientActivity extends FonctionnaliteActivity {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
                 Patient patient = (Patient) o;
-                //Toast.makeText(ListePatientActivity.this, "Selected :" + " " + patient.getId(), Toast.LENGTH_LONG).show();
-
-               /* String[] typeExo = {"phrase","logatome"};
-
-                Random rand = new Random();
-
-                // Obtain a number between [0 - 1].
-                int n = rand.nextInt(2);
-
-
-                Intent intent = new Intent(ListePatientActivity.this, ExerciceActivity.class);
-                intent.putExtra("type", typeExo[n]);
-                intent.putExtra("genre", ((Patient) o).getGenre());
-                intent.putExtra("iteration", 1);
-                startActivityForResult(intent, 0);*/
                 Intent intent = new Intent(ListePatientActivity.this, InfosPatientActivity.class);
                 intent.putExtra("idPatient", patient.getId().toString());
                 startActivity(intent);

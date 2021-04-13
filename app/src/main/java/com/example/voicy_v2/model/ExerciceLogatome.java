@@ -2,6 +2,8 @@ package com.example.voicy_v2.model;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -9,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +20,7 @@ import java.util.Date;
 import java.util.Random;
 import java.lang.*;
 
-public class ExerciceLogatome extends Exercice
+public class ExerciceLogatome extends Exercice implements Parcelable
 {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -97,8 +100,8 @@ public class ExerciceLogatome extends Exercice
                 listPhonemString += temp.get(k).getPhonemes();
                 listPhonemString += ",";
             }
-            listMotString = listMotString.substring(3, listMotString.length() - 1);
-            listPhonemString = listPhonemString.substring(3, listPhonemString.length() - 1);
+            listMotString = listMotString.substring(0, listMotString.length() - 1);
+            listPhonemString = listPhonemString.substring(0, listPhonemString.length() - 1);
         }
 //        listeElement = temp ;
 
@@ -152,37 +155,40 @@ public class ExerciceLogatome extends Exercice
     }
 
     //Constructeur d'exercice depuisla Bd (exo a recharger) .
-    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String listmots,String listPhonem)
+    public ExerciceLogatome(Context c,String idExo,String listmots, String listPhonem, String typeExo, String patientId, String leGenre)
     {
         super(c);
-        totalIteration = nb;
-        genre = leGenre;
-        idExo = id ;
-        listMotString = listmots;
-        patientSpecifiqueId = patientId;
-        listPhonemString = listPhonem ;
+        this.typeExo = typeExo;
+        this.genre = leGenre;
+        this.id = idExo ;
+        this.listMotString = listmots;
+        this.patientSpecifiqueId = patientId;
+        this.listPhonemString = listPhonem ;
 
         // Va récuperer les nonmots de la liste
         rechargerMots();
 
+        System.out.println(listeElement.get(0).getMot());
+        System.out.println(listeElement.get(1).getMot());
         directoryName = getExerciceDirectory();
 
         DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
     }
 
+
+
     public void rechargerMots(){
         listeElement.clear();
-        String[] resLogatoms = listMotString.split(",");
-//        String[] resLogatoms = listMotString.split("|");
-        String[] resPhonems = listPhonemString.split(",");
-        Log.i("taille", String.valueOf(resLogatoms.length));
-        // String[] resPhonems = listPhonemString.split("|");
-        for (int i =1 ; i<resLogatoms.length;i++){
+        String[] resLogatoms = this.listMotString.split(",");
+        String[] resPhonems = this.listPhonemString.split(",");
+        for (int i =0 ; i<resLogatoms.length;i++){
             listeElement.add(new Mot(resLogatoms[i], resPhonems[i]));
-            Log.i("message du mot",resLogatoms[1]);
-            // Log.i("message du phoneme",resPhonems[i]);
         }
-        //Collections.shuffle(listeElement);
+        for(Mot m: listeElement){
+            System.out.println(m.getMot()+"  "+m.getPhonemes());
+        }
+        this.totalIteration = listeElement.size();
+        Collections.shuffle(listeElement);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -236,4 +242,54 @@ public class ExerciceLogatome extends Exercice
 
         return direcName;
     }
+
+    protected ExerciceLogatome(Parcel in) {
+        super(null);
+        totalIteration = in.readInt();
+        actuelIteration = in.readInt();
+        genre = in.readString();
+        directoryName = in.readString();
+        id = in.readString();
+        idDb = in.readString();
+        listMotString = in.readString();
+        listPhonemString = in.readString();
+        patientSpecifiqueId = in.readString();
+        typeExo = in.readString();
+        listeElement = new ArrayList<Mot>();
+        listeElement = in.readArrayList(Mot.class.getClassLoader());
+    }
+
+    public static final Creator<ExerciceLogatome> CREATOR = new Creator<ExerciceLogatome>() {
+        @Override
+        public ExerciceLogatome createFromParcel(Parcel in) {
+            return new ExerciceLogatome(in);
+        }
+
+        @Override
+        public ExerciceLogatome[] newArray(int size) {
+            return new ExerciceLogatome[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(totalIteration);
+        dest.writeInt(actuelIteration);
+        dest.writeString(genre);
+        dest.writeString(directoryName);
+        dest.writeString(id);
+        dest.writeString(idDb);
+        dest.writeString(listMotString);
+        dest.writeString(listPhonemString);
+        dest.writeString(patientSpecifiqueId);
+        dest.writeString(typeExo);
+        dest.writeList(listeElement);
+    }
+
+
 }

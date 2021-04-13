@@ -206,7 +206,7 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
 
     private String[] getTextFromFileV2(String file) {
         String[] res = new String[2];
-        String[] resultMotPhoneme = new String[2];
+        String[] resultMotPhoneme = new String[] { "", "" };
 
         // buffer sur la liste présentes dans assets
         try(BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("liste_exo_specefiques/"+file))))
@@ -222,8 +222,8 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
                 resultMotPhoneme[0]  += res[0]+",";
                 resultMotPhoneme[1]  += res[1]+",";
             }
-            resultMotPhoneme[0] = resultMotPhoneme[0].substring(3, resultMotPhoneme[0].length() - 1);
-            resultMotPhoneme[1] = resultMotPhoneme[1].substring(3, resultMotPhoneme[1].length() - 1);
+            resultMotPhoneme[0] = resultMotPhoneme[0].substring(0, resultMotPhoneme[0].length() - 1);
+            resultMotPhoneme[1] = resultMotPhoneme[1].substring(0, resultMotPhoneme[1].length() - 1);
 
             return  resultMotPhoneme;
         }

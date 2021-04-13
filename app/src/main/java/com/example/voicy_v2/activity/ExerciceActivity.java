@@ -1,6 +1,5 @@
 package com.example.voicy_v2.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -8,8 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,14 +42,14 @@ import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ExerciceActivity extends FonctionnaliteActivity implements CallbackServer
+public class ExerciceActivity extends AppCompatActivity implements CallbackServer
 {
     private Toolbar toolbar;
     private Button btnAnnuler;
     private ImageButton btnNext, btnEcouter, btnRecord;
     private TextView lePrompteur, iterationEnCours;
     private Exercice exercice;
-    private String typeExercice, genre,phonemeFiltrage;
+    private String typeExercice, genre;
     private int maxIteration;
     private Mot motActuel;
     private boolean isRecording = false, isListening = false;
@@ -63,44 +60,35 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
     private HashMap<String,String> params = new HashMap<>();
     private String wavLocation = "";
     private int index = 1;
-    private String listmot,listphoneme,patientid,idExo;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_exercice);
-
-        //Ajout du menu sur l'activité
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        //inflate your activity layout here!
-        View contentView = inflater.inflate(R.layout.activity_exercice, null, false);
-        drawerLayout.addView(contentView, 0);
+        setContentView(R.layout.activity_exercice);
 
         // Initialise le prompteur
         lePrompteur = findViewById(R.id.prompteur);
         iterationEnCours = findViewById(R.id.txtNumElement);
 
+        Bundle extras = getIntent().getExtras();
+        exercice = (Exercice) extras.get("exoSelected");
+        typeExercice = exercice.getTypeExo();
+        maxIteration = exercice.getTotalIteration();
+        genre = exercice.getGenre();
         // Permet de récuperer le paramètre envoyer par l'activité précédente
-        Bundle param = getIntent().getExtras();
+        /*Bundle param = getIntent().getExtras();
         typeExercice = param.getString("type");
         maxIteration = param.getInt("iteration");
-        genre = param.getString("genre"); // Homme ou Femme
-        //********************************************************************************************************
-        idExo = param.getString("idExo");
-        patientid = param.getString("patientId");
-        //
-        listmot = param.getString("listmot");
-        listphoneme = param.getString("listphoneme");
-        //
-        phonemeFiltrage = param.getString("phonemes");
-        Log.i("la liste est :",phonemeFiltrage);
+        genre = param.getString("genre"); // Homme ou Femme*/
+
         // Log
         LogVoicy.getInstance().createLogInfo("Exercice " + typeExercice);
         LogVoicy.getInstance().createLogInfo("Genre : " + genre);
         LogVoicy.getInstance().createLogInfo("MaxIteration : " + maxIteration);
+        LogVoicy.getInstance().createLogInfo("List : " + exercice.getListElement().get(1).getMot());
 
         // Permet de configurer la request avec le type de l'exercice
         params.put("gender",genre);
@@ -124,15 +112,8 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
         if(typeExercice.equals("logatome"))
         {
             lePrompteur.setTextSize(46);
-            //exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5","zouvrin,zouvro,zucra","zz ou vv rr in,zz ou vv rr au,zz uu kk rr aa");
-            exercice = new ExerciceLogatome(maxIteration, genre,this);
-            /*
-            *  idExo = param.getString("idExo");
-        patientid = param.getString("patientId");
-        listmot = param.getString("listmot");
-        listphoneme = param.getString("listphoneme");
-            * */
-            //public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String listmots,String listPhonem)
+
+            //exercice = new ExerciceLogatome(maxIteration, genre,this);
 
             record = new Recorder(this, exercice.getDirectoryPath());
 
@@ -142,7 +123,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
         {
             lePrompteur.setTextSize(38);
 
-            exercice = new ExercicePhrase(maxIteration, genre,this);
+            //exercice = new ExercicePhrase(maxIteration, genre,this);
 
             record = new Recorder(this, exercice.getDirectoryPath());
 

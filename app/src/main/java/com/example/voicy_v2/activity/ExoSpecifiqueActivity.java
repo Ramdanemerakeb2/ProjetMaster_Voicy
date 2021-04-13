@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -68,12 +69,12 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 Object o = listView.getItemAtPosition(position);
-                Exercice exoSelect = (Exercice) o;
-                Toast.makeText(ExoSpecifiqueActivity.this, exoSelect.getId()+" click",Toast.LENGTH_LONG).show();
+                Exercice exoSelected = (Exercice) o;
 
-                /*Intent intent = new Intent(ListePatientActivity.this, InfosPatientActivity.class);
-                intent.putExtra("idPatient", patient.getId().toString());
-                startActivity(intent);*/
+                Intent intent = new Intent(ExoSpecifiqueActivity.this, ExerciceActivity.class);
+                intent.putExtra("exoSelected", (Parcelable) exoSelected);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 
