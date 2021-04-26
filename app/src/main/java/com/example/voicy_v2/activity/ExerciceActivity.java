@@ -1,5 +1,6 @@
 package com.example.voicy_v2.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,12 +44,12 @@ import java.util.HashMap;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ExerciceActivity extends AppCompatActivity implements CallbackServer
+public class ExerciceActivity extends FonctionnaliteActivity implements CallbackServer
 {
-    private Toolbar toolbar;
+    //private Toolbar toolbar;
     private Button btnAnnuler;
     private ImageButton btnNext, btnEcouter, btnRecord;
-    private TextView lePrompteur, iterationEnCours;
+    private TextView lePrompteur, iterationEnCours, titreExo;
     private Exercice exercice;
     private String typeExercice, genre;
     private int maxIteration;
@@ -67,7 +69,14 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercice);
+        //setContentView(R.layout.activity_exercice);
+
+        //Ajout du menu sur l'activité
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //inflate of ExoSpecifiqueActivity !
+        View contentView = inflater.inflate(R.layout.activity_exercice, null, false);
+        drawerLayout.addView(contentView, 0);
 
         // Initialise le prompteur
         lePrompteur = findViewById(R.id.prompteur);
@@ -96,7 +105,7 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
         params.put("size",String.valueOf(maxIteration));
 
         // Permet de configurer la toolbar pour cette activité
-        configOfToolbar(typeExercice);
+        //configOfToolbar(typeExercice);
 
         // Initialise les boutons et les configures
         initAllButton();
@@ -215,6 +224,9 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
         btnEcouter = findViewById(R.id.buttonEcouter);
         btnNext = findViewById(R.id.buttonNext);
         btnRecord = findViewById(R.id.buttonRecord);
+        titreExo = findViewById(R.id.titre_exo);
+
+        titreExo.setText("Exercice "+exercice.getIdDb());
 
         setVisibiliteBouton(false);
 
@@ -246,13 +258,13 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
             public void onClick(View v) {
                 if(!isRecording)
                 {
-                    btnRecord.setImageResource(R.drawable.stop);
+                    btnRecord.setBackgroundResource(R.drawable.btn_stop);
                     isRecording = true;
                     record.startRecording();
                 }
                 else
                 {
-                    btnRecord.setImageResource(R.drawable.mic_48dp);
+                    btnRecord.setBackgroundResource(R.drawable.mic);
                     isRecording = false;
 
                     if(typeExercice.equals("logatome"))
@@ -289,19 +301,19 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
                         public void onCompletion(MediaPlayer mp)
                         {
                             isListening = false;
-                            btnEcouter.setImageResource(R.drawable.ic_play_arrow_white_32dp);
+                            btnEcouter.setBackgroundResource(R.drawable.play);
                             stopMediaPlayer();
                         }
                     });
                 }
 
                 if (!isListening) {
-                    btnEcouter.setImageResource(R.drawable.ic_stop_white_32dp);
+                    btnEcouter.setBackgroundResource(R.drawable.btn_stop);
                     isListening = true;
                     mp.start();
                 } else
                 {
-                    btnEcouter.setImageResource(R.drawable.ic_play_arrow_white_32dp);
+                    btnEcouter.setBackgroundResource(R.drawable.play);
                     isListening = false;
                     stopMediaPlayer();
                 }
@@ -380,7 +392,7 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
                 })
                 .show();
     }
-
+    /*
     private void configOfToolbar(String type)
     {
         toolbar = findViewById(R.id.toolbar);
@@ -420,5 +432,5 @@ public class ExerciceActivity extends AppCompatActivity implements CallbackServe
     public boolean onSupportNavigateUp() {
         quitterPopup();
         return true;
-    }
+    }*/
 }
