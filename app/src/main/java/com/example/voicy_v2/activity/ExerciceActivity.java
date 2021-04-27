@@ -107,6 +107,8 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
         // Permet de configurer la toolbar pour cette activité
         //configOfToolbar(typeExercice);
 
+        DirectoryManager.getInstance().createFolderInPatientsFolder(exercice);
+
         // Initialise les boutons et les configures
         initAllButton();
 
@@ -192,7 +194,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
     }
 
-    @Override
+    //Il faut gerer la copie sur le ficher Attente
     public void exercuceAfterErrorServer(String error)
     {
         DirectoryManager.getInstance().cutAndPastFolderToAnother(exercice.getDirectoryPath(), DirectoryManager.OUTPUT_ATTENTE);

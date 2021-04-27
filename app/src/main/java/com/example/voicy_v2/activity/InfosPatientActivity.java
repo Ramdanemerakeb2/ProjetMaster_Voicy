@@ -62,6 +62,15 @@ public class InfosPatientActivity extends FonctionnaliteActivity {
             }
         });
 
+        btnSessions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InfosPatientActivity.this, SessionActivity.class);
+                intent.putExtra("idPatient", idPatient);
+                startActivity(intent);
+            }
+        });
+
 
 
     }

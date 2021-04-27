@@ -15,7 +15,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DirectoryManager
@@ -39,6 +41,7 @@ public class DirectoryManager
     public static final String OUTPUT_SENTENCE = Environment.getExternalStorageDirectory() + "/Voicy/Phrases";
     public static final String OUTPUT_RESULTAT = Environment.getExternalStorageDirectory() + "/Voicy/Resultats";
     public static final String OUTPUT_ATTENTE = Environment.getExternalStorageDirectory() + "/Voicy/Attente";
+    public static final String OUTPUT_PATEIENTS = Environment.getExternalStorageDirectory() + "/Voicy/Patients";
 
     public void initProject()
     {
@@ -47,6 +50,7 @@ public class DirectoryManager
         createFolderInAppFolder("Phrases");
         createFolderInAppFolder("Resultats");
         createFolderInAppFolder("Attente");
+        createFolderInAppFolder("Patients");
     }
 
     public void createFolder(String path)
@@ -85,6 +89,17 @@ public class DirectoryManager
         File file = new File(OUTPUT_DIRECTORY + "/" + directoryName);
         if (!file.exists())
             file.mkdir();
+    }
+
+    // Créer un dossier à l'intérieur du dossier des Patients
+    public void createFolderInPatientsFolder(Exercice exo) {
+        File file = new File(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId());
+        if (!file.exists())
+            file.mkdir();
+        File file2 = new File(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId()+"/"+getDateDirectory()+"_"+exo.getTypeExo()+"_"+exo.getId());
+        if (!file2.exists())
+            file2.mkdir();
+        exo.setDirectoryName(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId()+"/"+getDateDirectory()+"_"+exo.getTypeExo()+"_"+exo.getId());
     }
 
     public void rmdirFolder(String path)
@@ -179,4 +194,16 @@ public class DirectoryManager
     public File getFileTest(String sFile) {
         return new File(OUTPUT_DIRECTORY+"/"+sFile);
     } // TODO à virer ?
+
+    public String getDateDirectory()
+    {
+        String direcName = "";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy_HHmmss");
+        String currentDateandTime = sdf.format(new Date());
+
+        direcName += currentDateandTime;
+
+        return direcName;
+    }
 }

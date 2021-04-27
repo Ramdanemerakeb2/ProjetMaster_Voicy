@@ -172,7 +172,7 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         System.out.println(listeElement.get(1).getMot());
         directoryName = getExerciceDirectory();
 
-        DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
+        //DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
     }
 
 
@@ -229,14 +229,15 @@ public class ExerciceLogatome extends Exercice implements Parcelable
     @Override
     protected String getExerciceDirectory()
     {
-        String direcName = "Logatome_";
+        //String direcName = "Logatome_";
+        String direcName = this.patientSpecifiqueId+"/";
 
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy_HHmmss");
         String currentDateandTime = sdf.format(new Date());
 
         direcName += currentDateandTime;
 
-        direcName += "_" + genre;
+        //direcName += "_" + genre;
 
         //Log.d("logATOM", "Directory : " + direcName);
 
