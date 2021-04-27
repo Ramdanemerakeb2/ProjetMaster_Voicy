@@ -46,8 +46,7 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
     private String[] fileList;
     private View customView;
     private PopupWindow popUp;
-    private TextView titrePopUp, textClose, listLogatomes;
-    private Button btnAjoutExo;
+    private TextView titrePopUp, listLogatomes, btnAjoutExo;
     private LinearLayout linearLayout;
     public static VoicyDbHelper dbPatientExo;
     private String idPatient;
@@ -129,13 +128,6 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
         popUp.showAtLocation(linearLayout, Gravity.CENTER,0,0);
         popUp.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        textClose = customView.findViewById(R.id.txtClose);
-        textClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popUp.dismiss();
-            }
-        });
 
         btnAjoutExo = customView.findViewById(R.id.btn_ajout_exo_spec);
         btnAjoutExo.setOnClickListener(new View.OnClickListener() {
@@ -232,6 +224,16 @@ public class ListeExoPredefiniActivity extends FonctionnaliteActivity {
             e.printStackTrace();
             return resultMotPhoneme;
         }
+    }
+
+    //pour mettre a jour la liste des exo du patient dans le cas d'un ajout
+    public void onBackPressed() {
+        moveTaskToBack(false);
+        Intent intent = new Intent(getApplicationContext(), ExoSpecifiqueActivity.class);
+        intent.putExtra("idPatient", idPatient);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
 

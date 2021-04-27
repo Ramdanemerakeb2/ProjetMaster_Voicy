@@ -35,6 +35,7 @@ import com.example.voicy_v2.model.LogVoicy;
 import com.example.voicy_v2.model.Logatome;
 import com.example.voicy_v2.model.Phoneme;
 import com.example.voicy_v2.model.ResultFile;
+import com.example.voicy_v2.model.SessionFile;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,7 +50,7 @@ import java.util.List;
 
 public class AffichageExerciceActivity extends FonctionnaliteActivity
 {
-    private ResultFile resultFile;
+    private SessionFile resultFile;
     private String fileTXT = "";
     private ConstraintLayout rLayout;
     private List<JSONObject> listeJSONObject = new ArrayList<>();
@@ -67,7 +68,6 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
     private LayoutInflater inflater;
     private View customView;
     private int phraseIterator = 1;
-    private String typeExercice;
     private boolean popupOpen = false;
 
     @Override
@@ -83,7 +83,6 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
         View contentView = inflater.inflate(R.layout.activity_affichage_exercice, null, false);
         drawerLayout.addView(contentView, 0);
 
-        configOfToolbar();
 
         listView = findViewById(R.id.listeElement);
         rLayout = findViewById(R.id.const_layout);
@@ -93,13 +92,10 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
         customView = inflater.inflate(R.layout.popup_resultat,null);
 
         // Permet de récuperer le paramètre envoyer par l'activité précédente
-        resultFile = (ResultFile) getIntent().getSerializableExtra("resultat");
+        resultFile = (SessionFile) getIntent().getSerializableExtra("resultat");
         Bundle param = getIntent().getExtras();
-        typeExercice = param.getString("type");
 
-        LogVoicy.getInstance().createLogInfo("Type resultat = " + typeExercice);
-
-        fileTXT = DirectoryManager.OUTPUT_RESULTAT + "/" + resultFile.getNameFile() + "/resultat.txt";
+        fileTXT = resultFile.getPathName() + "/resultat.txt";
 
         // Permet de remplir la liste de JSON object
         getAllJSONObject(fileTXT);
@@ -108,7 +104,7 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
         getAllElement();
 
         // Permet d'ajouter un score globale qui fait un recap de tous les autres phonemes
-        if(typeExercice.toLowerCase().equals("l"))
+        if(resultFile.getType().toLowerCase().equals("logatome"))
         {
             double avgScoreContraint = getAvgScoreContraint(listeLogatome);
             double avgScoreNonContraint = getAvgScoreNonContraint(listeLogatome);
@@ -151,7 +147,7 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
 
                 btnEcouter = customView.findViewById(R.id.btnEcouterResultat);
 
-                if(typeExercice.toLowerCase().equals("l"))
+                if(resultFile.getType().toLowerCase().equals("logatome"))
                 {
                     if(i == (listeLogatome.size() - 1))
                     {
@@ -227,13 +223,13 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
 
         String path = "";
 
-        if(typeExercice.toLowerCase().equals("p"))
+        if(resultFile.getType().toLowerCase().equals("phrase")) //A verrifier apres l'ajout des phrases
         {
-            path = DirectoryManager.OUTPUT_RESULTAT + "/" + resultFile.getNameFile() + "/phrase" + (i+1) + ".wav";
+            path = resultFile.getPathName() + "/phrase" + (i+1) + ".wav";
         }
         else
         {
-            path = DirectoryManager.OUTPUT_RESULTAT + "/" + resultFile.getNameFile() + "/" + listeLogatome.get(i).getLogatomeName() + ".wav";
+            path = resultFile.getPathName() + "/" + listeLogatome.get(i).getLogatomeName() + ".wav";
         }
 
         try
@@ -266,7 +262,7 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
         // Configuration du titre
         titrePopUp = popUp.getContentView().findViewById(R.id.titrePopup);
 
-        if(typeExercice.toLowerCase().equals("p"))
+        if(resultFile.getType().toLowerCase().equals("phrase"))
         {
             titrePopUp.setText("Resultat");
         }
@@ -407,7 +403,7 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
             try {
 
                 String name = "";
-                if(typeExercice.toLowerCase().equals("p"))
+                if(resultFile.getType().toLowerCase().equals("phrase"))
                 {
                     name = "résultat des phrases";
                 }
@@ -478,52 +474,4 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
         }
     }
 
-
-
-    // ----------------------- SECTION TOOLBAR ET ACTION LORS DES BACK / CLIQUE ITEM MENU -----------------------------
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-
-        if(id == R.id.action_home)
-        {
-            finish();
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        setResult(1);
-        finish();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        setResult(1);
-        finish();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        return true;
-    }
-
-    private void configOfToolbar()
-    {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Exercice");
-    }
 }

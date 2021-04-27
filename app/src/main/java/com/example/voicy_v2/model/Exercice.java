@@ -120,8 +120,14 @@ public abstract class Exercice
     public int getActuelIteration() { return actuelIteration;}
     public String getDirectoryName() { return directoryName; }
 
-    // Renvoie le chemin complet vers le dossier de l'exercice se trouvant dans resultat
-    public String getDirectoryPath() { return DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName;}
+    public void setDirectoryName(String directoryName) {
+        this.directoryName = directoryName;
+    }
+// Renvoie le chemin complet vers le dossier de l'exercice se trouvant dans resultat
+    //public String getDirectoryPath() { return DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName;}
+
+    public String getDirectoryPath() { return directoryName;}
+
 
     public String getGenre() {
         return genre;
