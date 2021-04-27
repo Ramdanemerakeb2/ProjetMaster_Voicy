@@ -63,7 +63,8 @@ public class ExerciceSpecifiqueLogatomLaunchActivity extends FonctionnaliteActiv
     private HashMap<String,String> params = new HashMap<>();
     private String wavLocation = "";
     private int index = 1;
-    private String listmot,listphoneme,patientid,idExo;
+    private String listmot,listphoneme,patientid,idExo,suiteFiltre,serieFiltre;
+    private String[] CVCV ;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -94,6 +95,9 @@ public class ExerciceSpecifiqueLogatomLaunchActivity extends FonctionnaliteActiv
         //
         listmot = param.getString("logatoms");
         listphoneme = param.getString("phonems");
+        serieFiltre = param.getString("serieFiltre");
+        suiteFiltre = param.getString("suiteFiltre");
+        CVCV = param.getStringArray("CVCV");
         //
         phonemeFiltrage = param.getString("phonemes");
         Log.i("la liste est :",phonemeFiltrage);
@@ -124,7 +128,7 @@ public class ExerciceSpecifiqueLogatomLaunchActivity extends FonctionnaliteActiv
         if(typeExercice.equals("logatome"))
         {
             lePrompteur.setTextSize(46);
-            exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5",phonemeFiltrage);
+            exercice = new ExerciceLogatome(maxIteration, genre,this,idExo,patientid,suiteFiltre,serieFiltre,CVCV);
             //exercice = new ExerciceLogatome(maxIteration, genre,this,"5","5",listmot,listphoneme);
             //exercice = new ExerciceLogatome(maxIteration, genre,this);
             /*

@@ -47,7 +47,7 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         this.typeExo = "logatome";
     }
     //constructeur d'exo specifique a ajouter dans la bd
-    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String phonemeFiltrage)
+    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String suitePhonem,String seriePhonem,String[] CVCV)
     {
         super(c);
         totalIteration = nb;
@@ -75,22 +75,105 @@ public class ExerciceLogatome extends Exercice implements Parcelable
 //            //Log.i("phonem: ",listeElement.get(i).getPhonemes());
 //        }
 //        Log.i("la taille : ", String.valueOf(listeElement.size()));
+
         recupereElementExercice("lexique_phone.AA4");
-        String[] mesFiltres = phonemeFiltrage.split(",");
         ArrayList<Mot> temp = new ArrayList<Mot>();
         int i =0 ;
-        while (temp.size()!=totalIteration){
+        int totalNonNull = 0;
+        for (int j =0 ; j<CVCV.length;j++){
+            if (!CVCV[j].equals("  ")){
+                totalNonNull++;
+            }
+        }
+        int nonNull = 0 ;
+//        while ((temp.size()!=totalIteration)&&(i<listeElement.size())){
+//            Log.i("testons ",listeElement.get(i).getPhonemes());
+//
+//            String[] Mymot = listeElement.get(i).getPhonemes().split(" ");
+//            if (Mymot.length==CVCV.length){
+//                for (int x =0 ;x<4;x++){
+//                    Log.i("hay ",Mymot[x]);
+//                    if (CVCV[x].equals(Mymot[x])){
+//                        nonNull++ ;
+//                        Log.i("temp est ", String.valueOf(temp.size()));
+//                    }
+//                    if (nonNull==totalNonNull){
+//                        temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+//                        Log.i("temp est ", String.valueOf(temp.size()));
+//                        for (int p = 0 ;p<temp.size();p++){
+//                            Log.i("temp est ",temp.get(p).getPhonemes());
+//                        }
+//                    }
+//                }
+//            }
+//            i++;
+//        }
+
+
+//        int totalNonNull = 0;
+//        for (int j =0 ; j<CVCV.length;j++){
+//            if (CVCV[j]!=null){
+//                totalNonNull++;
+//            }
+//        }
+//        if (CVCV.length!=0){
+//            int nonNull = 0 ;
+//            int k = 0 ;
+//            while (temp.size()!=totalIteration){
+//                String test = "";
+//
+//
+//                /////// IF listeElement.get(k).getPhonemes().split(" ").length < CVCV.length ///////////////////////
+//
+//
+//                Log.i("nbspaces: ",listeElement.get(k).getPhonemes());
+//                test +=  listeElement.get(i).getPhonemes().split(" ");
+//                String [] myMot =test.split(" ");
+//                for (int j = 0 ; j<4;j++){
+//                    if (nonNull==totalNonNull){
+//                        temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+//                    }
+//                    else {
+//                    nonNull++ ;
+//                    }
+//
+//                }
+//                i++;
+//            }
+//        }
+
+
+        if (!seriePhonem.equals("")){
+            String[] mesPhonem = seriePhonem.split(" ");
+            while (temp.size()!=totalIteration){
+                Log.i("mot : ",listeElement.get(i).getMot());
+                for (int j = 0 ; j<mesPhonem.length-1;j++){
+                    if ((listeElement.get(i).getPhonemes().contains(mesPhonem[j]))&&(listeElement.get(i).getPhonemes().contains(mesPhonem[j+1]))){
+                        temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+                    }
+                }
+                i++;
+            }
+
+        }
+        if (!suitePhonem.equals("")){
+            while (temp.size()!=totalIteration){
+                Log.i("mot : ",listeElement.get(i).getMot());
+                if (listeElement.get(i).getPhonemes().contains(suitePhonem)){
+                    temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+                }
+                i++;
+            }
+        }
+        /*while (temp.size()!=totalIteration){
             Log.i("mot : ",listeElement.get(i).getMot());
             for (int j=0;j<mesFiltres.length;j++){
             if (listeElement.get(i).getPhonemes().contains(mesFiltres[j])){
                 temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
-
             }
-
-
             }
             i++;
-        }
+        }*/
         if (temp.size()!=0){
             listeElement.clear();
             for (int k=0 ;k< temp.size();k++){
