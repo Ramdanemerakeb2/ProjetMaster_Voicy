@@ -3,6 +3,8 @@ package com.example.voicy_v2.model;
 import android.os.Environment;
 import android.os.StatFs;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -120,6 +122,16 @@ public class DirectoryManager
         }
         else
         {
+            LogVoicy.getInstance().createLogError("Impossible de supprimer " + path);
+        }
+    }
+
+    public void rmdirDirectory(String path){
+        File dir = new File(path);
+        try {
+            FileUtils.deleteDirectory(dir);
+            LogVoicy.getInstance().createLogInfo("Suppression de " + path);
+        } catch (Exception e) {
             LogVoicy.getInstance().createLogError("Impossible de supprimer " + path);
         }
     }

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
 import com.example.voicy_v2.R;
+import com.example.voicy_v2.model.DirectoryManager;
 import com.example.voicy_v2.model.ListePatientAdapter;
 import com.example.voicy_v2.model.Patient;
 import com.example.voicy_v2.model.VoicyDbHelper;
@@ -68,6 +69,50 @@ public class ListePatientActivity extends FonctionnaliteActivity {
                 startActivity(intent);
             }
         });
+
+        //gestion de la suppression d'un patient
+        listView.setLongClickable(true);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View v, final int position, long id) {
+                Object o = listView.getItemAtPosition(position);
+                final Patient patient = (Patient) o;
+
+                new cn.pedant.SweetAlert.SweetAlertDialog(ListePatientActivity.this, cn.pedant.SweetAlert.SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Êtes-vous sûr ?")
+                        .setContentText("Voulez-vous vraiment supprimer ce patient ?")
+                        .setConfirmText("Oui")
+                        .setConfirmClickListener(new cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(cn.pedant.SweetAlert.SweetAlertDialog sDialog)
+                            {
+                                sDialog.dismissWithAnimation();
+
+                                //suppression des infos du patient de la BD
+                                dbPatient.deletePatient(patient.getId());
+                                //suppression des exos du patient de la BD
+                                dbPatient.deleteExoByPatient(patient.getId());
+                                //suppression des fichiers (resultas & wav ) du patient de la tablette
+                                DirectoryManager.getInstance().rmdirDirectory(DirectoryManager.OUTPUT_PATEIENTS+"/"+patient.getId());
+
+                                //suppression du patient de la liste
+                                listePatients.remove(position);
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        })
+                        .setCancelButton("Non", new cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(cn.pedant.SweetAlert.SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                            }
+                        })
+                        .show();
+
+
+
+
+                return true;
+            }});
 
         //https://www.javatpoint.com/android-searchview
         //elle permet de filter la liste des patient selon l'id entrer par le clinicien
