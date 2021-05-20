@@ -74,15 +74,56 @@ public class InfosPatientActivity extends FonctionnaliteActivity {
             }
         });
 
+        //gestion des chekbox (logatome, phrase, texte) ==> si est selectionné on change le type de filtre et en desactive le champs date
         filtrageLogatomes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     //desactiver le champs de date
                     filtrageDate.setEnabled(false);
+                    filtagePhrases.setEnabled(false);
+                    filrageTexte.setEnabled(false);
                     typeFiltre = "logatomes";
                 }else{
                     filtrageDate.setEnabled(true);
+                    filtagePhrases.setEnabled(true);
+                    filrageTexte.setEnabled(true);
+                    typeFiltre = "null";
+                }
+            }
+        });
+
+        filtagePhrases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    //desactiver le champs de date
+                    filtrageDate.setEnabled(false);
+                    filtrageLogatomes.setEnabled(false);
+                    filrageTexte.setEnabled(false);
+                    typeFiltre = "phrase";
+                }else{
+                    filtrageDate.setEnabled(true);
+                    filtrageLogatomes.setEnabled(true);
+                    filrageTexte.setEnabled(true);
+                    typeFiltre = "null";
+                }
+            }
+        });
+
+        filrageTexte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    //desactiver le champs de date
+                    filtrageDate.setEnabled(false);
+                    filtrageLogatomes.setEnabled(false);
+                    filtagePhrases.setEnabled(false);
+                    typeFiltre = "texte";
+                }else{
+                    filtrageDate.setEnabled(true);
+                    filtrageLogatomes.setEnabled(true);
+                    filtagePhrases.setEnabled(true);
                     typeFiltre = "null";
                 }
             }
