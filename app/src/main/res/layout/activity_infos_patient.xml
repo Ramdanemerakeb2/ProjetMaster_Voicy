@@ -165,21 +165,21 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/filtrage_logatomes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Logatomes" />
 
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/filtrage_phrases"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Phrases" />
 
                 <CheckBox
-                    android:id="@+id/checkBox4"
+                    android:id="@+id/filtrage_texte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -197,10 +197,10 @@
                 android:textStyle="bold" />
 
             <customfonts.MyEditText
-                android:id="@+id/commentaire"
+                android:id="@+id/filtrage_date"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="JJ-MM-AA"
+                android:hint="JJ/MM/AA"
                 android:inputType="text"
                 android:textColor="#000"
                 android:background="#f0f0f4"

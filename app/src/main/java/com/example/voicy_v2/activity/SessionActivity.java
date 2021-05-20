@@ -27,7 +27,7 @@ import java.util.List;
 public class SessionActivity extends FonctionnaliteActivity{
 
     private ListView listView ;
-    private String idPatient;
+    private String idPatient, typeFiltre, dateFiltrage;
     private ListSessionAdapter adapter ;
     private List<SessionFile> listeSession ;
 
@@ -45,6 +45,18 @@ public class SessionActivity extends FonctionnaliteActivity{
 
         Intent i = getIntent();
         idPatient = (String) i.getStringExtra("idPatient");
+        typeFiltre = (String) i.getStringExtra("typeFiltre");
+        dateFiltrage = (String) i.getStringExtra("dateFiltrage");
+
+        //conversion de la date au format qui convient au nommage des dossier en supprimant "-"
+        if(dateFiltrage.contains("/")){
+            System.out.println("******** Modification de date");
+            dateFiltrage = dateFiltrage.replace("/", "");
+        }
+
+
+        System.out.println("******** typeFiltre "+ typeFiltre+" **********");
+        System.out.println("******** dateFiltrage "+ dateFiltrage+" **********");
 
         listView = (ListView) findViewById(R.id.list_sessions);
         listeSession = getAllSessionsFromAppFolderById(idPatient);
@@ -76,12 +88,39 @@ public class SessionActivity extends FonctionnaliteActivity{
 
         File[] dirs = SortFileByCreationDate.getInstance().getListSorted(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient);
 
-        for(int i = (dirs.length - 1); i >= 0; i--)
-        {
-            SessionFile s = new SessionFile(dirs[i].getName());
-            s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
-            listResult.add(s);
+        //pas de filtre
+        if(typeFiltre.equals("null")){
+            for(int i = (dirs.length - 1); i >= 0; i--) {
+                SessionFile s = new SessionFile(dirs[i].getName());
+                s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                listResult.add(s);
+            }
         }
+
+        //filtrage par logatomes
+        if(typeFiltre.equals("logatomes")){
+            for(int i = (dirs.length - 1); i >= 0; i--) {
+                if(dirs[i].getName().contains("logatome")){
+                    SessionFile s = new SessionFile(dirs[i].getName());
+                    s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                    listResult.add(s);
+                }
+            }
+        }
+
+        //filtrage par date
+        if(typeFiltre.equals("date")){
+            for(int i = (dirs.length - 1); i >= 0; i--) {
+                if(dirs[i].getName().contains(dateFiltrage)){
+                    SessionFile s = new SessionFile(dirs[i].getName());
+                    s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                    listResult.add(s);
+                }
+            }
+        }
+
+
+
 
         return listResult;
     }
