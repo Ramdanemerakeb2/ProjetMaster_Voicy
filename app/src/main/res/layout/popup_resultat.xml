@@ -8,18 +8,6 @@
     android:padding="5dp"
     android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/txtClose"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="end"
-        android:gravity="center"
-        android:text="X"
-        android:textColor="#EF0101"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -70,10 +58,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="TextView"
+        android:fontFamily="serif"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="#1C1B1B"
-        android:background="@drawable/box_titre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

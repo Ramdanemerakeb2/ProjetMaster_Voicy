@@ -65,16 +65,12 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
 
         switch (id){
             case R.id.activity_main_drawer_acceuil :
-                Intent intentMain = new Intent(FonctionnaliteActivity.this, MainActivity.class);
+                Intent intentMain = new Intent(FonctionnaliteActivity.this, AccueilActivity.class);
                 startActivity(intentMain);
                 break;
             case R.id.activity_main_drawer_ajoutPatient:
                 Intent intentAjoutPatient = new Intent(FonctionnaliteActivity.this, AjoutPatientActivity.class);
                 startActivity(intentAjoutPatient);
-                break;
-            case R.id.activity_main_drawer_recherchePatient:
-                Intent intentRecherchePatient = new Intent(FonctionnaliteActivity.this, RecherchePatientActivity.class);
-                startActivity(intentRecherchePatient);
                 break;
             case R.id.activity_main_drawer_listePatient:
                 Intent intentListPatient = new Intent(FonctionnaliteActivity.this, ListePatientActivity.class);
@@ -83,8 +79,6 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
             case R.id.activity_main_drawer_ajoutExo:
                 Intent intentInfo = new Intent(FonctionnaliteActivity.this, InfosPatientActivity.class);
                 startActivity(intentInfo);
-                break;
-            case R.id.activity_main_drawer_rechercheExo:
                 break;
             case R.id.activity_main_drawer_logout:
                 Intent intentLogout = new Intent(FonctionnaliteActivity.this, ConnexionActivity.class);

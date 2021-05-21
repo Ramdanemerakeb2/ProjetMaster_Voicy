@@ -67,12 +67,12 @@ public class AffichagePatientActivity extends FonctionnaliteActivity implements 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getSelectedItem().toString().isEmpty())))
+                if (!(idPatient.getText().toString().isEmpty())&& !(genrePatient.getSelectedItem().toString().isEmpty()))
                 {   Patient patient1 = new Patient(patientIdIntent,genrePatient.getSelectedItem().toString(),commentaire.getText().toString());
                     patientDbHelper.updatePatient(patient1);
 
                     Toast.makeText(AffichagePatientActivity.this, patient.getId().toString() + " mis a jour", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(AffichagePatientActivity.this, MainActivity.class);
+                    Intent intent = new Intent(AffichagePatientActivity.this, ListePatientActivity.class);
                     startActivity(intent);
 
                 }else{

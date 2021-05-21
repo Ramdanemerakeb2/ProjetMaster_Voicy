@@ -56,7 +56,7 @@ public class AjoutPatientActivity extends FonctionnaliteActivity  {
             @Override
             public void onClick(View v)
             {
-                if (!((idPatient.getText().toString().isEmpty())&&(genrePatient.getSelectedItem().toString().isEmpty()))){
+                if (!(idPatient.getText().toString().isEmpty())&& !(genrePatient.getSelectedItem().toString().isEmpty())){
                     patient = new Patient(idPatient.getText().toString(),genrePatient.getSelectedItem().toString(),commentairePatient.getText().toString());
                     //recuperer l'id du clinicien connecté
                     sharedpreferences = getSharedPreferences(ConnexionActivity.clinicienSession, Context.MODE_PRIVATE);
@@ -64,18 +64,14 @@ public class AjoutPatientActivity extends FonctionnaliteActivity  {
                     if(patientDbHelper.ajoutPatient(patient,sharedpreferences.getString(ConnexionActivity.sessionIdClinicien, null))){
                         Toast.makeText(AjoutPatientActivity.this, patient.getId().toString()+" ajouté",Toast.LENGTH_LONG).show();
 
-                        /*SweetAlertDialog sDialog = new SweetAlertDialog(AjoutPatientActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                        sDialog.setContentText("Le patient "+patient.getId()+" est ajouté ");
-                        sDialog.setCancelable(true);
-                        sDialog.show();*/
 
-                        Intent intent = new Intent(AjoutPatientActivity.this, MainActivity.class);
+                        Intent intent = new Intent(AjoutPatientActivity.this, ListePatientActivity.class);
                         startActivity(intent);
 
                     }else{
                         SweetAlertDialog sDialog = new SweetAlertDialog(AjoutPatientActivity.this, SweetAlertDialog.ERROR_TYPE);
                         sDialog.setTitleText("Oups ...");
-                        sDialog.setContentText("Le patient "+patient.getId()+" existe sur la Base de données");
+                        sDialog.setContentText("Le patient "+patient.getId()+" existe");
                         sDialog.setCancelable(true);
                         sDialog.show();
                     }

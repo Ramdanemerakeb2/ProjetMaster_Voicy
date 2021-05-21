@@ -60,7 +60,7 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
     private RelativeLayout mRelativeLayout;
     private PopupWindow popUp;
     private TableLayout tableLayout;
-    private TextView titrePopUp, textClose;
+    private TextView titrePopUp;
     private ImageButton btnEcouter;
     private MediaPlayer mediaPlayer;
     private boolean isListening = false;
@@ -246,7 +246,6 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
 
     private void showResultat(Logatome logatome, int i)
     {
-        textClose = customView.findViewById(R.id.txtClose);
 
 
         //Initialisation de la popup
@@ -280,15 +279,6 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
         popUp.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
         popUp.showAtLocation(rLayout, Gravity.CENTER,0,0);
         popUp.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        textClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popUp.dismiss();
-                mediaPlayer.stop();
-                popupOpen = false;
-            }
-        });
 
         popUp.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
