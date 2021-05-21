@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/aa"
+        android:title="aa" />
+    <item
+        android:id="@+id/ee"
+        android:title="ee"/>
+    <item
+        android:id="@+id/ii"
+        android:title="ii"/>
+    <item
+        android:id="@+id/oo"
+        android:title="oo"/>
+    <item
+        android:id="@+id/uu"
+        android:title="uu"/>
+    <item
+        android:id="@+id/yy"
+        android:title="yy"/>
+    <item
+        android:id="@+id/ou"
+        android:title="ou"/>
+    <item
+        android:id="@+id/au"
+        android:title="au"/>
+
+</menu>

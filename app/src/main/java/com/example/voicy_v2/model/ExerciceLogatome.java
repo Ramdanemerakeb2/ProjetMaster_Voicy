@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -47,7 +48,7 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         this.typeExo = "logatome";
     }
     //constructeur d'exo specifique a ajouter dans la bd
-    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String phonemeFiltrage)
+    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String suitePhonem,String seriePhonem,String[] CVCV)
     {
         super(c);
         totalIteration = nb;
@@ -57,39 +58,93 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         this.typeExo = "logatome";
 //        listMotString = listmots;
         patientSpecifiqueId = patientId;
-//        listPhonemString = listPhonem ;
-//        recupereElementExercice("lexique_phone.AA4");
-//        String[] mesFiltres = phonemeFiltrage.split(",");
-//
-//        for (int i =0 ; i<mesFiltres.length;i++){
-//        Log.i("mesFiltre",mesFiltres[i]);
-//            Log.i("size is ", String.valueOf(listeElement.size()));
-//            if (!(listeElement.get(i).getPhonemes().contains(mesFiltres[i]))){
-//                Log.i("mesFiltre","c'est passé");
-//                listeElement.remove(listeElement.get(i));
-//            }
-//        }
-//        Log.i("size is ", String.valueOf(listeElement.size()));
-//        for(int i = 0; i < listeElement.size(); i++) {
-//            //Log.i("mot : ",listeElement.get(i).getMot());
-//            //Log.i("phonem: ",listeElement.get(i).getPhonemes());
-//        }
-//        Log.i("la taille : ", String.valueOf(listeElement.size()));
+
         recupereElementExercice("lexique_phone.AA4");
-        String[] mesFiltres = phonemeFiltrage.split(",");
         ArrayList<Mot> temp = new ArrayList<Mot>();
         int i =0 ;
-        while (temp.size()!=totalIteration){
-            Log.i("mot : ",listeElement.get(i).getMot());
-            for (int j=0;j<mesFiltres.length;j++){
-            if (listeElement.get(i).getPhonemes().contains(mesFiltres[j])){
-                temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+//        int totalNonNull = 0;
+//        for (int j =0 ; j<CVCV.length;j++){
+//            if (!CVCV[j].equals(" ")){
+//                totalNonNull++;
+//            }
+//        }
+        String moncvcv ="";
+        boolean vide = true ;
+        for (int v = 0 ;  v<CVCV.length;v++){
+            moncvcv+=CVCV[v];
+            moncvcv+=" " ;
+            if(!CVCV[v].equals(" ")){vide = false;}
+        }
+        System.out.println("ici 251251"+moncvcv);
+        if(!vide){
 
+            while((temp.size()!=totalIteration)&&(i<listeElement.size())){
+
+                String[] myMot = listeElement.get(i).getPhonemes().split(" ");
+                String moMot ="";
+                if (myMot.length==CVCV.length){
+                    System.out.println("taille mot "+myMot.length);
+
+                    for (int v = 0 ;  v<myMot.length;v++){
+                        moMot+=myMot[v];
+                        moMot+=" " ;
+                    }
+
+                    //Log.i("taille temp ",String.valueOf(temp.size()));
+
+                    //Log.i("corresp",String.valueOf(correspondance));
+                    if(verif(myMot,CVCV)){
+                        temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+                        System.out.println("iciiiiiii");
+                    }
+                   /* int correspondance =0;
+                    for (int x =0 ; x<CVCV.length;x++){
+                        if ((myMot[x]==CVCV[x])||(CVCV[x]==" ")){
+                            correspondance++ ;
+                            System.out.println("myMot[x] "+myMot[x]);
+                            System.out.println("CVCV[x] "+CVCV[x]);
+                            System.out.println("correspondance "+correspondance);
+                        }
+                        if (correspondance==4){
+                            System.out.println("ajouté");
+                            temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+                            //i=listeElement.size()-1;
+                            break;
+                        }
+                    }*/
+                }
+                //for(int p = 0;p<temp.size();p++){
+
+                //}
+
+
+                i++;
+            }
+        }
+
+        //serie de phonem
+        if (!seriePhonem.equals("")){
+            String[] mesPhonem = seriePhonem.split(" ");
+            while (temp.size()!=totalIteration){
+                //Log.i("mot : ",listeElement.get(i).getMot());
+                for (int j = 0 ; j<mesPhonem.length-1;j++){
+                    if ((listeElement.get(i).getPhonemes().contains(mesPhonem[j]))&&(listeElement.get(i).getPhonemes().contains(mesPhonem[j+1]))){
+                        temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+                    }
+                }
+                i++;
             }
 
-
+        }
+        //serie stricte de phonems
+        if (!suitePhonem.equals("")){
+            while (temp.size()!=totalIteration){
+                //Log.i("mot : ",listeElement.get(i).getMot());
+                if (listeElement.get(i).getPhonemes().contains(suitePhonem)){
+                    temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
+                }
+                i++;
             }
-            i++;
         }
         if (temp.size()!=0){
             listeElement.clear();
@@ -103,49 +158,6 @@ public class ExerciceLogatome extends Exercice implements Parcelable
             listMotString = listMotString.substring(0, listMotString.length() - 1);
             listPhonemString = listPhonemString.substring(0, listPhonemString.length() - 1);
         }
-//        listeElement = temp ;
-
-        //via le fichier de logatomes+phonems
-         /*if (!phonemeFiltrage.equals("")){
-            String[] mesFiltres = phonemeFiltrage.split(",");
-            String[] res = null;
-            try(BufferedReader br = new BufferedReader(new InputStreamReader(context.getAssets().open("lexique_phone.AA4"))))
-            {
-                String line;
-                while ((line = br.readLine()) != null)
-                {
-                    line = line.substring(line.indexOf("\t")+1);
-
-                    // split de la ligne par rapport à une tabulation
-                    res = line.split("\t");
-                    for (int j=0;j<=totalIteration;j++) {
-                        for (int i = 0; i < mesFiltres.length; i++) {
-                            if (res[1].contains(mesFiltres[i])) {
-                                Log.i("le resultat " + i + " est : ", res[i]);
-                                listeElement.add(new Mot(res[0], res[1]));
-                                listMotString += res[0];
-                                listMotString += ",";
-                                listPhonemString += res[1];
-                                listPhonemString += ",";
-                                //a inserer dans la base de données
-                            }
-                        }
-                    }
-                    Log.i("la taille : ", String.valueOf(listeElement.size()));
-                    // Log.i("message du mot",res[0]);
-                    //Log.i("message du phonem",res[1]);
-                    // Ajout du mot dans l'arrayList avec en param 1 = mot et param 2 = phoneme
-
-
-                }
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-
-
-        }*/
         Collections.shuffle(listeElement);
 
         directoryName = getExerciceDirectory();
@@ -153,7 +165,19 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
 
     }
-
+    public boolean verif(String [] myMot , String[] cvcv){
+        int cor =0 ;
+        for (int i=0;i<4;i++){
+            if ((myMot[i]==cvcv[i])||(cvcv[i]==" ")){
+                cor++;
+            }
+            if (cor ==4){
+                System.out.println("ca passe");
+                return true ;
+            }
+        }
+        return false;
+    }
     //Constructeur d'exercice depuisla Bd (exo a recharger) .
     public ExerciceLogatome(Context c,String idExo,String listmots, String listPhonem, String typeExo, String patientId, String leGenre)
     {

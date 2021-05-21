@@ -77,7 +77,7 @@ public class FonctionnaliteActivity extends AppCompatActivity implements Navigat
                 startActivity(intentListPatient);
                 break;
             case R.id.activity_main_drawer_ajoutExo:
-                Intent intentInfo = new Intent(FonctionnaliteActivity.this, InfosPatientActivity.class);
+                Intent intentInfo = new Intent(FonctionnaliteActivity.this, CreationExoSpecifiqueLogatomActivity.class);
                 startActivity(intentInfo);
                 break;
             case R.id.activity_main_drawer_logout:
