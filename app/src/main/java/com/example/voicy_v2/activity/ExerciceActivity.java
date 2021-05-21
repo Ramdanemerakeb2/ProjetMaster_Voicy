@@ -46,7 +46,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class ExerciceActivity extends FonctionnaliteActivity implements CallbackServer
 {
-    //private Toolbar toolbar;
+
     private Button btnAnnuler;
     private ImageButton btnNext, btnEcouter, btnRecord;
     private TextView lePrompteur, iterationEnCours, titreExo;
@@ -201,7 +201,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
         String pathDestination = DirectoryManager.OUTPUT_ATTENTE + "/" + exercice.getDirectoryName();
 
-        DirectoryManager.getInstance().createFileOnDirectory(pathDestination, "temp.txt", params.toString());
+        //DirectoryManager.getInstance().createFileOnDirectory(pathDestination, "temp.txt", params.toString());
 
         SweetAlertDialog sDialog = new SweetAlertDialog(ExerciceActivity.this, SweetAlertDialog.ERROR_TYPE);
         sDialog.setTitleText("Oups ...");

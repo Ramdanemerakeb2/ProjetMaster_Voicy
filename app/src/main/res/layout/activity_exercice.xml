@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.ExerciceActivity">
 
-    <!--<include
-        android:id="@+id/include3"
-        layout="@layout/toolbar"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-305dp" />-->
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
