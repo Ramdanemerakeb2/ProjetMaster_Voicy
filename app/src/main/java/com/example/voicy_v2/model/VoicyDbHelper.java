@@ -188,6 +188,7 @@ public class VoicyDbHelper extends SQLiteOpenHelper {
 
     //suppression d'un exercice specefique a un patient lors de sa suppression
     public void deleteExoByPatient(String id) {
+        Log.i(TAG, "MyDatabaseHelper.deleteExoByPatient ... " + id);
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_EXERCICE, COLUMN_PATIENT_SPECIFIQUE_ID + " = ?",
                 new String[]{id});

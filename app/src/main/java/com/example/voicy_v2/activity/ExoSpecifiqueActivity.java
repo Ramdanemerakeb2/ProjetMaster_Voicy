@@ -17,12 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.voicy_v2.R;
+import com.example.voicy_v2.model.DirectoryManager;
 import com.example.voicy_v2.model.Exercice;
 import com.example.voicy_v2.model.ListeExoSpecefiqueAdapter;
 import com.example.voicy_v2.model.ListePatientAdapter;
 import com.example.voicy_v2.model.Patient;
+import com.example.voicy_v2.model.SessionFile;
+import com.example.voicy_v2.model.SortFileByCreationDate;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
+import java.io.File;
 import java.util.List;
 
 public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
@@ -63,6 +67,50 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
 
         titre.setText("Exercices spécifiques "+idPatient);
 
+        //gestion de la suppression d'un exo
+        listView.setLongClickable(true);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View v, final int position, long id) {
+
+                Object o = listView.getItemAtPosition(position);
+                final Exercice exo = (Exercice) o;
+
+                new cn.pedant.SweetAlert.SweetAlertDialog(ExoSpecifiqueActivity.this, cn.pedant.SweetAlert.SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Êtes-vous sûr ?")
+                        .setContentText("Voulez-vous vraiment supprimer cet exercice ?")
+                        .setConfirmText("Oui")
+                        .setConfirmClickListener(new cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(cn.pedant.SweetAlert.SweetAlertDialog sDialog)
+                            {
+                                sDialog.dismissWithAnimation();
+
+                                //suppression de l'exo de la BD
+                                dbExo.deleteExoByPatient(idPatient);
+                                //suppression les eventuelles sessions enregistré pour cet exo sur la tablette
+                                deleteFilesSessionByExo(exo.getId());
+                                //suppression de l'exo de la liste
+                                listeExoSpec.remove(position);
+
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        })
+                        .setCancelButton("Non", new cn.pedant.SweetAlert.SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(cn.pedant.SweetAlert.SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                            }
+                        })
+                        .show();
+
+
+
+
+                return true;
+            }});
+
+
         // When the user clicks on the ListItem
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -98,6 +146,18 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
 
 
 
+
+    }
+
+    private void deleteFilesSessionByExo(String idExo){
+
+        File[] dirs = SortFileByCreationDate.getInstance().getListSorted(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient);
+
+        for(int i = (dirs.length - 1); i >= 0; i--) {
+            if(dirs[i].getName().contains(idExo)){
+                DirectoryManager.getInstance().rmdirDirectory(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+            }
+        }
 
     }
 }
