@@ -33,18 +33,18 @@ public class SessionFile implements Serializable
 
         String chaine[] = this.nameFile.split(Pattern.quote("_"));
 
-        laDate1 = addChar(chaine[0],'/',2);
+        laDate1 = addChar(chaine[1],'/',2);
         laDate = addChar(laDate1,'/',5);
 
-        lheure1 = addChar(chaine[1],':',2);
+        lheure1 = addChar(chaine[2],':',2);
         lheure = addChar(lheure1,':',5);
 
 
 
         this.date = laDate;
         this.hour = lheure;
-        this.type  = chaine[2];
-        this.idExo = chaine[3];
+        this.type  = chaine[3];
+        this.idExo = chaine[4];
 
     }
 

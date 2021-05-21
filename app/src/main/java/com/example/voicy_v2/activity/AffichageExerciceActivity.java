@@ -69,6 +69,7 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
     private View customView;
     private int phraseIterator = 1;
     private boolean popupOpen = false;
+    private String idPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -93,9 +94,9 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
 
         // Permet de récuperer le paramètre envoyer par l'activité précédente
         resultFile = (SessionFile) getIntent().getSerializableExtra("resultat");
-        Bundle param = getIntent().getExtras();
+        idPatient = (String) getIntent().getStringExtra("idPatient");
+        fileTXT = resultFile.getPathName() + "/"+idPatient+"_resultat.txt";
 
-        fileTXT = resultFile.getPathName() + "/resultat.txt";
 
         // Permet de remplir la liste de JSON object
         getAllJSONObject(fileTXT);
@@ -225,11 +226,11 @@ public class AffichageExerciceActivity extends FonctionnaliteActivity
 
         if(resultFile.getType().toLowerCase().equals("phrase")) //A verrifier apres l'ajout des phrases
         {
-            path = resultFile.getPathName() + "/phrase" + (i+1) + ".wav";
+            path = resultFile.getPathName() + "/"+idPatient+"_phrase" + (i+1) + ".wav";
         }
         else
         {
-            path = resultFile.getPathName() + "/" + listeLogatome.get(i).getLogatomeName() + ".wav";
+            path = resultFile.getPathName() + "/"+idPatient+"_"+ listeLogatome.get(i).getLogatomeName() + ".wav";
         }
 
         try

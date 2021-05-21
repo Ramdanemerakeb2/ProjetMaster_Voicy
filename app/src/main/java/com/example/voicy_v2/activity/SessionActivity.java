@@ -73,6 +73,7 @@ public class SessionActivity extends FonctionnaliteActivity{
 
                 Intent intent = new Intent(SessionActivity.this, AffichageExerciceActivity.class);
                 intent.putExtra("resultat", session);
+                intent.putExtra("idPatient", idPatient);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }

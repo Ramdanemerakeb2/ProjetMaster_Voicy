@@ -98,10 +98,10 @@ public class DirectoryManager
         File file = new File(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId());
         if (!file.exists())
             file.mkdir();
-        File file2 = new File(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId()+"/"+getDateDirectory()+"_"+exo.getTypeExo()+"_"+exo.getId());
+        File file2 = new File(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId()+"/" + exo.getPatientSpecifiqueId()+"_"+getDateDirectory()+"_"+exo.getTypeExo()+"_"+exo.getId());
         if (!file2.exists())
             file2.mkdir();
-        exo.setDirectoryName(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId()+"/"+getDateDirectory()+"_"+exo.getTypeExo()+"_"+exo.getId());
+        exo.setDirectoryName(OUTPUT_PATEIENTS + "/" + exo.getPatientSpecifiqueId()+"/"+ exo.getPatientSpecifiqueId()+"_"+getDateDirectory()+"_"+exo.getTypeExo()+"_"+exo.getId());
     }
 
     public void rmdirFolder(String path)

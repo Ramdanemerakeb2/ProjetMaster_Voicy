@@ -71,7 +71,7 @@ public class ConnexionActivity extends AppCompatActivity {
                     editor.putString(sessionIdClinicien, clinicienSup.getIdentifiant());
                     editor.commit();
 
-                    Intent it = new Intent(ConnexionActivity.this, MainActivity.class);
+                    Intent it = new Intent(ConnexionActivity.this, AccueilActivity.class);
                     startActivity(it);
                 }else{
                     SweetAlertDialog sDialog = new SweetAlertDialog(ConnexionActivity.this, SweetAlertDialog.ERROR_TYPE);

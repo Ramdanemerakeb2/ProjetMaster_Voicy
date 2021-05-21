@@ -183,7 +183,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
             public void run()
             {
 
-                DirectoryManager.getInstance().createFileOnDirectory(exercice.getDirectoryPath(), "resultat.txt", response.toString());
+                DirectoryManager.getInstance().createFileOnDirectory(exercice.getDirectoryPath(), exercice.getPatientSpecifiqueId()+"_resultat.txt", response.toString());
 
                 Intent intent = new Intent(ExerciceActivity.this, ResultatActivity.class);
                 startActivity(intent);
@@ -270,9 +270,9 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
                     isRecording = false;
 
                     if(typeExercice.equals("logatome"))
-                        wavLocation = record.stopRecording(exercice.getActuelMot().getMot()+".wav");
+                        wavLocation = record.stopRecording(exercice.getPatientSpecifiqueId()+"_"+exercice.getActuelMot().getMot()+".wav");
                     else
-                        wavLocation = record.stopRecording("phrase"+ (exercice.getActuelIteration() + 1) +".wav");
+                        wavLocation = record.stopRecording(exercice.getPatientSpecifiqueId()+"_"+"phrase"+ (exercice.getActuelIteration() + 1) +".wav");
 
                     setVisibiliteBouton(true);
                 }
@@ -287,11 +287,11 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
                         if(typeExercice.equals("logatome"))
                         {
-                            mp.setDataSource(exercice.getDirectoryPath() + "/" + exercice.getActuelMot().getMot() + ".wav");
+                            mp.setDataSource(exercice.getDirectoryPath() + "/" + exercice.getPatientSpecifiqueId()+"_"+exercice.getActuelMot().getMot() + ".wav");
                         }
                         else
                         {
-                            mp.setDataSource(exercice.getDirectoryPath() + "/phrase"+ (exercice.getActuelIteration() + 1) + ".wav");
+                            mp.setDataSource(exercice.getDirectoryPath() + "/phrase"+ (exercice.getPatientSpecifiqueId()+"_"+exercice.getActuelIteration() + 1) + ".wav");
                         }
 
                         mp.prepare();
