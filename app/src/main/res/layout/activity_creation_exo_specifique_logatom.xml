@@ -46,119 +46,134 @@
 
             </RelativeLayout>
 
-    <customfonts.MyEditText
-        android:id="@+id/idExo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Identifiant de l'exercice"
-        android:inputType="text"
-        android:textColor="#000"
-        android:padding="12dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/email"
-        android:drawablePadding="16dp"
-        android:background="#f0f0f4"
-        />
-    <customfonts.MyEditText
-        android:id="@+id/textIteration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre de logatomes"
-        android:inputType="text"
-        android:textColor="#000"
-        android:padding="12dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/email"
-        android:drawablePadding="16dp"
-        android:background="#f0f0f4"
-        />
-    <Spinner
-        android:id="@+id/spinner_genre"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        android:paddingLeft="50dp"
-        android:background="@drawable/gradient_spinner"
-        />
+             <customfonts.MyEditText
+                 android:id="@+id/idExo"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Identifiant de l'exercice"
+                 android:inputType="text"
+                 android:textColor="#000"
+                 android:padding="12dp"
+                 android:layout_marginTop="30dp"
+                 android:layout_marginBottom="10dp"
+                 android:layout_marginLeft="80dp"
+                 android:layout_marginRight="80dp"
+                 android:drawableLeft="@drawable/email"
+                 android:drawablePadding="16dp"
+                 android:background="#f0f0f4"
+                 />
+                <customfonts.MyEditText
+                    android:id="@+id/textIteration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre de logatomes"
+                    android:inputType="text"
+                    android:textColor="#000"
+                    android:padding="12dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="80dp"
+                    android:drawableLeft="@drawable/email"
+                    android:drawablePadding="16dp"
+                    android:background="#f0f0f4"
+                    />
+                <Spinner
+                    android:id="@+id/spinner_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="80dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="50dp"
+                    android:background="@drawable/gradient_spinner"
+                    />
 
 
-            <customfonts.MyEditText
-        android:id="@+id/phonemeFilter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Suite de Phonems"
-        android:inputType="text"
-        android:textColor="#000"
-        android:padding="12dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/email"
-        android:drawablePadding="16dp"
-        android:background="#f0f0f4"/>
+                    <customfonts.MyEditText
+                    android:id="@+id/phonemeFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Suite de Phonems"
+                    android:inputType="text"
+                    android:textColor="#000"
+                    android:padding="12dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginRight="80dp"
+                    android:drawableLeft="@drawable/email"
+                    android:drawablePadding="16dp"
+                    android:background="#f0f0f4"/>
+            <LinearLayout
+                android:layout_width="765dp"
+                android:layout_height="80dp"
+                android:orientation="horizontal" >
+                <customfonts.MyRegulerText
+                    android:id="@+id/phonems"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/btnformate"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:text="Filtrer par suite stricte de phonems"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="16dp" />
 
-    <customfonts.MyRegulerText
-        android:id="@+id/phonems"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginRight="300dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/btnformate"
-        android:gravity="center"
-        android:padding="14dp"
-        android:text="Filtrer par Suite de phonems"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="OU" />
+
+                <customfonts.MyRegulerText
+                    android:id="@+id/phonems2"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/btnformate"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:text="Filtrer par serie de phonems"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+            <customfonts.MyRegulerText
+                android:id="@+id/showFiltrageAvance"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="300dp"
+                android:layout_marginRight="300dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/btnformate"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="Filtrage par format"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="16dp" />
 
 
-
-    <customfonts.MyEditText
-        android:id="@+id/suitePhonem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Filtrer par Serie de Phonem"
-        android:inputType="text"
-        android:textColor="#000"
-        android:padding="12dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:drawableLeft="@drawable/email"
-        android:drawablePadding="16dp"
-        android:background="#f0f0f4"/>
-
-    <customfonts.MyRegulerText
-        android:id="@+id/phonems2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginRight="300dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/btnformate"
-        android:gravity="center"
-        android:padding="14dp"
-        android:text="Filtrer par Phonems"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="16dp" />
 
 
 
 
             <RelativeLayout
+                android:id="@+id/filtrageAvance"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -179,7 +194,7 @@
                     android:background="@drawable/box_titre"
                     android:fontFamily="serif"
                     android:gravity="center"
-                    android:text="Filtrage par Format"
+                    android:text="Filtrage par format"
                     android:textColor="#1B1A1A"
                     android:textSize="30dp"
                     android:textStyle="bold" />
@@ -225,7 +240,7 @@
                     android:gravity="center"
                     android:text="V2  :" />
                 <customfonts.MyRegulerText
-
+                    android:id="@+id/format"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btnformate"
@@ -235,30 +250,30 @@
                     android:textAlignment="center"
                     android:padding="14dp"
                     android:gravity="center"
-                    android:text="CVCV"
+                    android:text="C-V-C-V"
                     android:textSize="20dp"
                     android:textColor="#fff"
-                    />
+                />
 
 
             </RelativeLayout>
 
 
-    <customfonts.MyRegulerText
-        android:id="@+id/btnAjout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btnformate"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginRight="300dp"
-        android:textAlignment="center"
-        android:padding="14dp"
-        android:gravity="center"
-        android:text="Ajouter"
-        android:textSize="16dp"
-        android:textColor="#fff"
-        />
+                <customfonts.MyRegulerText
+                android:id="@+id/btnAjout"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btnformate"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginRight="300dp"
+                android:textAlignment="center"
+                android:padding="14dp"
+                android:gravity="center"
+                android:text="Ajouter"
+                android:textSize="16dp"
+                android:textColor="#fff"
+                />
 
         </LinearLayout>
     </ScrollView>

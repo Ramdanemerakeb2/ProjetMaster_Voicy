@@ -112,7 +112,7 @@ public class ExerciceSpecifiqueLogatomLaunchActivity extends FonctionnaliteActiv
         params.put("size",String.valueOf(maxIteration));
 
         // Permet de configurer la toolbar pour cette activité
-        configOfToolbar(typeExercice);
+        //configOfToolbar(typeExercice);
 
         // Initialise les boutons et les configures
         initAllButton();
