@@ -35,7 +35,13 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
     public static String maListePhonem = "" ;
     public static String serieFiltre = "" ;
     public static  String[] CVCV = new String[4]; ;
+    public static  String[] CCVCCV = new String[6]; ;
+    public static  String[] CVCCV = new String[5]; ;
+    public static  String[] CCVCV = new String[5]; ;
+    public static String[] tabformat = null ;
+    public static int monFromat = 0 ;
     public static boolean visible = false ;
+//    public static RelativeLayout rl = null ;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,14 +51,38 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
         drawerLayout.addView(contentView, 0);
 
         dbPatientExo = new VoicyDbHelper(this);
-        final RelativeLayout rl = findViewById(R.id.filtrageAvance);
+        final TextView format = findViewById(R.id.format);
+        final RelativeLayout rlCVCV = findViewById(R.id.filtrageCVCV);
         final TextView firstC1 = findViewById(R.id.C1);
         final TextView firstV1 = findViewById(R.id.V1);
         final TextView firstC2 = findViewById(R.id.C2);
         final TextView firstV2 = findViewById(R.id.V2);
 
+        final RelativeLayout rlCCVCCV = findViewById(R.id.filtrageCCVCCV);
+        final TextView secondC1 = findViewById(R.id.secondC1);
+        final TextView secondC2 = findViewById(R.id.secondC2);
+        final TextView secondV1 = findViewById(R.id.secondV1);
+        final TextView secondC3 = findViewById(R.id.secondC3);
+        final TextView secondC4 = findViewById(R.id.secondC4);
+        final TextView secondV2 = findViewById(R.id.secondV2);
 
-        final TextView format = findViewById(R.id.format);
+        final RelativeLayout rlCVCCV = findViewById(R.id.filtrageCVCCV);
+        final TextView thirdC1 = findViewById(R.id.thirdC1);
+        final TextView thirdV1 = findViewById(R.id.thirdV1);
+        final TextView thirdC2 = findViewById(R.id.thirdC2);
+        final TextView thirdC3 = findViewById(R.id.thirdC3);
+        final TextView thirdV2 = findViewById(R.id.thirdV2);
+
+        final RelativeLayout rlCCVCV = findViewById(R.id.filtrageCCVCV);
+        final TextView fourthC1 = findViewById(R.id.fourthC1);
+        final TextView fourthC2 = findViewById(R.id.fourthC2);
+        final TextView fourthV1 = findViewById(R.id.fourthV1);
+        final TextView fourthC3 = findViewById(R.id.fourthC3);
+        final TextView fourthV2 = findViewById(R.id.fourthV2);
+
+
+
+
         final TextView TextIdentifiantExo = findViewById(R.id.idExo);
         final TextView filtrePhonem = findViewById(R.id.phonems);
         final TextView filtrePhonemSerie = findViewById(R.id.phonems2);
@@ -66,29 +96,138 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
         final TextView tv = findViewById(R.id.tv);
 
         for(int a = 0 ; a<CVCV.length;a++){
-            CVCV[a] = " " ;
+            CVCV[a] = "!" ;
         }
 
-        rl.setVisibility(View.GONE);
+        for(int a = 0 ; a<CCVCCV.length;a++){
+            CCVCCV[a] = "!" ;
+        }
+        for(int a = 0 ; a<CVCCV.length;a++){
+            CVCCV[a] = "!" ;
+        }
+        for(int a = 0 ; a<CCVCV.length;a++){
+            CCVCV[a] = "!" ;
+        }
+
+
+        rlCVCV.setVisibility(View.GONE);
+        rlCCVCCV.setVisibility(View.GONE);
+        rlCVCCV.setVisibility(View.GONE);
+        rlCCVCV.setVisibility(View.GONE);
         showFiltrageAvance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!visible) {
-                    rl.setVisibility(View.VISIBLE);
+                    PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, showFiltrageAvance);
+                    //Inflating the Popup using xml file
+                    popup.getMenuInflater().inflate(R.menu.popup_format_filtre, popup.getMenu());
+
+                    //registering popup with OnMenuItemClickListener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        public boolean onMenuItemClick(MenuItem item) {
+                            //format.setText(item.getTitle());
+                            if (item.getTitle().toString().contains("C_C_V_C_V")){System.out.println("format"+item.getTitle());
+                                Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"Format qui passe  " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                                monFromat = 4 ;
+                                System.out.println("format int "+monFromat);
+                                rlCCVCV.setVisibility(View.VISIBLE);
+                                tv.setVisibility(View.GONE);
+                                lesPhonems.setVisibility(View.GONE);
+                                filtrePhonem.setVisibility(View.GONE);
+                                filtrePhonemSerie.setVisibility(View.GONE);
+                                showFiltrageAvance.setText("Filtrage par phonems");
+                                visible=true;
+                                System.out.println("visible  "+visible);
+                            }
+                            else if (item.getTitle().toString().contains("C_C_V_C_C_V")){System.out.println("format"+item.getTitle());
+                                Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"Format qui passe  " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                                monFromat = 2 ;
+                                rlCCVCCV.setVisibility(View.VISIBLE);
+                                tv.setVisibility(View.GONE);
+                                lesPhonems.setVisibility(View.GONE);
+                                filtrePhonem.setVisibility(View.GONE);
+                                filtrePhonemSerie.setVisibility(View.GONE);
+                                showFiltrageAvance.setText("Filtrage par phonems");
+                                visible=true;
+                            }
+                            else if (item.getTitle().toString().contains("C_V_C_C_V")){System.out.println("format"+item.getTitle());
+                                Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"Format qui passe  " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                                monFromat = 3 ;
+                                System.out.println("format int "+monFromat);
+                                rlCVCCV.setVisibility(View.VISIBLE);
+                                tv.setVisibility(View.GONE);
+                                lesPhonems.setVisibility(View.GONE);
+                                filtrePhonem.setVisibility(View.GONE);
+                                filtrePhonemSerie.setVisibility(View.GONE);
+                                showFiltrageAvance.setText("Filtrage par phonems");
+                                visible=true;
+                                System.out.println("visible  "+visible);
+                            }
+                            else if (item.getTitle().toString().contains("C_V_C_V")){System.out.println("format"+item.getTitle());
+                                Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"Format qui passe  " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                                monFromat = 1 ;
+                                rlCVCV.setVisibility(View.VISIBLE);
+                                tv.setVisibility(View.GONE);
+                                lesPhonems.setVisibility(View.GONE);
+                                filtrePhonem.setVisibility(View.GONE);
+                                filtrePhonemSerie.setVisibility(View.GONE);
+                                showFiltrageAvance.setText("Filtrage par phonems");
+                                visible=true;
+                            }
+
+                            return true;
+                        }
+                    });
+
+                    popup.show();
+                   /* rl.setVisibility(View.VISIBLE);
                     tv.setVisibility(View.GONE);
                     lesPhonems.setVisibility(View.GONE);
                     filtrePhonem.setVisibility(View.GONE);
                     filtrePhonemSerie.setVisibility(View.GONE);
                     showFiltrageAvance.setText("Filtrage par phonems");
-                    visible=true;
+                    visible=true;*/
                 }else{
-                    rl.setVisibility(View.GONE);
+                    if (monFromat ==1){
+                        rlCVCV.setVisibility(View.GONE);
+                        tv.setVisibility(View.VISIBLE);
+                        lesPhonems.setVisibility(View.VISIBLE);
+                        filtrePhonem.setVisibility(View.VISIBLE);
+                        filtrePhonemSerie.setVisibility(View.VISIBLE);
+                        showFiltrageAvance.setText("Filtrage par format");
+                        visible=false;
+                    }else if (monFromat ==2){
+                        rlCCVCCV.setVisibility(View.GONE);
+                        tv.setVisibility(View.VISIBLE);
+                        lesPhonems.setVisibility(View.VISIBLE);
+                        filtrePhonem.setVisibility(View.VISIBLE);
+                        filtrePhonemSerie.setVisibility(View.VISIBLE);
+                        showFiltrageAvance.setText("Filtrage par format");
+                        visible=false;
+                    }else if (monFromat ==3){
+                        rlCVCCV.setVisibility(View.GONE);
+                        tv.setVisibility(View.VISIBLE);
+                        lesPhonems.setVisibility(View.VISIBLE);
+                        filtrePhonem.setVisibility(View.VISIBLE);
+                        filtrePhonemSerie.setVisibility(View.VISIBLE);
+                        showFiltrageAvance.setText("Filtrage par format");
+                        visible=false;
+                    }else if (monFromat ==4){
+                        rlCCVCV.setVisibility(View.GONE);
+                        tv.setVisibility(View.VISIBLE);
+                        lesPhonems.setVisibility(View.VISIBLE);
+                        filtrePhonem.setVisibility(View.VISIBLE);
+                        filtrePhonemSerie.setVisibility(View.VISIBLE);
+                        showFiltrageAvance.setText("Filtrage par format");
+                        visible=false;
+                    }
+                    /*rl.setVisibility(View.GONE);
                     tv.setVisibility(View.VISIBLE);
                     lesPhonems.setVisibility(View.VISIBLE);
                     filtrePhonem.setVisibility(View.VISIBLE);
                     filtrePhonemSerie.setVisibility(View.VISIBLE);
                     showFiltrageAvance.setText("Filtrage par format");
-                    visible=false;
+                    visible=false;*/
                 }
             }
         });
@@ -117,6 +256,395 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
                 popup.show();
             }
         });
+
+
+        fourthC1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, fourthC1);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        fourthC1.setText(fourthC1.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCV[0]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        fourthC2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, fourthC2);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        fourthC2.setText(fourthC2.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCV[1]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        fourthV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, fourthV1);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_voyelles, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        fourthV1.setText(fourthV1.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCV[2]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        fourthC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, fourthC3);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        fourthC3.setText(fourthC3.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCV[3]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        fourthV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, fourthV2);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_voyelles, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        fourthV2.setText(fourthV2.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCV[4]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        thirdC1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, thirdC1);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        thirdC1.setText(thirdC1.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CVCCV[0]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        thirdV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, thirdV1);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_voyelles, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        thirdV1.setText(thirdV1.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CVCCV[1]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        thirdC2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, thirdC2);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        thirdC2.setText(thirdC2.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CVCCV[2]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        thirdC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, thirdC3);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        thirdC3.setText(thirdC3.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CVCCV[3]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        thirdV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, thirdV2);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_voyelles, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        thirdV2.setText(thirdV2.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CVCCV[4]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        secondC1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, secondC1);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        secondC1.setText(secondC1.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCCV[0]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+        secondC2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, secondC2);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        secondC2.setText(secondC2.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCCV[1]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        secondV1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, secondV1);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_voyelles, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        secondV1.setText(secondV1.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCCV[2]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        secondC3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, secondC3);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        secondC3.setText(secondC3.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCCV[3]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        secondC4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, secondC4);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_consonnes, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        secondC4.setText(secondC4.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCCV[4]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+        secondV2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(CreationExoSpecifiqueLogatomActivity.this, secondV2);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.popup_voyelles, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        secondV2.setText(secondV2.getText().toString()+item.getTitle());
+                        serieFiltre="";
+                        suiteFiltre="";
+                        CCVCCV[5]=item.getTitle().toString();
+                        //if (CCVCCV[0]==null){CVCV[0]="";}
+                        Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"element " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+
 
         firstC1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,7 +756,7 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
                     public boolean onMenuItemClick(MenuItem item) {
                         String s = item.getTitle().toString();
                         maListePhonem += s ;
-                        maListePhonem += " ";
+                        maListePhonem += ",";
                         lesPhonems.setText("la suite de phonems est ' "+maListePhonem+"'");
                         Log.i("filtres ",maListePhonem);
                         Toast.makeText(CreationExoSpecifiqueLogatomActivity.this,"les Phonems sont "+maListePhonem+"ajout du phonem : " + item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -267,6 +795,7 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
         filtrePhonemSerie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(maListePhonem!=""){maListePhonem=maListePhonem.substring(0, maListePhonem.length() - 1);}
                 serieFiltre = maListePhonem;
                 Log.i("filtres ", serieFiltre);
                 Toast.makeText(CreationExoSpecifiqueLogatomActivity.this, "les Phonems sont " + serieFiltre, Toast.LENGTH_SHORT).show();
@@ -282,6 +811,7 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
         filtrePhonem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(maListePhonem!=""){maListePhonem=maListePhonem.substring(0, maListePhonem.length() - 1);}
                 suiteFiltre = maListePhonem;
                 Log.i("filtres ", suiteFiltre);
                 Toast.makeText(CreationExoSpecifiqueLogatomActivity.this, "les Phonems sont " + suiteFiltre,Toast.LENGTH_SHORT).show();
@@ -319,21 +849,34 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
                     {
                         String genrePatient = genre.getSelectedItem().toString() ;
                         String phonemesFiltrage;
-                        if(suiteFiltre!=""){
+                      /*  if(suiteFiltre!=""){
                             suiteFiltre=suiteFiltre.substring(0, suiteFiltre.length() - 1);
+                            serieFiltre="";
                         }
                         if(serieFiltre!=""){
+                            suiteFiltre="";
                             serieFiltre=serieFiltre.substring(0, serieFiltre.length() - 1);
-                        }
+                        }*/
                         phonemesFiltrage = suiteFiltre;
+                        if (monFromat ==1){tabformat = CVCV;}
+                        else if (monFromat ==2){tabformat = CCVCCV;}
+                        else if (monFromat ==3){tabformat = CVCCV;}
+                        else if (monFromat ==4){tabformat = CCVCV;}
                         //public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String phonemeFiltrage)
-                        if(dbPatientExo.addExercice(new ExerciceLogatome(Integer.parseInt(String.valueOf(TextIteration.getText())),genrePatient,getApplicationContext(),TextIdentifiantExo.getText().toString(),idPatient,suiteFiltre,serieFiltre,CVCV))){
-
+                        if(dbPatientExo.addExercice(new ExerciceLogatome(Integer.parseInt(String.valueOf(TextIteration.getText())),genrePatient,getApplicationContext(),TextIdentifiantExo.getText().toString(),idPatient,suiteFiltre,serieFiltre,tabformat))){
+                            maListePhonem="";
+                            lesPhonems.setText("");
+                            Log.i("filtres ils sont la zebiiiiiiiiii ", suiteFiltre);
                             for (int m=0 ; m <CVCV.length;m++){
                                 Log.i("cvcv["+m+"]",CVCV[m]);
                             }
+                            SweetAlertDialog sDialog = new SweetAlertDialog(CreationExoSpecifiqueLogatomActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                            sDialog.setContentText("Exercice ajouté");
+                            sDialog.setCancelable(true);
+                            sDialog.show();
+
                             Intent intent = new Intent(CreationExoSpecifiqueLogatomActivity.this, ExerciceSpecifiqueLogatomLaunchActivity.class);
-                            intent.putExtra("CVCV",CVCV);
+                            intent.putExtra("CVCV",tabformat);
                             intent.putExtra("phonemes",phonemesFiltrage);
                             intent.putExtra("serieFiltre",serieFiltre);
                             intent.putExtra("suiteFiltre",suiteFiltre);
@@ -344,10 +887,7 @@ public class CreationExoSpecifiqueLogatomActivity  extends FonctionnaliteActivit
                             startActivityForResult(intent, 0);
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-                            SweetAlertDialog sDialog = new SweetAlertDialog(CreationExoSpecifiqueLogatomActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                            sDialog.setContentText("Exercice ajouté");
-                            sDialog.setCancelable(true);
-                            sDialog.show();
+
                         }else{
                             SweetAlertDialog sDialog = new SweetAlertDialog(CreationExoSpecifiqueLogatomActivity.this, SweetAlertDialog.ERROR_TYPE);
                             sDialog.setTitleText("Oups ...");

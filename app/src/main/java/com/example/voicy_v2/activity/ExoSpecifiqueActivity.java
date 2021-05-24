@@ -9,10 +9,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -136,12 +138,32 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
         });
 
         ajoutExo2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListeExoPredefiniActivity.class);
-                intent.putExtra("idPatient", idPatient);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            }
+                   String source ="";
+                    @Override
+                    public void onClick(View view) {
+                        PopupMenu popup = new PopupMenu(ExoSpecifiqueActivity.this, ajoutExo2);
+                        //Inflating the Popup using xml file
+                        popup.getMenuInflater().inflate(R.menu.popup_exo_source, popup.getMenu());
+
+                        //registering popup with OnMenuItemClickListener
+                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            public boolean onMenuItemClick(MenuItem item) {
+                                source = item.getTitle().toString();
+                                Toast.makeText(ExoSpecifiqueActivity.this,"Format  " + source, Toast.LENGTH_SHORT).show();
+                                if (source.contains("ajouter depuis les exercices predefinis")){
+                                    Intent intent = new Intent(getApplicationContext(), ListeExoPredefiniActivity.class);
+                                    intent.putExtra("idPatient", idPatient);
+                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                                }
+
+                                return true;
+                            }
+                        });
+
+                        popup.show();
+                    }
+               /**/
         });
 
 

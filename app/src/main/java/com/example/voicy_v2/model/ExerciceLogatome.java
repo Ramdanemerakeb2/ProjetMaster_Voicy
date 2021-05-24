@@ -48,9 +48,11 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         this.typeExo = "logatome";
     }
     //constructeur d'exo specifique a ajouter dans la bd
-    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String suitePhonem,String seriePhonem,String[] CVCV)
+    public ExerciceLogatome(int nb, String leGenre, Context c,String idExo,String patientId,String suitePhonem,String seriePhonem,String[] tabFormat)
     {
+
         super(c);
+
         totalIteration = nb;
         genre = leGenre;
         //idExo = id ;
@@ -59,59 +61,64 @@ public class ExerciceLogatome extends Exercice implements Parcelable
 //        listMotString = listmots;
         patientSpecifiqueId = patientId;
 
+
         recupereElementExercice("lexique_phone.AA4");
         ArrayList<Mot> temp = new ArrayList<Mot>();
         int i =0 ;
 //        int totalNonNull = 0;
-//        for (int j =0 ; j<CVCV.length;j++){
-//            if (!CVCV[j].equals(" ")){
+//        for (int j =0 ; j<tabFormat.length;j++){
+//            if (!tabFormat[j].equals(" ")){
 //                totalNonNull++;
 //            }
 //        }
-        String moncvcv ="";
+        String montabFormat ="";
         boolean vide = true ;
-        for (int v = 0 ;  v<CVCV.length;v++){
-            moncvcv+=CVCV[v];
-            moncvcv+=" " ;
-            if(!CVCV[v].equals(" ")){vide = false;}
+        if (tabFormat!=null){
+            for (int v = 0 ;  v<tabFormat.length;v++){
+                montabFormat+=tabFormat[v];
+                montabFormat+="," ;
+                if(!tabFormat[v].equals(" ")){vide = false;}
+            }
+
         }
-        System.out.println("ici 251251"+moncvcv);
+
+        Log.i("filtres ils sont la zebiiiiiiiiii 33333333335555555", seriePhonem);
         if(!vide){
 
             while((temp.size()!=totalIteration)&&(i<listeElement.size())){
 
-                String[] myMot = listeElement.get(i).getPhonemes().split(" ");
+                String[] myMot = listeElement.get(i).getPhonemes().split(",");
                 String moMot ="";
-                if (myMot.length==CVCV.length){
+                if (myMot.length==tabFormat.length){
                     System.out.println("taille mot "+myMot.length);
 
                     for (int v = 0 ;  v<myMot.length;v++){
                         moMot+=myMot[v];
                         moMot+=" " ;
                     }
-
+                    //suiteFiltre=suiteFiltre.substring(0, suiteFiltre.length() - 1);
                     //Log.i("taille temp ",String.valueOf(temp.size()));
 
                     //Log.i("corresp",String.valueOf(correspondance));
-                    if(verif(myMot,CVCV)){
+                    if(verif(myMot,tabFormat)){
                         temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
                         System.out.println("iciiiiiii");
                     }
-                   /* int correspondance =0;
-                    for (int x =0 ; x<CVCV.length;x++){
-                        if ((myMot[x]==CVCV[x])||(CVCV[x]==" ")){
+                    int correspondance =0;
+                    for (int x =0 ; x<tabFormat.length;x++){
+                        if ((myMot[x].contains(tabFormat[x]))||(tabFormat[x].contains("!"))){
                             correspondance++ ;
-                            System.out.println("myMot[x] "+myMot[x]);
-                            System.out.println("CVCV[x] "+CVCV[x]);
+                            System.out.println("myMot["+x+"] "+myMot[x]);
+                            System.out.println("tabFormat["+x+"] "+tabFormat[x]);
                             System.out.println("correspondance "+correspondance);
                         }
-                        if (correspondance==4){
+                        if (correspondance==tabFormat.length){
                             System.out.println("ajouté");
                             temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
                             //i=listeElement.size()-1;
                             break;
                         }
-                    }*/
+                    }
                 }
                 //for(int p = 0;p<temp.size();p++){
 
@@ -124,8 +131,8 @@ public class ExerciceLogatome extends Exercice implements Parcelable
 
         //serie de phonem
         if (!seriePhonem.equals("")){
-            String[] mesPhonem = seriePhonem.split(" ");
-            while (temp.size()!=totalIteration){
+            String[] mesPhonem = seriePhonem.split(",");
+            while  ((temp.size()!=totalIteration)&&(i<listeElement.size())){
                 //Log.i("mot : ",listeElement.get(i).getMot());
                 for (int j = 0 ; j<mesPhonem.length-1;j++){
                     if ((listeElement.get(i).getPhonemes().contains(mesPhonem[j]))&&(listeElement.get(i).getPhonemes().contains(mesPhonem[j+1]))){
@@ -138,9 +145,11 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         }
         //serie stricte de phonems
         if (!suitePhonem.equals("")){
-            while (temp.size()!=totalIteration){
+            Log.i("filtres ils sont la ", suitePhonem);
+            while ((temp.size()!=totalIteration)&&(i<listeElement.size())){
                 //Log.i("mot : ",listeElement.get(i).getMot());
                 if (listeElement.get(i).getPhonemes().contains(suitePhonem)){
+                    System.out.println(suitePhonem);
                     temp.add(new Mot(listeElement.get(i).getMot(),listeElement.get(i).getPhonemes()));
                 }
                 i++;
@@ -165,10 +174,10 @@ public class ExerciceLogatome extends Exercice implements Parcelable
         DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
 
     }
-    public boolean verif(String [] myMot , String[] cvcv){
+    public boolean verif(String [] myMot , String[] tabFormat){
         int cor =0 ;
         for (int i=0;i<4;i++){
-            if ((myMot[i]==cvcv[i])||(cvcv[i]==" ")){
+            if ((myMot[i].contains(tabFormat[i]))||(tabFormat[i]==" ")){
                 cor++;
             }
             if (cor ==4){
