@@ -171,7 +171,7 @@ public class ExerciceLogatome extends Exercice implements Parcelable
 
         directoryName = getExerciceDirectory();
 
-        DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
+        //DirectoryManager.getInstance().createFolder(DirectoryManager.OUTPUT_RESULTAT + "/" + directoryName);
 
     }
     public boolean verif(String [] myMot , String[] tabFormat){
