@@ -88,7 +88,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
                                 //suppression de l'exo de la BD
                                 dbExo.deleteExoByPatient(idPatient);
                                 //suppression les eventuelles sessions enregistré pour cet exo sur la tablette
-                                deleteFilesSessionByExo(exo.getId());
+                                //deleteFilesSessionByExo(exo.getId());
                                 //suppression de l'exo de la liste
                                 listeExoSpec.remove(position);
 
