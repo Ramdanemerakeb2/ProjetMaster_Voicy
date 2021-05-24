@@ -171,12 +171,12 @@
 
 
 
-
             <RelativeLayout
-                android:id="@+id/filtrageAvance"
+                android:id="@+id/filtrageCVCV"
                 android:layout_width="600dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:layout_marginTop="20dp">
 
                 <ImageView
@@ -253,7 +253,315 @@
                     android:text="C-V-C-V"
                     android:textSize="20dp"
                     android:textColor="#fff"
-                />
+                    />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/filtrageCCVCCV"
+                android:layout_width="600dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView32"
+                    android:layout_width="500dp"
+                    android:layout_height="300dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    app:srcCompat="@drawable/box_infos" />
+
+                <TextView
+                    android:layout_width="450dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/box_titre"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Filtrage par format"
+                    android:textColor="#1B1A1A"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/secondC1"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C1  :" />
+                <TextView
+                    android:id="@+id/secondC2"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="210dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C2  :" />
+
+                <TextView
+                    android:id="@+id/secondV1"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="400dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="V1  :" />
+
+                <TextView
+                    android:id="@+id/secondC3"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C3  :" />
+                <TextView
+                    android:id="@+id/secondC4"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="210dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C4  :" />
+                <TextView
+                    android:id="@+id/secondV2"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="400dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="V2  :" />
+                <customfonts.MyRegulerText
+                    android:id="@+id/format2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btnformate"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="70dp"
+                    android:textAlignment="center"
+                    android:padding="14dp"
+                    android:gravity="center"
+                    android:text="C-C-V-C-C-V"
+                    android:textSize="20dp"
+                    android:textColor="#fff"
+                    />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/filtrageCVCCV"
+                android:layout_width="600dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView323"
+                    android:layout_width="500dp"
+                    android:layout_height="300dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    app:srcCompat="@drawable/box_infos" />
+
+                <TextView
+                    android:layout_width="450dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/box_titre"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Filtrage par format"
+                    android:textColor="#1B1A1A"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/thirdC1"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C1  :" />
+                <TextView
+                    android:id="@+id/thirdV1"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="210dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="V1  :" />
+
+                <TextView
+                    android:id="@+id/thirdC2"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="400dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C2  :" />
+
+                <TextView
+                    android:id="@+id/thirdC3"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C3  :" />
+
+                <TextView
+                    android:id="@+id/thirdV2"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="300dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="V2  :" />
+                <customfonts.MyRegulerText
+                    android:id="@+id/format3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btnformate"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="70dp"
+                    android:textAlignment="center"
+                    android:padding="14dp"
+                    android:gravity="center"
+                    android:text="C-V-C-C-V"
+                    android:textSize="20dp"
+                    android:textColor="#fff"
+                    />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/filtrageCCVCV"
+                android:layout_width="600dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="500dp"
+                    android:layout_height="300dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    app:srcCompat="@drawable/box_infos" />
+
+                <TextView
+                    android:layout_width="450dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/box_titre"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Filtrage par format"
+                    android:textColor="#1B1A1A"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fourthC1"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C1  :" />
+                <TextView
+                    android:id="@+id/fourthC2"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="210dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C2  :" />
+
+                <TextView
+                    android:id="@+id/fourthV1"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="400dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="130dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="V1  :" />
+
+                <TextView
+                    android:id="@+id/fourthC3"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="120dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="C3  :" />
+
+                <TextView
+                    android:id="@+id/fourthV2"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
+                    android:layout_marginLeft="300dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="200dp"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:text="V2  :" />
+                <customfonts.MyRegulerText
+                    android:id="@+id/format4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btnformate"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginRight="220dp"
+                    android:layout_marginTop="70dp"
+                    android:textAlignment="center"
+                    android:padding="14dp"
+                    android:gravity="center"
+                    android:text="C-C-V-C-V"
+                    android:textSize="20dp"
+                    android:textColor="#fff"
+                    />
 
 
             </RelativeLayout>
