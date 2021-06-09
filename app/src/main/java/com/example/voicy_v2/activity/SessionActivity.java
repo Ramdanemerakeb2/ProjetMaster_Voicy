@@ -89,58 +89,61 @@ public class SessionActivity extends FonctionnaliteActivity{
 
         File[] dirs = SortFileByCreationDate.getInstance().getListSorted(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient);
 
-        //pas de filtre (par defaut)
-        if(typeFiltre.equals("null")){
-            for(int i = (dirs.length - 1); i >= 0; i--) {
-                SessionFile s = new SessionFile(dirs[i].getName());
-                s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
-                listResult.add(s);
-            }
-        }
-
-        //filtrage par logatomes
-        if(typeFiltre.equals("logatomes")){
-            for(int i = (dirs.length - 1); i >= 0; i--) {
-                if(dirs[i].getName().contains("logatome")){
+        if(dirs != null){
+            //pas de filtre (par defaut)
+            if(typeFiltre.equals("null")){
+                for(int i = (dirs.length - 1); i >= 0; i--) {
                     SessionFile s = new SessionFile(dirs[i].getName());
                     s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
                     listResult.add(s);
                 }
             }
-        }
 
-        //filtrage par phrase
-        if(typeFiltre.equals("phrase")){
-            for(int i = (dirs.length - 1); i >= 0; i--) {
-                if(dirs[i].getName().contains("phrase")){
-                    SessionFile s = new SessionFile(dirs[i].getName());
-                    s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
-                    listResult.add(s);
+            //filtrage par logatomes
+            if(typeFiltre.equals("logatomes")){
+                for(int i = (dirs.length - 1); i >= 0; i--) {
+                    if(dirs[i].getName().contains("logatome")){
+                        SessionFile s = new SessionFile(dirs[i].getName());
+                        s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                        listResult.add(s);
+                    }
+                }
+            }
+
+            //filtrage par phrase
+            if(typeFiltre.equals("phrase")){
+                for(int i = (dirs.length - 1); i >= 0; i--) {
+                    if(dirs[i].getName().contains("phrase")){
+                        SessionFile s = new SessionFile(dirs[i].getName());
+                        s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                        listResult.add(s);
+                    }
+                }
+            }
+
+            //filtrage par texte
+            if(typeFiltre.equals("texte")){
+                for(int i = (dirs.length - 1); i >= 0; i--) {
+                    if(dirs[i].getName().contains("texte")){
+                        SessionFile s = new SessionFile(dirs[i].getName());
+                        s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                        listResult.add(s);
+                    }
+                }
+            }
+
+            //filtrage par date
+            if(typeFiltre.equals("date")){
+                for(int i = (dirs.length - 1); i >= 0; i--) {
+                    if(dirs[i].getName().contains(dateFiltrage)){
+                        SessionFile s = new SessionFile(dirs[i].getName());
+                        s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
+                        listResult.add(s);
+                    }
                 }
             }
         }
 
-        //filtrage par texte
-        if(typeFiltre.equals("texte")){
-            for(int i = (dirs.length - 1); i >= 0; i--) {
-                if(dirs[i].getName().contains("texte")){
-                    SessionFile s = new SessionFile(dirs[i].getName());
-                    s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
-                    listResult.add(s);
-                }
-            }
-        }
-
-        //filtrage par date
-        if(typeFiltre.equals("date")){
-            for(int i = (dirs.length - 1); i >= 0; i--) {
-                if(dirs[i].getName().contains(dateFiltrage)){
-                    SessionFile s = new SessionFile(dirs[i].getName());
-                    s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+idPatient+"/"+dirs[i].getName());
-                    listResult.add(s);
-                }
-            }
-        }
         return listResult;
     }
 }

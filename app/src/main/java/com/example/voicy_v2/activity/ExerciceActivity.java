@@ -185,7 +185,8 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
                 DirectoryManager.getInstance().createFileOnDirectory(exercice.getDirectoryPath(), exercice.getPatientSpecifiqueId()+"_resultat.txt", response.toString());
 
-                Intent intent = new Intent(ExerciceActivity.this, ResultatActivity.class);
+                Intent intent = new Intent(ExerciceActivity.this, InfosPatientActivity.class);
+                intent.putExtra("idPatient", exercice.getPatientSpecifiqueId());
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

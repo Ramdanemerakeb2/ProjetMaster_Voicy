@@ -33,7 +33,12 @@ public class SortFileByCreationDate
 
         File[] dirs = dir.listFiles();
 
-        return sortDirsByDateCreated(dirs);
+        if(dirs == null)
+            return null;
+        else
+            return sortDirsByDateCreated(dirs);
+
+
     }
 
     private File[] sortDirsByDateCreated(File[] dirs)
