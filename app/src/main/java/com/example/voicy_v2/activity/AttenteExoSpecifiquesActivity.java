@@ -1,11 +1,9 @@
 package com.example.voicy_v2.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -22,20 +20,16 @@ import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.DirectoryManager;
 import com.example.voicy_v2.model.Exercice;
 import com.example.voicy_v2.model.ListeExoSpecefiqueAdapter;
-import com.example.voicy_v2.model.ListePatientAdapter;
-import com.example.voicy_v2.model.Patient;
-import com.example.voicy_v2.model.SessionFile;
 import com.example.voicy_v2.model.SortFileByCreationDate;
 import com.example.voicy_v2.model.VoicyDbHelper;
 
 import java.io.File;
 import java.util.List;
 
-public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
+public class AttenteExoSpecifiquesActivity extends FonctionnaliteActivity {
 
     private ListView listView ;
-    private TextView titre, btnAtt;
-    private ImageButton ajoutExo2,ajoutExo;;
+    private TextView titre, btn_exo;
     private String idPatient;
     public static VoicyDbHelper dbExo;
     private ListeExoSpecefiqueAdapter adapter ;
@@ -50,7 +44,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //inflate of ExoSpecifiqueActivity !
-        View contentView = inflater.inflate(R.layout.activity_exo_specifique, null, false);
+        View contentView = inflater.inflate(R.layout.activity_attente_exo_specifiques, null, false);
         drawerLayout.addView(contentView, 0);
 
         dbExo = new VoicyDbHelper(this);
@@ -59,9 +53,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
         idPatient = (String) i.getStringExtra("idPatient");
 
         titre = (TextView) findViewById(R.id.titre_exo);
-        btnAtt = (TextView) findViewById(R.id.btn_att);
-        ajoutExo = (ImageButton) findViewById(R.id.btn_ajout_exo);
-        ajoutExo2 = (ImageButton) findViewById(R.id.btn_ajout_exo2);
+        btn_exo = (TextView) findViewById(R.id.btn_exo);
         listView = (ListView) findViewById(R.id.list_exo_spec);
 
         listeExoSpec = dbExo.getExosByPatient(idPatient);
@@ -70,17 +62,17 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
 
         titre.setText("Exercices spécifiques "+idPatient);
 
-        /*switch vers l'Attente
-        btnAtt.setOnClickListener(new View.OnClickListener()
+        //switch vers exo a realiser
+        btn_exo.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Intent it = new Intent(ExoSpecifiqueActivity.this, AttenteExoSpecifiquesActivity.class);
+                Intent it = new Intent(AttenteExoSpecifiquesActivity.this, ExoSpecifiqueActivity.class);
                 it.putExtra("idPatient", idPatient);
                 startActivity(it);
             }
-        });*/
+        });
 
         //gestion de la suppression d'un exo
         listView.setLongClickable(true);
@@ -90,7 +82,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
                 Object o = listView.getItemAtPosition(position);
                 final Exercice exo = (Exercice) o;
 
-                new cn.pedant.SweetAlert.SweetAlertDialog(ExoSpecifiqueActivity.this, cn.pedant.SweetAlert.SweetAlertDialog.WARNING_TYPE)
+                new cn.pedant.SweetAlert.SweetAlertDialog(AttenteExoSpecifiquesActivity.this, cn.pedant.SweetAlert.SweetAlertDialog.WARNING_TYPE)
                         .setTitleText("Êtes-vous sûr ?")
                         .setContentText("Voulez-vous vraiment supprimer cet exercice ?")
                         .setConfirmText("Oui")
@@ -103,7 +95,7 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
                                 //suppression de l'exo de la BD
                                 dbExo.deleteExoByPatient(idPatient);
                                 //suppression les eventuelles sessions enregistré pour cet exo sur la tablette
-                                deleteFilesSessionByExo(exo.getId());
+                                //deleteFilesSessionByExo(exo.getId());
                                 //suppression de l'exo de la liste
                                 listeExoSpec.remove(position);
 
@@ -134,52 +126,14 @@ public class ExoSpecifiqueActivity extends FonctionnaliteActivity {
                 Object o = listView.getItemAtPosition(position);
                 Exercice exoSelected = (Exercice) o;
 
-                Intent intent = new Intent(ExoSpecifiqueActivity.this, ExerciceActivity.class);
+                Intent intent = new Intent(AttenteExoSpecifiquesActivity.this, ExerciceActivity.class);
                 intent.putExtra("exoSelected", (Parcelable) exoSelected);
-                //pour diifrencier le traitement de l'acceuil
-                intent.putExtra("viewSelected", 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 
-        ajoutExo.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(ExoSpecifiqueActivity.this, CreationExoSpecifiqueLogatomActivity.class);
-                intent.putExtra("idPatient", idPatient);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            }
-        });
 
-        ajoutExo2.setOnClickListener(new View.OnClickListener() {
-                   String source ="";
-                    @Override
-                    public void onClick(View view) {
-                        PopupMenu popup = new PopupMenu(ExoSpecifiqueActivity.this, ajoutExo2);
-                        //Inflating the Popup using xml file
-                        popup.getMenuInflater().inflate(R.menu.popup_exo_source, popup.getMenu());
-
-                        //registering popup with OnMenuItemClickListener
-                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            public boolean onMenuItemClick(MenuItem item) {
-                                source = item.getTitle().toString();
-                                Toast.makeText(ExoSpecifiqueActivity.this,"Format  " + source, Toast.LENGTH_SHORT).show();
-                                if (source.contains("ajouter depuis les exercices predefinis")){
-                                    Intent intent = new Intent(getApplicationContext(), ListeExoPredefiniActivity.class);
-                                    intent.putExtra("idPatient", idPatient);
-                                    startActivity(intent);
-                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                                }
-
-                                return true;
-                            }
-                        });
-
-                        popup.show();
-                    }
-               /**/
-        });
 
 
 

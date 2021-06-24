@@ -3,9 +3,14 @@ package com.example.voicy_v2.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.voicy_v2.R;
 import com.example.voicy_v2.model.Exercice;
@@ -21,6 +26,7 @@ public class AccueilActivity extends FonctionnaliteActivity {
 
     private String[] fileList;
     private Exercice exoTest;
+    private Button lancerExo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,8 @@ public class AccueilActivity extends FonctionnaliteActivity {
         //inflate of ListePatientActivity !
         View contentView = inflater.inflate(R.layout.activity_accueil, null, false);
         drawerLayout.addView(contentView, 0);
+
+        lancerExo = (Button) findViewById(R.id.lancer_exo);
 
         //rechrager les exo predefinis disponible sur la tablette afin de selectionné un aleatoirement
         try {
@@ -55,10 +63,18 @@ public class AccueilActivity extends FonctionnaliteActivity {
         System.out.println("phonemDb "+phonemDb);
         System.out.println("idPatient null");
 
-        exoTest = new ExerciceLogatome(this,idExo,motDb,phonemDb,"logatome",null,"Homme");
+        exoTest = new ExerciceLogatome(this,idExo,motDb,phonemDb,"logatome","PatientTest","Homme");
 
-        // a completer
 
+        lancerExo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(AccueilActivity.this, ExerciceActivity.class);
+                intent.putExtra("exoSelected", (Parcelable) exoTest);
+                intent.putExtra("viewSelected", 2);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
 
 
 

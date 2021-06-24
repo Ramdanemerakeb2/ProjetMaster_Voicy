@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.AttenteExoSpecifiquesActivity"></activity>
         <activity android:name=".activity.AccueilActivity" />
         <activity android:name=".activity.SessionActivity" />
         <activity android:name=".activity.ExerciceSpecifiqueLogatomLaunchActivity" />

@@ -1,9 +1,6 @@
 17289	daptin	dd aa pp tt in
 17290	dapto	dd aa pp tt au
 17291	daptou	dd aa pp tt ou
-17292	daptu	dd aa pp tt uu
 8650	chaqui	ch aa kk ii
 8651	charba	ch aa rr bb aa
 8652	charbant	ch aa rr bb an
-3382	blospin	bb ll oo ss pp in
-3383	blospo	bb ll oo ss pp au

@@ -30,6 +30,8 @@ import com.example.voicy_v2.model.LogVoicy;
 import com.example.voicy_v2.model.Mot;
 import com.example.voicy_v2.model.Recorder;
 import com.example.voicy_v2.model.RequestServer;
+import com.example.voicy_v2.model.SessionFile;
+import com.example.voicy_v2.model.SortFileByCreationDate;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -52,7 +54,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
     private TextView lePrompteur, iterationEnCours, titreExo;
     private Exercice exercice;
     private String typeExercice, genre;
-    private int maxIteration;
+    private int maxIteration , viewSelected;
     private Mot motActuel;
     private boolean isRecording = false, isListening = false;
     private Recorder record;
@@ -84,6 +86,7 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
 
         Bundle extras = getIntent().getExtras();
         exercice = (Exercice) extras.get("exoSelected");
+        viewSelected = (int) extras.get("viewSelected");
         typeExercice = exercice.getTypeExo();
         maxIteration = exercice.getTotalIteration();
         genre = exercice.getGenre();
@@ -184,12 +187,32 @@ public class ExerciceActivity extends FonctionnaliteActivity implements Callback
             {
 
                 DirectoryManager.getInstance().createFileOnDirectory(exercice.getDirectoryPath(), exercice.getPatientSpecifiqueId()+"_resultat.txt", response.toString());
+                //le cas d'un traitement d'un exo specefique
+                if(viewSelected == 1){
+                    Intent intent = new Intent(ExerciceActivity.this, InfosPatientActivity.class);
+                    intent.putExtra("idPatient", exercice.getPatientSpecifiqueId());
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    finish();
 
-                Intent intent = new Intent(ExerciceActivity.this, InfosPatientActivity.class);
-                intent.putExtra("idPatient", exercice.getPatientSpecifiqueId());
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finish();
+                }else if(viewSelected == 2){//le cas d'un traitement d'un exo test (Acceuil)
+
+                    File[] dirs = SortFileByCreationDate.getInstance().getListSorted(DirectoryManager.OUTPUT_PATEIENTS+"/"+exercice.getPatientSpecifiqueId());
+                    for(int i = (dirs.length - 1); i >= 0; i--) {
+                        SessionFile s = new SessionFile(dirs[i].getName());
+                        s.setPathName(DirectoryManager.OUTPUT_PATEIENTS+"/"+exercice.getPatientSpecifiqueId()+"/"+dirs[i].getName());
+
+
+                        Intent intent = new Intent(ExerciceActivity.this, AffichageExerciceActivity.class);
+                        intent.putExtra("resultat", s);
+                        intent.putExtra("idPatient", exercice.getPatientSpecifiqueId());
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+                    }
+
+                }
+
             }
         });
 

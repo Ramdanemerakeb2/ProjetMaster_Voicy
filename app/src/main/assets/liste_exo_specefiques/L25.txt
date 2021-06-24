@@ -1,10 +1,6 @@
 39990	lafo	ll aa ff au
-39991	lafou	ll aa ff ou
 39992	lafra	ll aa ff rr aa
 85329	zuvrin	zz uu vv rr in
 85330	zuvro	zz uu vv rr au
-85331	zuvrou	zz uu vv rr ou
-42573	mamu	mm aa mm uu
-42574	mancha	mm an ch aa
 35825	grufru	gg rr uu ff rr uu
 35826	grufu	gg rr uu ff uu

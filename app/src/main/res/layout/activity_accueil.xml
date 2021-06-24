@@ -39,6 +39,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/lancer_exo"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="false"
